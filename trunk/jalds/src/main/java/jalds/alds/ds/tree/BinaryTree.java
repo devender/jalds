@@ -78,7 +78,7 @@ public abstract class BinaryTree {
 	 * <li>Traverse the right subtree</li>
 	 * </ul>
 	 * 
-	 * @return
+	 * @return 
 	 */
 	public List<SortableObject> preOrder() {
 		List<SortableObject> list = new ArrayList<SortableObject>();
@@ -102,7 +102,7 @@ public abstract class BinaryTree {
 	 * <li>Visit the node</li>
 	 * </ul>
 	 * 
-	 * @return
+	 * @return post order sorted list
 	 */
 	public List<SortableObject> postOrder() {
 		List<SortableObject> list = new ArrayList<SortableObject>();
