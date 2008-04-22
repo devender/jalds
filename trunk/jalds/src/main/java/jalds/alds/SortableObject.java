@@ -1,0 +1,75 @@
+/*
+ * Copyright 2008 the original author or authors.
+ * 
+ * http://www.gnu.org/licenses/gpl.txt
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package jalds.alds;
+
+/**
+ * Sortable Object is used in all of the Sorting Classes and also in some of the Data Structures, if
+ * you want to use any of the sorting classes you need to use this class.
+ * 
+ * <p>
+ * It needs both the object and that object's value in order to sort, if the object value is not
+ * provided it uses the hashcode.
+ * 
+ * @author Devender Gollapally
+ * 
+ */
+public class SortableObject {
+	private Object object;
+	private int value;
+
+	/**
+	 * Constructs a Sortable Object whose value is the hash code of the provided object. It is
+	 * preferred that the user provide the value, this should only be used if you are providing a
+	 * custom hash code for your object.
+	 * 
+	 * @param object
+	 */
+	public SortableObject(Object object) {
+		this.object = object;
+		this.value = object.hashCode();
+	}
+
+	/**
+	 * Constructs a Sortable Object whose value is the provided value.
+	 * 
+	 * @param object
+	 * @param value
+	 */
+	public SortableObject(Object object, int value) {
+		this.object = object;
+		this.value = value;
+	}
+
+	public Object getObject() {
+		return object;
+	}
+
+	/**
+	 * Returns the value of the object, which is used for comparisons and sorting. If you provided a
+	 * value when creating the object that value will be used or the hashcode of that object will be
+	 * used.
+	 * 
+	 * See the constructor.
+	 * 
+	 * @return int
+	 */
+	public int getValue() {
+		return value;
+	}
+
+}
