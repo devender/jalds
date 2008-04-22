@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="javadoc">
+	<target name="javadoc">
+		<javadoc overview="src\overview.html" access="public" author="true" classpath="C:\noscan\eclipse\plugins\org.junit_3.8.2.v200706111738\junit.jar" destdir="doc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="jalds.alds.ds.tree,jalds.alds,test.jalds.alds.al.sorting.comparisonsort,jalds.alds.al.sorting,jalds.alds.al.sorting.comparisonsort" source="1.5" sourcepath="src" splitindex="true" use="true" version="true" />
+	</target>
+</project>
