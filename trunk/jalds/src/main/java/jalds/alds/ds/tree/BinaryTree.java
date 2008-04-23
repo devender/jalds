@@ -148,4 +148,11 @@ public abstract class BinaryTree {
 		return max;
 	}
 
+	public SortableObject findMin() {
+		SortableObject min = null;
+		for (Node node = root; node != null; node = node.getLeft()) {
+			min = node.getSortableObject();
+		}
+		return min;
+	}
 }
