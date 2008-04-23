@@ -55,4 +55,11 @@ public class TestSimpleBinaryTree extends TestCase {
 		}
 	}
 
+	public void testMax() {
+		List<SortableObject> list = binaryTree.inOrder();
+		SortableObject maxKnown = list.get(list.size() - 1);
+		SortableObject max = binaryTree.findMax();
+		assertEquals(maxKnown.getValue(), max.getValue());
+	}
+
 }

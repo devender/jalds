@@ -140,4 +140,12 @@ public abstract class BinaryTree {
 		}
 	}
 
+	public SortableObject findMax() {
+		SortableObject max = null;
+		for (Node node = root; node != null; node = node.getRight()) {
+			max = node.getSortableObject();
+		}
+		return max;
+	}
+
 }
