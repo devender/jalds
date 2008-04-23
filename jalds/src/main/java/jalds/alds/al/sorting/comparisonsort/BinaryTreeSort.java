@@ -25,7 +25,7 @@ import java.util.List;
 
 /**
  * A sort algorithm that first builds a binary search tree of the keys then accesses the keys with
- * an in-order traversal. Sorts in <em> O(log n) </em>time. 
+ * an in-order traversal. Sorts in <em> O(log n) </em>time.
  * 
  * source http://www.nist.gov/dads/HTML/treesort1.html
  * 
@@ -38,7 +38,7 @@ public class BinaryTreeSort extends AbstractComparisonSort {
 	public SortableObject[] sort(SortableObject[] unSortedList) {
 		BinaryTree binaryTree = new SimpleBinaryTree();
 		for (SortableObject sortableObject : unSortedList) {
-			binaryTree.insertNode(sortableObject);
+			binaryTree.insertNode(sortableObject, true);
 		}
 		List<SortableObject> list = binaryTree.inOrder();
 		unSortedList = new SortableObject[list.size()];
