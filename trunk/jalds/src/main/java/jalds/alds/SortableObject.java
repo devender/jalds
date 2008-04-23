@@ -18,12 +18,14 @@
 package jalds.alds;
 
 /**
- * Sortable Object is used in all of the Sorting Classes and also in some of the Data Structures, if
- * you want to use any of the sorting classes you need to use this class.
- * 
+ * Sortable Object is used in all of the Sorting Classes and also in some of the Data Structures,
+ * User will need to use this class
  * <p>
  * It needs both the object and that object's value in order to sort, if the object value is not
- * provided it uses the hashcode.
+ * provided it uses the hashcode of the provided object.
+ * <p>
+ * All of the algorithms and datastructures in this package will only rely on the Value and will not
+ * use the object itself.
  * 
  * @author Devender Gollapally
  * 

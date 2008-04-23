@@ -20,8 +20,7 @@ package jalds.alds.ds.tree;
 import jalds.alds.SortableObject;
 
 /**
- * A node in the tree, you will normally not have to use this class, it is internally by the Tree
- * programs.
+ * A node in the tree, User will not have to use this class, it is used internally by the package.
  * 
  * @author Devender Gollapally
  * 
