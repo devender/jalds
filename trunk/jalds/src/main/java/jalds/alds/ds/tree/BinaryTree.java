@@ -78,6 +78,7 @@ public abstract class BinaryTree {
 			if (nodeForKey.getRight() != null) {
 				successor = findMin(nodeForKey.getRight()).getSortableObject();
 			} else {
+				//go find the closest ancestor where which is on the left
 				Node parentNode = nodeForKey.getParent();
 				while (parentNode != null && nodeForKey.equals(parentNode.getRight())) {
 					nodeForKey = parentNode;
@@ -91,8 +92,32 @@ public abstract class BinaryTree {
 		return successor;
 	}
 
-	public SortableObject findPredecessor(int value) {
-		return null;
+	/**
+	 * Symetric to findSuccessor
+	 * 
+	 * @param key
+	 * @return SortableObject
+	 */
+	public SortableObject findPredecessor(int key) {
+		SortableObject predecessor = null;
+		Node nodeForKey = find(root, key);
+		if (nodeForKey != null) {
+			if (nodeForKey.getLeft() != null) {
+				predecessor = findMax(nodeForKey.getLeft()).getSortableObject();
+			} else {
+				//go find the closest ancestor where which is on the right
+				Node parentNode = nodeForKey.getParent();
+				while (parentNode != null && nodeForKey.equals(parentNode.getLeft())) {
+					nodeForKey = parentNode;
+					parentNode = parentNode.getParent();
+				}
+				if (parentNode != null) {
+					predecessor = parentNode.getSortableObject();
+				}
+			}
+		}
+
+		return predecessor;
 	}
 
 	/**
@@ -102,19 +127,30 @@ public abstract class BinaryTree {
 	 * @return {@link SortableObject}
 	 */
 	public SortableObject find(int key) {
-		return find(root, key).getSortableObject();
+		return iterativeFind(root, key).getSortableObject();
 	}
 
 	protected Node find(Node node, int key) {
 		if (node == null || node.getSortableObject().getValue() == key) {
 			return node;
 		} else {
-			if (key > node.getSortableObject().getValue()) {
-				return find(node.getRight(), key);
-			} else {
+			if (key < node.getSortableObject().getValue()) {
 				return find(node.getLeft(), key);
+			} else {
+				return find(node.getRight(), key);
 			}
 		}
+	}
+
+	protected Node iterativeFind(Node node, int key) {
+		while (node != null && node.getSortableObject().getValue() != key) {
+			if (key < node.getSortableObject().getValue()) {
+				node = node.getLeft();
+			} else {
+				node = node.getRight();
+			}
+		}
+		return node;
 	}
 
 	/**
@@ -191,18 +227,44 @@ public abstract class BinaryTree {
 		}
 	}
 
+	/**
+	 * Find the Object with the max value
+	 * 
+	 * @return SortableObject
+	 */
 	public SortableObject findMax() {
-		SortableObject max = null;
-		for (Node node = root; node != null; node = node.getRight()) {
-			max = node.getSortableObject();
+		return findMax(root).getSortableObject();
+	}
+
+	/**
+	 * Finds the max from Node
+	 * 
+	 * @param node
+	 * @return
+	 */
+	private Node findMax(Node node) {
+		Node max = null;
+		for (; node != null; node = node.getRight()) {
+			max = node;
 		}
 		return max;
 	}
 
+	/**
+	 * Find the Object with the Min Value
+	 * 
+	 * @return SortableObject
+	 */
 	public SortableObject findMin() {
 		return findMin(root).getSortableObject();
 	}
 
+	/**
+	 * Finds the most min from the given node
+	 * 
+	 * @param node
+	 * @return node
+	 */
 	private Node findMin(Node node) {
 		Node min = null;
 		for (; node != null; node = node.getLeft()) {
