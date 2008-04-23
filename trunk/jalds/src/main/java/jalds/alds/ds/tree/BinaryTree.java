@@ -42,7 +42,58 @@ public abstract class BinaryTree {
 		this.root = root;
 	}
 
-	public abstract void insertNode(SortableObject sortableObject);
+	/**
+	 * Insert the given Sortable Object into the Tree
+	 * 
+	 * @param {@link SortableObject}
+	 * @param Should
+	 *            Duplicate be allowed or not
+	 */
+	public abstract void insertNode(SortableObject sortableObject, boolean allowDuplicates);
+
+	/**
+	 * Delete the First Node whose Sortable Object's value is the given value
+	 * 
+	 * @param value
+	 */
+	public abstract void deleteNodeWithValue(int value);
+
+	/**
+	 * Find the node with the smallest value greater than the give key, Note the given key must be
+	 * in the tree i.e A sortable object with the given key must be in the tree
+	 * <p>
+	 * If a node which holds the given key is found and that node has a right child, the successor
+	 * of this node will be the node with the most min value in the right subtree.
+	 * <p>
+	 * <em>NOTE</em>: findSuccessor will work correctely only if there are no duplicates, if
+	 * duplicates are allowed it can return back null when you don't expect it. 
+	 * 
+	 * @param value
+	 * @return {@link SortableObject}
+	 */
+	public SortableObject findSuccessor(int key) {
+		SortableObject successor = null;
+		Node nodeForKey = find(root, key);
+		if (nodeForKey != null) {
+			if (nodeForKey.getRight() != null) {
+				successor = findMin(nodeForKey.getRight()).getSortableObject();
+			} else {
+				Node parentNode = nodeForKey.getParent();
+				while (parentNode != null && nodeForKey.equals(parentNode.getRight())) {
+					nodeForKey = parentNode;
+					parentNode = parentNode.getParent();
+				}
+				if (parentNode != null) {
+					successor = parentNode.getSortableObject();
+				}
+			}
+		}
+		return successor;
+	}
+
+	public SortableObject findPredecessor(int value) {
+		return null;
+	}
 
 	/**
 	 * Find the sortable object whose value is equal to the given key
@@ -51,12 +102,12 @@ public abstract class BinaryTree {
 	 * @return {@link SortableObject}
 	 */
 	public SortableObject find(int key) {
-		return find(root, key);
+		return find(root, key).getSortableObject();
 	}
 
-	private SortableObject find(Node node, int key) {
+	protected Node find(Node node, int key) {
 		if (node == null || node.getSortableObject().getValue() == key) {
-			return node.getSortableObject();
+			return node;
 		} else {
 			if (key > node.getSortableObject().getValue()) {
 				return find(node.getRight(), key);
@@ -149,10 +200,33 @@ public abstract class BinaryTree {
 	}
 
 	public SortableObject findMin() {
-		SortableObject min = null;
-		for (Node node = root; node != null; node = node.getLeft()) {
-			min = node.getSortableObject();
+		return findMin(root).getSortableObject();
+	}
+
+	private Node findMin(Node node) {
+		Node min = null;
+		for (; node != null; node = node.getLeft()) {
+			min = node;
 		}
 		return min;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		print(root, builder);
+
+		return builder.toString();
+	}
+
+	private void print(Node node, StringBuilder builder) {
+		if (node == null) {
+			return;
+		}
+		builder.append(node.getSortableObject().getValue());
+		builder.append("\n__|\n");
+		print(node.getLeft(), builder);
+		builder.append("|__\n");
+		print(node.getRight(), builder);
 	}
 }

@@ -30,7 +30,11 @@ import jalds.alds.SortableObject;
 public class SimpleBinaryTree extends BinaryTree {
 
 	@Override
-	public void insertNode(SortableObject sortableObject) {
+	public void insertNode(SortableObject sortableObject, boolean allowDuplicates) {
+		if (!allowDuplicates && find(root,sortableObject.getValue()) != null) {
+			return;
+		}
+
 		if (root == null) {
 			root = new Node();
 			root.setSortableObject(sortableObject);
@@ -43,18 +47,14 @@ public class SimpleBinaryTree extends BinaryTree {
 		// should I go right or left ?
 		if (sortableObject.getValue() > node.getSortableObject().getValue()) {
 			if (node.getRight() == null) {
-				Node right = new Node();
-				right.setParent(node);
-				right.setSortableObject(sortableObject);
+				Node right = createNode(node, sortableObject);
 				node.setRight(right);
 			} else {
 				checkAndCreate(node.getRight(), sortableObject);
 			}
 		} else {
 			if (node.getLeft() == null) {
-				Node left = new Node();
-				left.setParent(node);
-				left.setSortableObject(sortableObject);
+				Node left = createNode(node, sortableObject);
 				node.setLeft(left);
 			} else {
 				checkAndCreate(node.getLeft(), sortableObject);
@@ -62,4 +62,56 @@ public class SimpleBinaryTree extends BinaryTree {
 		}
 	}
 
+	private Node createNode(Node parent, SortableObject sortableObject) {
+		Node node = new Node();
+		node.setParent(parent);
+		node.setSortableObject(sortableObject);
+		return node;
+	}
+
+	/**
+	 * Deletes the first node which has the given value.
+	 * <ul>
+	 * <li>Find the Node which has the given value</li>
+	 * <li>If the Node is the root node then delete the root</li>
+	 * <li>Else if the Node has no children then set the Parent of this node's link to child as
+	 * null.</li>
+	 * <li>Else if the Node has only one child, move the child to the parent</li>
+	 * <li>If the Node has both children
+	 * <ul>
+	 * 
+	 * </ul>
+	 * </li>
+	 * </ul>
+	 */
+	public void deleteNodeWithValue(int value) {
+		Node nodeToDelete = find(root, value);
+		Node parent = nodeToDelete.getParent();
+
+		// is this the root node ?
+		if (parent == null) {
+			root = null;
+		} else if (nodeToDelete.getLeft() == null && nodeToDelete.getRight() == null) {
+			// easier if no kids
+			if (nodeToDelete.equals(parent.getLeft())) {
+				parent.setLeft(null);
+			} else {
+				parent.setRight(null);
+			}
+		} else {
+			if (nodeToDelete.getLeft() != null && nodeToDelete.getRight() != null) {
+				// has both children
+				// TODO
+			} else if ((nodeToDelete.getLeft() != null && nodeToDelete.getRight() == null) || (nodeToDelete.getLeft() == null && nodeToDelete.getRight() != null)) {
+				// has only one child
+				Node child = (nodeToDelete.getLeft() != null) ? nodeToDelete.getLeft() : nodeToDelete.getRight();
+				if (nodeToDelete.equals(parent.getLeft())) {
+					parent.setLeft(child);
+				} else {
+					parent.setRight(child);
+				}
+			}
+
+		}
+	}
 }

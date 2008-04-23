@@ -65,4 +65,17 @@ public class Node {
 		this.sortableObject = sortableObject;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || obj.getClass() != this.getClass()) {
+			return false;
+		} else {
+			Node other = (Node) obj;
+			if (this.getSortableObject().equals(other.getSortableObject())) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
 }

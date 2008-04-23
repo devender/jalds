@@ -72,4 +72,22 @@ public class SortableObject {
 		return value;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || obj.getClass() != this.getClass()) {
+			return false;
+		} else {
+			SortableObject other = (SortableObject) obj;
+			if (this.getValue() == other.getValue()) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(value);
+	}
 }

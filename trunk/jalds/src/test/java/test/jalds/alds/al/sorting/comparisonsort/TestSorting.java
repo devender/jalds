@@ -11,7 +11,7 @@ import jalds.alds.SortableObject;
 public abstract class TestSorting extends TestCase {
 
 	public void testSort() {
-		SortableObject[] objects = TestSortingHelper.makeUnSortedList(9000);
+		SortableObject[] objects = TestSortingHelper.makeUnSortedList(100);
 		objects = sortEm(objects);
 		int value = Integer.MIN_VALUE;
 		for (int i = 0; i < objects.length; i++) {
