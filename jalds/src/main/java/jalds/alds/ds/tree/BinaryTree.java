@@ -23,9 +23,10 @@ import java.util.List;
 import jalds.alds.SortableObject;
 
 /**
- * The keys in a BST are always stored in such a way as to satisfy the BST property. Let x be a ode
- * in the BST, if y is a node in the left subtree key(y) <= key(x) and if y is is a node in the
- * right subtree of x then key(y)>=key(x)
+ * Maintains the following invariant
+ * <p>
+ * Let x be a node in the BST, if y is a node in the left subtree of x then key(y) < key(x) and if y
+ * is is a node in the right subtree of x then key(y)>=key(x)
  * 
  * @author Devender Gollapally
  * 
@@ -66,7 +67,7 @@ public abstract class BinaryTree {
 	 * of this node will be the node with the most min value in the right subtree.
 	 * <p>
 	 * <em>NOTE</em>: findSuccessor will work correctely only if there are no duplicates, if
-	 * duplicates are allowed it can return back null when you don't expect it. 
+	 * duplicates are allowed it can return back null when you don't expect it.
 	 * 
 	 * @param value
 	 * @return {@link SortableObject}
