@@ -45,8 +45,30 @@ public abstract class BinaryTree {
 	public abstract void insertNode(SortableObject sortableObject);
 
 	/**
+	 * Find the sortable object whose value is equal to the given key
+	 * 
+	 * @param key
+	 * @return {@link SortableObject}
+	 */
+	public SortableObject find(int key) {
+		return find(root, key);
+	}
+
+	private SortableObject find(Node node, int key) {
+		if (node == null || node.getSortableObject().getValue() == key) {
+			return node.getSortableObject();
+		} else {
+			if (key > node.getSortableObject().getValue()) {
+				return find(node.getRight(), key);
+			} else {
+				return find(node.getLeft(), key);
+			}
+		}
+	}
+
+	/**
 	 * Puts Root in the middle, traversing a binary tree in order will give you a sorted list of
-	 * elements.
+	 * elements. Takes O(n) time to make the list, where n is
 	 * <ul>
 	 * <li>Traverse the left subtree</li>
 	 * <li>Visit the node</li>
@@ -78,7 +100,7 @@ public abstract class BinaryTree {
 	 * <li>Traverse the right subtree</li>
 	 * </ul>
 	 * 
-	 * @return 
+	 * @return post ordered list of Sortable Objects
 	 */
 	public List<SortableObject> preOrder() {
 		List<SortableObject> list = new ArrayList<SortableObject>();
