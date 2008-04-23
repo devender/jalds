@@ -34,7 +34,6 @@ public class SimpleBinaryTree extends BinaryTree {
 		if (!allowDuplicates && find(root,sortableObject.getValue()) != null) {
 			return;
 		}
-
 		if (root == null) {
 			root = new Node();
 			root.setSortableObject(sortableObject);
@@ -45,7 +44,7 @@ public class SimpleBinaryTree extends BinaryTree {
 
 	private void checkAndCreate(Node node, SortableObject sortableObject) {
 		// should I go right or left ?
-		if (sortableObject.getValue() > node.getSortableObject().getValue()) {
+		if (sortableObject.getValue() >= node.getSortableObject().getValue()) {
 			if (node.getRight() == null) {
 				Node right = createNode(node, sortableObject);
 				node.setRight(right);

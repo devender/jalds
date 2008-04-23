@@ -29,11 +29,11 @@ public class TestSimpleBinaryTree extends TestCase {
 	public void testBTInvarient() {
 		assertTrue(binaryTree.getRoot() != null);
 		if (binaryTree.getRoot().getLeft() != null) {
-			assertTrue(binaryTree.getRoot().getLeft().getSortableObject().getValue() <= binaryTree.getRoot().getSortableObject().getValue());
+			assertTrue(binaryTree.getRoot().getLeft().getSortableObject().getValue() < binaryTree.getRoot().getSortableObject().getValue());
 		}
 
 		if (binaryTree.getRoot().getRight() != null) {
-			assertTrue(binaryTree.getRoot().getRight().getSortableObject().getValue() > binaryTree.getRoot().getSortableObject().getValue());
+			assertTrue(binaryTree.getRoot().getRight().getSortableObject().getValue() >= binaryTree.getRoot().getSortableObject().getValue());
 		}
 	}
 
