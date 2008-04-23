@@ -62,4 +62,12 @@ public class TestSimpleBinaryTree extends TestCase {
 		assertEquals(maxKnown.getValue(), max.getValue());
 	}
 
+	public void testMin()
+	{
+		List<SortableObject> list = binaryTree.inOrder();
+		SortableObject minKnown = list.get(0);
+		SortableObject min = binaryTree.findMin();
+		assertEquals(minKnown.getValue(), min.getValue());
+		
+	}
 }
