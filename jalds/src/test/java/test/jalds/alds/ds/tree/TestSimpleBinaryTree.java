@@ -72,7 +72,7 @@ public class TestSimpleBinaryTree extends TestCase {
 	public void testSuccessor() {
 		binaryTree = new SimpleBinaryTree();
 		Random random = new Random();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 20; i++) {
 			int key = random.nextInt(10);
 			binaryTree.insertNode(new SortableObject(key, key), false);
 		}
@@ -81,6 +81,21 @@ public class TestSimpleBinaryTree extends TestCase {
 			int key = list.get(i).getValue();
 			SortableObject object = binaryTree.findSuccessor(key);
 			assertTrue(object.getValue() >= key);
+		}
+	}
+
+	public void testPredecessor() {
+		binaryTree = new SimpleBinaryTree();
+		Random random = new Random();
+		for (int i = 0; i < 20; i++) {
+			int key = random.nextInt(10);
+			binaryTree.insertNode(new SortableObject(key, key), false);
+		}
+		List<SortableObject> list = binaryTree.inOrder();
+		for (int i = list.size() - 1; i > 0; i--) {
+			int key = list.get(i).getValue();
+			SortableObject object = binaryTree.findPredecessor(key);
+			assertTrue(object.getValue() <= key);
 		}
 	}
 }
