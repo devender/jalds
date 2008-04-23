@@ -13,7 +13,7 @@ public abstract class TestSorting extends TestCase {
 	public void testSort() {
 		SortableObject[] objects = TestSortingHelper.makeUnSortedList(9000);
 		objects = sortEm(objects);
-		double value = Integer.MIN_VALUE;
+		int value = Integer.MIN_VALUE;
 		for (int i = 0; i < objects.length; i++) {
 			assertTrue(objects[i].getValue() >= value);
 			value = objects[i].getValue();
