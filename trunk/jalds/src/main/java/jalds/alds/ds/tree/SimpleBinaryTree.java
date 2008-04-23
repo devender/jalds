@@ -20,9 +20,9 @@ package jalds.alds.ds.tree;
 import jalds.alds.SortableObject;
 
 /**
- * A very simple implementation of the Binary Tree, it hope all the elements are inserted in a
+ * A very simple implementation of the Binary Tree, it hopes all the elements are inserted in a
  * random order, if elements are inserted in a random order into a binary tree the height of the
- * tree will be <em>O(n log n)</em> but things are rarely random in the real world.
+ * tree will be approximately <em>O(n log n)</em> but things are rarely random in the real world.
  * 
  * @author Devender Gollapally
  * 
@@ -31,7 +31,7 @@ public class SimpleBinaryTree extends BinaryTree {
 
 	@Override
 	public void insertNode(SortableObject sortableObject, boolean allowDuplicates) {
-		if (!allowDuplicates && find(root,sortableObject.getValue()) != null) {
+		if (!allowDuplicates && find(root, sortableObject.getValue()) != null) {
 			return;
 		}
 		if (root == null) {
