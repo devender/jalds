@@ -44,11 +44,10 @@ public abstract class BinaryTree {
 	}
 
 	/**
-	 * Insert the given Sortable Object into the Tree
+	 * Insert the given Sortable Object into the Tree, also needs to know if duplicates are allowed.
 	 * 
-	 * @param {@link SortableObject}
-	 * @param Should
-	 *            Duplicate be allowed or not
+	 * @param sortableObject
+	 * @param allowDuplicates
 	 */
 	public abstract void insertNode(SortableObject sortableObject, boolean allowDuplicates);
 
@@ -69,7 +68,7 @@ public abstract class BinaryTree {
 	 * <em>NOTE</em>: findSuccessor will work correctely only if there are no duplicates, if
 	 * duplicates are allowed it can return back null when you don't expect it.
 	 * 
-	 * @param value
+	 * @param key
 	 * @return {@link SortableObject}
 	 */
 	public SortableObject findSuccessor(int key) {
