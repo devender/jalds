@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="javadoc">
+<target name="javadoc">
+<javadoc access="protected" author="true" classpath="C:\Documents and Settings\dgollapa\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar" destdir="C:\noscan\work\jalds\svn\wiki\doc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" overview="C:\noscan\work\jalds\svn\trunk\jalds\src\overview.html" packagenames="jalds.alds.al.sorting.comparisonsort,jalds.alds.ds.tree,jalds.alds,jalds.alds.al.sorting" source="1.5" sourcepath="src/main/java;src/test/java" splitindex="true" use="true" version="true"/>
+</target>
+</project>
