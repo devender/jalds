@@ -63,7 +63,9 @@ public abstract class BinaryTree {
 	 * in the tree i.e A sortable object with the given key must be in the tree
 	 * <p>
 	 * If a node which holds the given key is found and that node has a right child, the successor
-	 * of this node will be the node with the most min value in the right subtree.
+	 * of this node will be the node with the most min value in the right subtree.Else we start
+	 * going up the tree to find an ancestor which has the given node in its left subtree, that
+	 * would be the successor of this node.
 	 * <p>
 	 * <em>NOTE</em>: findSuccessor will work correctely only if there are no duplicates, if
 	 * duplicates are allowed it can return back null when you don't expect it.
@@ -78,7 +80,7 @@ public abstract class BinaryTree {
 			if (nodeForKey.getRight() != null) {
 				successor = findMin(nodeForKey.getRight()).getSortableObject();
 			} else {
-				//go find the closest ancestor where which is on the left
+				// go find the closest ancestor where which is on the left
 				Node parentNode = nodeForKey.getParent();
 				while (parentNode != null && nodeForKey.equals(parentNode.getRight())) {
 					nodeForKey = parentNode;
@@ -93,7 +95,7 @@ public abstract class BinaryTree {
 	}
 
 	/**
-	 * Symetric to findSuccessor
+	 * Symmetric to findSuccessor
 	 * 
 	 * @param key
 	 * @return SortableObject
@@ -105,7 +107,7 @@ public abstract class BinaryTree {
 			if (nodeForKey.getLeft() != null) {
 				predecessor = findMax(nodeForKey.getLeft()).getSortableObject();
 			} else {
-				//go find the closest ancestor where which is on the right
+				// go find the closest ancestor where which is on the right
 				Node parentNode = nodeForKey.getParent();
 				while (parentNode != null && nodeForKey.equals(parentNode.getLeft())) {
 					nodeForKey = parentNode;
