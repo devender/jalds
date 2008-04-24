@@ -32,37 +32,50 @@ import jalds.alds.SortableObject;
  */
 public class RedBlackTree extends BinaryTree {
 
+	/**
+	 * A Nil node has a special Property of always being black.
+	 */
 	private static final Node NilNode = new Node();
 	static {
 		NilNode.setNodeType(NodeType.Black);
 	}
 
+	/**
+	 * A RedBlack tree's root node is initialized to a Nil node, (A Nil node has a special Property
+	 * of always being black.)
+	 */
 	public RedBlackTree() {
-		root = NilNode;
+		initializeRoot();
 	}
 
-	@Override
-	public void deleteNodeWithValue(int value) {
-
-	}
-
-	public Node insertNode(SortableObject sortableObject, boolean allowDuplicates) {
+	/**
+	 * 
+	 */
+	public void insertNode(SortableObject sortableObject, boolean allowDuplicates) {
 		if (!allowDuplicates && find(root, sortableObject.getValue()) != null) {
-			return null;
+			return;
 		}
-		if (root == null) {
-			root = new Node();
-			root.setSortableObject(sortableObject);
-			return root;
-		} else {
-			return checkAndCreate(root, sortableObject);
-		}
+		initializeRoot();
+		Node node = checkAndCreate(root, sortableObject);
+		insertFixUp();
 	}
 
+	private void insertFixUp() {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * Finds the right place to insert the node and returns the node created.
+	 * 
+	 * @param node
+	 * @param sortableObject
+	 * @return Node
+	 */
 	private Node checkAndCreate(Node node, SortableObject sortableObject) {
 		// should I go right or left ?
 		if (sortableObject.getValue() >= node.getSortableObject().getValue()) {
-			if (node.getRight() == null) {
+			if (node.getRight().equals(NilNode)) {
 				Node right = createNode(node, sortableObject);
 				node.setRight(right);
 				return right;
@@ -70,7 +83,7 @@ public class RedBlackTree extends BinaryTree {
 				return checkAndCreate(node.getRight(), sortableObject);
 			}
 		} else {
-			if (node.getLeft() == null) {
+			if (node.getLeft().equals(NilNode)) {
 				Node left = createNode(node, sortableObject);
 				node.setLeft(left);
 				return left;
@@ -80,11 +93,23 @@ public class RedBlackTree extends BinaryTree {
 		}
 	}
 
-	private Node createNode(Node parent, SortableObject sortableObject) {
-		Node node = new Node();
-		node.setParent(parent);
-		node.setSortableObject(sortableObject);
+	protected Node createNode(Node parent, SortableObject sortableObject) {
+		Node node = super.createNode(parent, sortableObject);
+		node.setNodeType(NodeType.Red);
+		node.setLeft(NilNode);
+		node.setRight(NilNode);
 		return node;
+	}
+
+	private void initializeRoot() {
+		if (root == null) {
+			root = NilNode;
+		}
+	}
+
+	@Override
+	public void deleteNodeWithValue(int value) {
+
 	}
 
 }

@@ -27,11 +27,21 @@ import jalds.alds.SortableObject;
  * <p>
  * Let x be a node in the BST, if y is a node in the left subtree of x then key(y) < key(x) and if y
  * is is a node in the right subtree of x then key(y)>=key(x)
+ * <p>
+ * This is a very simple implementation of the Binary Tree, it hopes all the elements are inserted
+ * in a random order, if a binary tree is created by inserting elements in a random order the height
+ * of the tree will be approximately <em>O(n log n)</em> but things are rarely random in the real
+ * world.For a faster implementation use the RedBlack tree, which is a blanced tree.
+ * <p>
+ * The height of a tree is important since all operations such as Search,Insert,Delete..run in O(h)
+ * time
+ * 
+ * @see RedBlackTree
  * 
  * @author Devender Gollapally
  * 
  */
-public abstract class BinaryTree {
+public class BinaryTree {
 
 	protected Node root;
 
@@ -49,16 +59,15 @@ public abstract class BinaryTree {
 	 * @param sortableObject
 	 * @param allowDuplicates
 	 */
-	public Node insertNode(SortableObject sortableObject, boolean allowDuplicates) {
+	public void insertNode(SortableObject sortableObject, boolean allowDuplicates) {
 		if (!allowDuplicates && find(root, sortableObject.getValue()) != null) {
-			return null;
+			return;
 		}
 		if (root == null) {
 			root = new Node();
 			root.setSortableObject(sortableObject);
-			return root;
 		} else {
-			return checkAndCreate(root, sortableObject);
+			checkAndCreate(root, sortableObject);
 		}
 	}
 
@@ -83,7 +92,7 @@ public abstract class BinaryTree {
 		}
 	}
 
-	private Node createNode(Node parent, SortableObject sortableObject) {
+	protected Node createNode(Node parent, SortableObject sortableObject) {
 		Node node = new Node();
 		node.setParent(parent);
 		node.setSortableObject(sortableObject);
@@ -91,11 +100,60 @@ public abstract class BinaryTree {
 	}
 
 	/**
-	 * Delete the First Node whose Sortable Object's value is the given value
-	 * 
-	 * @param value
+	 * Deletes the first node which has the given value.
+	 * <ul>
+	 * <li>Find the Node which has the given value</li>
+	 * <li>If the Node is the root node then delete the root</li>
+	 * <li>Else if the Node has no children then set the Parent of this node's link to child as
+	 * null.</li>
+	 * <li>Else if the Node has only one child, move the child to the parent</li>
+	 * <li>If the Node has both children
+	 * <ul>
+	 * <li> Find the Node's Successor.</li>
+	 * <li> Replace this Node's Sortable object with the Successors' Sortable Object</li>
+	 * <li> Delete Successor </li>
+	 * </ul>
+	 * </li>
+	 * </ul>
 	 */
-	public abstract void deleteNodeWithValue(int value);
+	public void deleteNodeWithValue(int value) {
+		Node nodeToDelete = find(root, value);
+		deleteNode(nodeToDelete);
+	}
+
+	private void deleteNode(Node nodeToDelete) {
+		Node parent = nodeToDelete.getParent();
+		// is this the root node ?
+		if (parent == null) {
+			root = null;
+		} else if (nodeToDelete.getLeft() == null && nodeToDelete.getRight() == null) {
+			// easier if no kids
+			if (nodeToDelete.equals(parent.getLeft())) {
+				parent.setLeft(null);
+			} else {
+				parent.setRight(null);
+			}
+		} else {
+			if (nodeToDelete.getLeft() != null && nodeToDelete.getRight() != null) {
+				// has both children
+				Node successor = findSuccessor(nodeToDelete);
+				if (successor != null) {
+					nodeToDelete.setSortableObject(successor.getSortableObject());
+					deleteNode(successor);
+				} else {
+					throw new RuntimeException("Unable to find Successor");
+				}
+			} else if ((nodeToDelete.getLeft() != null && nodeToDelete.getRight() == null) || (nodeToDelete.getLeft() == null && nodeToDelete.getRight() != null)) {
+				// has only one child
+				Node child = (nodeToDelete.getLeft() != null) ? nodeToDelete.getLeft() : nodeToDelete.getRight();
+				if (nodeToDelete.equals(parent.getLeft())) {
+					parent.setLeft(child);
+				} else {
+					parent.setRight(child);
+				}
+			}
+		}
+	}
 
 	/**
 	 * Find the node with the smallest value greater than the give key, Note the given key must be
