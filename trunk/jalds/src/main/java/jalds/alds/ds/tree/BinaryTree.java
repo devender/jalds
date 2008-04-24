@@ -231,22 +231,16 @@ public class BinaryTree {
 	 * @return {@link SortableObject}
 	 */
 	public SortableObject find(int key) {
-		return iterativeFind(root, key).getSortableObject();
+		return find(root, key).getSortableObject();
 	}
 
+	/*
+	 * private Node find(Node node, int key) { if (node == null ||
+	 * node.getSortableObject().getValue() == key) { return node; } else { if (key <
+	 * node.getSortableObject().getValue()) { return find(node.getLeft(), key); } else { return
+	 * find(node.getRight(), key); } } }
+	 */
 	protected Node find(Node node, int key) {
-		if (node == null || node.getSortableObject().getValue() == key) {
-			return node;
-		} else {
-			if (key < node.getSortableObject().getValue()) {
-				return find(node.getLeft(), key);
-			} else {
-				return find(node.getRight(), key);
-			}
-		}
-	}
-
-	protected Node iterativeFind(Node node, int key) {
 		while (node != null && node.getSortableObject().getValue() != key) {
 			if (key < node.getSortableObject().getValue()) {
 				node = node.getLeft();
@@ -341,10 +335,10 @@ public class BinaryTree {
 	}
 
 	/**
-	 * Finds the max from Node
+	 * Finds the max of the given Node's subtree
 	 * 
 	 * @param node
-	 * @return
+	 * @return Node
 	 */
 	private Node findMax(Node node) {
 		Node max = null;
@@ -355,7 +349,7 @@ public class BinaryTree {
 	}
 
 	/**
-	 * Find the Object with the Min Value
+	 * Finds the Object with the Min Value
 	 * 
 	 * @return SortableObject
 	 */
@@ -364,7 +358,7 @@ public class BinaryTree {
 	}
 
 	/**
-	 * Finds the most min from the given node
+	 * Finds the most min in the given Node's sub tree.
 	 * 
 	 * @param node
 	 * @return node
