@@ -74,20 +74,25 @@ public abstract class BinaryTree {
 	 * @return {@link SortableObject}
 	 */
 	public SortableObject findSuccessor(int key) {
-		SortableObject successor = null;
 		Node nodeForKey = find(root, key);
-		if (nodeForKey != null) {
-			if (nodeForKey.getRight() != null) {
-				successor = findMin(nodeForKey.getRight()).getSortableObject();
+		SortableObject successor = findSuccessor(nodeForKey).getSortableObject();
+		return successor;
+	}
+
+	protected Node findSuccessor(Node node) {
+		Node successor = null;
+		if (node != null) {
+			if (node.getRight() != null) {
+				successor = findMin(node.getRight());
 			} else {
 				// go find the closest ancestor where which is on the left
-				Node parentNode = nodeForKey.getParent();
-				while (parentNode != null && nodeForKey.equals(parentNode.getRight())) {
-					nodeForKey = parentNode;
+				Node parentNode = node.getParent();
+				while (parentNode != null && node.equals(parentNode.getRight())) {
+					node = parentNode;
 					parentNode = parentNode.getParent();
 				}
 				if (parentNode != null) {
-					successor = parentNode.getSortableObject();
+					successor = parentNode;
 				}
 			}
 		}
