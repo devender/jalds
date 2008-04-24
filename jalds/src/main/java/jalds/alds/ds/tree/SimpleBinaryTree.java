@@ -85,8 +85,11 @@ public class SimpleBinaryTree extends BinaryTree {
 	 */
 	public void deleteNodeWithValue(int value) {
 		Node nodeToDelete = find(root, value);
-		Node parent = nodeToDelete.getParent();
+		deleteNode(nodeToDelete);
+	}
 
+	private void deleteNode(Node nodeToDelete) {
+		Node parent = nodeToDelete.getParent();
 		// is this the root node ?
 		if (parent == null) {
 			root = null;
@@ -100,7 +103,13 @@ public class SimpleBinaryTree extends BinaryTree {
 		} else {
 			if (nodeToDelete.getLeft() != null && nodeToDelete.getRight() != null) {
 				// has both children
-				// TODO
+				Node successor = findSuccessor(nodeToDelete);
+				if (successor != null) {
+					nodeToDelete.setSortableObject(successor.getSortableObject());
+					deleteNode(successor);
+				} else {
+					throw new RuntimeException("Unable to find Successor");
+				}
 			} else if ((nodeToDelete.getLeft() != null && nodeToDelete.getRight() == null) || (nodeToDelete.getLeft() == null && nodeToDelete.getRight() != null)) {
 				// has only one child
 				Node child = (nodeToDelete.getLeft() != null) ? nodeToDelete.getLeft() : nodeToDelete.getRight();
@@ -110,7 +119,6 @@ public class SimpleBinaryTree extends BinaryTree {
 					parent.setRight(child);
 				}
 			}
-
 		}
 	}
 }

@@ -39,13 +39,8 @@ public class TestSimpleBinaryTree extends TestCase {
 
 	public void testInOrder() {
 		// walking in order should produce a sorted list
-		int value = Integer.MIN_VALUE;
 		List<SortableObject> list = binaryTree.inOrder();
-		for (int i = 0; i < list.size(); i++) {
-			SortableObject object = list.get(i);
-			assertTrue(object.getValue() >= value);
-			value = object.getValue();
-		}
+		orderTest(list);
 	}
 
 	public void testFind() {
@@ -96,6 +91,38 @@ public class TestSimpleBinaryTree extends TestCase {
 			int key = list.get(i).getValue();
 			SortableObject object = binaryTree.findPredecessor(key);
 			assertTrue(object.getValue() <= key);
+		}
+	}
+
+	public void testDelete() {
+		int n = 20;
+
+		for (int indexToDelete = 0; indexToDelete < n; indexToDelete++) {
+
+			binaryTree = new SimpleBinaryTree();
+			Random random = new Random();
+			for (int i = 0; i < 20; i++) {
+				int key = random.nextInt(20);
+				binaryTree.insertNode(new SortableObject(key, key), false);
+			}
+
+			List<SortableObject> list = binaryTree.inOrder();
+			if (n > list.size()) {
+				continue;
+			}
+			int key = list.get(n).getValue();
+
+			binaryTree.deleteNodeWithValue(key);
+			orderTest(binaryTree.inOrder());
+		}
+	}
+
+	private void orderTest(List<SortableObject> list) {
+		int value = Integer.MIN_VALUE;
+		for (int i = 0; i < list.size(); i++) {
+			SortableObject object = list.get(i);
+			assertTrue(object.getValue() >= value);
+			value = object.getValue();
 		}
 	}
 }
