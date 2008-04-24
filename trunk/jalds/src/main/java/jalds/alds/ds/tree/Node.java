@@ -77,13 +77,27 @@ public class Node {
 	public boolean equals(Object obj) {
 		if (obj == null || obj.getClass() != this.getClass()) {
 			return false;
-		} else {
-			Node other = (Node) obj;
-			if (this.getSortableObject().equals(other.getSortableObject())) {
-				return true;
-			} else {
-				return false;
+		}
+		Node other = (Node) obj;
+		boolean hasSameParent = false;
+
+		if (this.getParent() == null && other.getParent() == null) {
+			hasSameParent = true;
+		} else if (this.getParent() != null && other.getParent() != null && this.getParent().equals(other.getParent())) {
+			hasSameParent = true;
+		}
+		
+		if (hasSameParent) {
+			boolean hasSameKey = false;
+			if(this.getSortableObject()==null && other.getSortableObject()==null){
+				hasSameKey=true;
+			}else if(this.getSortableObject()!=null && other.getSortableObject()!=null &&this.getSortableObject().equals(other.getSortableObject())){
+				hasSameKey=true;
 			}
+			return hasSameKey;	
+		}else
+		{
+			return false;
 		}
 	}
 }
