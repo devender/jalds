@@ -49,7 +49,46 @@ public abstract class BinaryTree {
 	 * @param sortableObject
 	 * @param allowDuplicates
 	 */
-	public abstract void insertNode(SortableObject sortableObject, boolean allowDuplicates);
+	public Node insertNode(SortableObject sortableObject, boolean allowDuplicates) {
+		if (!allowDuplicates && find(root, sortableObject.getValue()) != null) {
+			return null;
+		}
+		if (root == null) {
+			root = new Node();
+			root.setSortableObject(sortableObject);
+			return root;
+		} else {
+			return checkAndCreate(root, sortableObject);
+		}
+	}
+
+	private Node checkAndCreate(Node node, SortableObject sortableObject) {
+		// should I go right or left ?
+		if (sortableObject.getValue() >= node.getSortableObject().getValue()) {
+			if (node.getRight() == null) {
+				Node right = createNode(node, sortableObject);
+				node.setRight(right);
+				return right;
+			} else {
+				return checkAndCreate(node.getRight(), sortableObject);
+			}
+		} else {
+			if (node.getLeft() == null) {
+				Node left = createNode(node, sortableObject);
+				node.setLeft(left);
+				return left;
+			} else {
+				return checkAndCreate(node.getLeft(), sortableObject);
+			}
+		}
+	}
+
+	private Node createNode(Node parent, SortableObject sortableObject) {
+		Node node = new Node();
+		node.setParent(parent);
+		node.setSortableObject(sortableObject);
+		return node;
+	}
 
 	/**
 	 * Delete the First Node whose Sortable Object's value is the given value
