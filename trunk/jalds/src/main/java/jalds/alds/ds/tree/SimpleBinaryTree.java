@@ -21,8 +21,9 @@ import jalds.alds.SortableObject;
 
 /**
  * A very simple implementation of the Binary Tree, it hopes all the elements are inserted in a
- * random order, if elements are inserted in a random order into a binary tree the height of the
- * tree will be approximately <em>O(n log n)</em> but things are rarely random in the real world.
+ * random order, if a binary tree is created by inserting elements in a random order the height of
+ * the tree will be approximately <em>O(n log n)</em> but things are rarely random in the real
+ * world.
  * 
  * @author Devender Gollapally
  * 
