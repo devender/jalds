@@ -31,7 +31,7 @@ import jalds.alds.SortableObject;
  * This is a very simple implementation of the Binary Tree, it hopes all the elements are inserted
  * in a random order, if a binary tree is created by inserting elements in a random order the height
  * of the tree will be approximately <em>O(n log n)</em> but things are rarely random in the real
- * world.For a faster implementation use the RedBlack tree, which is a blanced tree.
+ * world.For a faster implementation use the RedBlack tree, which is a balanced tree.
  * <p>
  * The height of a tree is important since all operations such as Search,Insert,Delete..run in O(h)
  * time
@@ -176,7 +176,7 @@ public class BinaryTree {
 		return successor;
 	}
 
-	protected Node findSuccessor(Node node) {
+	private Node findSuccessor(Node node) {
 		Node successor = null;
 		if (node != null) {
 			if (node.getRight() != null) {
@@ -220,7 +220,6 @@ public class BinaryTree {
 				}
 			}
 		}
-
 		return predecessor;
 	}
 
