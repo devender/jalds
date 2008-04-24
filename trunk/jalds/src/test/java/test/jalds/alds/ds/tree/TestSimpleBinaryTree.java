@@ -2,7 +2,6 @@ package test.jalds.alds.ds.tree;
 
 import jalds.alds.SortableObject;
 import jalds.alds.ds.tree.BinaryTree;
-import jalds.alds.ds.tree.SimpleBinaryTree;
 
 import java.util.List;
 import java.util.Random;
@@ -18,7 +17,7 @@ public class TestSimpleBinaryTree extends TestCase {
 	private BinaryTree binaryTree;
 
 	protected void setUp() throws Exception {
-		binaryTree = new SimpleBinaryTree();
+		binaryTree = new BinaryTree();
 		Random random = new Random();
 		for (int i = 0; i < 10; i++) {
 			int key = random.nextInt(10);
@@ -65,7 +64,7 @@ public class TestSimpleBinaryTree extends TestCase {
 	}
 
 	public void testSuccessor() {
-		binaryTree = new SimpleBinaryTree();
+		binaryTree = new BinaryTree();
 		Random random = new Random();
 		for (int i = 0; i < 20; i++) {
 			int key = random.nextInt(10);
@@ -80,7 +79,7 @@ public class TestSimpleBinaryTree extends TestCase {
 	}
 
 	public void testPredecessor() {
-		binaryTree = new SimpleBinaryTree();
+		binaryTree = new BinaryTree();
 		Random random = new Random();
 		for (int i = 0; i < 20; i++) {
 			int key = random.nextInt(10);
@@ -98,8 +97,7 @@ public class TestSimpleBinaryTree extends TestCase {
 		int n = 20;
 
 		for (int indexToDelete = 0; indexToDelete < n; indexToDelete++) {
-
-			binaryTree = new SimpleBinaryTree();
+			binaryTree = new BinaryTree();
 			Random random = new Random();
 			for (int i = 0; i < 20; i++) {
 				int key = random.nextInt(20);
