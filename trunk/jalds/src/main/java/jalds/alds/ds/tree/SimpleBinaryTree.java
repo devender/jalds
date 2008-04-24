@@ -78,7 +78,9 @@ public class SimpleBinaryTree extends BinaryTree {
 	 * <li>Else if the Node has only one child, move the child to the parent</li>
 	 * <li>If the Node has both children
 	 * <ul>
-	 * 
+	 * <li> Find the Node's Successor.</li>
+	 * <li> Replace this Node's Sortable object with the Successors' Sortable Object</li>
+	 * <li> Delete Successor </li>
 	 * </ul>
 	 * </li>
 	 * </ul>

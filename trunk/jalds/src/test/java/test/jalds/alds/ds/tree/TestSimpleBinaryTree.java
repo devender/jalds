@@ -113,6 +113,7 @@ public class TestSimpleBinaryTree extends TestCase {
 			int key = list.get(n).getValue();
 
 			binaryTree.deleteNodeWithValue(key);
+			assertNull(binaryTree.find(key));
 			orderTest(binaryTree.inOrder());
 		}
 	}
