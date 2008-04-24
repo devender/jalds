@@ -24,50 +24,14 @@ import jalds.alds.SortableObject;
  * random order, if a binary tree is created by inserting elements in a random order the height of
  * the tree will be approximately <em>O(n log n)</em> but things are rarely random in the real
  * world.
+ * <p>
+ * The height of a tree is important since all operations such as Search,Insert,Delete..run in O(h)
+ * time.
  * 
  * @author Devender Gollapally
  * 
  */
 public class SimpleBinaryTree extends BinaryTree {
-
-	@Override
-	public void insertNode(SortableObject sortableObject, boolean allowDuplicates) {
-		if (!allowDuplicates && find(root, sortableObject.getValue()) != null) {
-			return;
-		}
-		if (root == null) {
-			root = new Node();
-			root.setSortableObject(sortableObject);
-		} else {
-			checkAndCreate(root, sortableObject);
-		}
-	}
-
-	private void checkAndCreate(Node node, SortableObject sortableObject) {
-		// should I go right or left ?
-		if (sortableObject.getValue() >= node.getSortableObject().getValue()) {
-			if (node.getRight() == null) {
-				Node right = createNode(node, sortableObject);
-				node.setRight(right);
-			} else {
-				checkAndCreate(node.getRight(), sortableObject);
-			}
-		} else {
-			if (node.getLeft() == null) {
-				Node left = createNode(node, sortableObject);
-				node.setLeft(left);
-			} else {
-				checkAndCreate(node.getLeft(), sortableObject);
-			}
-		}
-	}
-
-	private Node createNode(Node parent, SortableObject sortableObject) {
-		Node node = new Node();
-		node.setParent(parent);
-		node.setSortableObject(sortableObject);
-		return node;
-	}
 
 	/**
 	 * Deletes the first node which has the given value.

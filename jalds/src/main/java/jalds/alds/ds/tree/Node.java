@@ -31,6 +31,7 @@ public class Node {
 	private Node left;
 	private Node right;
 	private SortableObject sortableObject;
+	private NodeType nodeType;
 
 	public Node getParent() {
 		return parent;
@@ -62,6 +63,14 @@ public class Node {
 
 	public void setSortableObject(SortableObject sortableObject) {
 		this.sortableObject = sortableObject;
+	}
+
+	public NodeType getNodeType() {
+		return nodeType;
+	}
+
+	public void setNodeType(NodeType nodeType) {
+		this.nodeType = nodeType;
 	}
 
 	@Override
