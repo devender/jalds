@@ -23,7 +23,7 @@ import jalds.alds.SortableObject;
  * A red black tree is a binary tree with one extra bit of storage per node, its color which can
  * either be black or red. By constraining the way nodes can be colored on any path from the root to
  * a lead, red-black trees ensure that no such path is more than twice as long as any other, so the
- * tree is approimately balanced.
+ * tree is approximately balanced.
  * <p>
  * Source Introduction To Algorithms book
  * 
