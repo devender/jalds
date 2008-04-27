@@ -27,33 +27,99 @@ import jalds.alds.ds.tree.Node;
  * @author Devender Gollapally
  * 
  */
-public class RedBlackNode extends Node {
+public class RedBlackNode {
+	private RedBlackNode parent;
+	private RedBlackNode left;
+	private RedBlackNode right;
+	private SortableObject sortableObject;
+
 	/**
 	 * A Nil node has a special Property of always being black.
 	 */
 	public static final RedBlackNode NilNode = new RedBlackNode();
 	static {
-		NilNode.setNodeType(NodeType.Black);
+		NilNode.setNodeColor(NodeColor.Black);
 	}
 
-	private NodeType nodeType;
+	private NodeColor nodeType;
 
-	public RedBlackNode() {
+	private RedBlackNode() {
+		this.setParent(NilNode);
 		this.setLeft(NilNode);
 		this.setRight(NilNode);
 	}
 
 	public RedBlackNode(SortableObject sortableObject) {
 		this.setSortableObject(sortableObject);
+		this.setParent(NilNode);
 		this.setLeft(NilNode);
 		this.setRight(NilNode);
 	}
 
-	public NodeType getNodeType() {
+	public NodeColor getNodeColor() {
 		return nodeType;
 	}
 
-	public void setNodeType(NodeType nodeType) {
+	public void setNodeColor(NodeColor nodeType) {
 		this.nodeType = nodeType;
+	}
+
+	public RedBlackNode getParent() {
+		return parent;
+	}
+
+	public void setParent(RedBlackNode parent) {
+		this.parent = parent;
+	}
+
+	public RedBlackNode getLeft() {
+		return left;
+	}
+
+	public void setLeft(RedBlackNode left) {
+		this.left = left;
+	}
+
+	public RedBlackNode getRight() {
+		return right;
+	}
+
+	public void setRight(RedBlackNode right) {
+		this.right = right;
+	}
+
+	public SortableObject getSortableObject() {
+		return sortableObject;
+	}
+
+	public void setSortableObject(SortableObject sortableObject) {
+		this.sortableObject = sortableObject;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || obj.getClass() != this.getClass()) {
+			return false;
+		}
+		RedBlackNode other = (RedBlackNode) obj;
+		boolean hasSameParent = false;
+
+		if (this.getParent() == null && other.getParent() == null) {
+			hasSameParent = true;
+		} else if (this.getParent() != null && other.getParent() != null && this.getParent().equals(other.getParent())) {
+			hasSameParent = true;
+		}
+
+		if (hasSameParent) {
+			boolean hasSameKey = false;
+			if (this.getSortableObject() == null && other.getSortableObject() == null) {
+				hasSameKey = true;
+			} else if (this.getSortableObject() != null && other.getSortableObject() != null && this.getSortableObject().equals(other.getSortableObject())) {
+				hasSameKey = true;
+			}
+			return hasSameKey;
+		} else {
+			return false;
+		}
 	}
 }

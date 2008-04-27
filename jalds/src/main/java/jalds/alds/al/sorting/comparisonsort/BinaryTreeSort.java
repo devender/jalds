@@ -19,6 +19,7 @@ package jalds.alds.al.sorting.comparisonsort;
 
 import jalds.alds.SortableObject;
 import jalds.alds.ds.tree.BinaryTree;
+import jalds.alds.ds.tree.SimpleBinaryTree;
 
 import java.util.List;
 
@@ -35,7 +36,7 @@ import java.util.List;
 public class BinaryTreeSort extends AbstractComparisonSort {
 
 	public SortableObject[] sort(SortableObject[] unSortedList) {
-		BinaryTree binaryTree = new BinaryTree();
+		BinaryTree binaryTree = new SimpleBinaryTree();
 		for (SortableObject sortableObject : unSortedList) {
 			binaryTree.insertNode(sortableObject, true);
 		}

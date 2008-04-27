@@ -19,7 +19,11 @@ package jalds.alds.ds.tree.rb;
 
 import jalds.alds.SortableObject;
 import jalds.alds.ds.tree.BinaryTree;
-import jalds.alds.ds.tree.Node;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.NodeType;
 
 /**
  * A red black tree is a binary tree with one extra bit of storage per node, its
@@ -50,7 +54,9 @@ import jalds.alds.ds.tree.Node;
  * @author Devender Gollapally
  * 
  */
-public class RedBlackTree extends BinaryTree {
+public class RedBlackTree implements BinaryTree {
+
+	private RedBlackNode root;
 
 	/**
 	 * A RedBlack tree's root node is initialized to a Nil node, (A Nil node has
@@ -69,12 +75,56 @@ public class RedBlackTree extends BinaryTree {
 		if (!allowDuplicates && find(root, sortableObject.getValue()) != null) {
 			return;
 		}
+		RedBlackNode newNode = null;
 		if (root.equals(RedBlackNode.NilNode)) {
 			root = createNode(sortableObject);
+			newNode = root;
 		} else {
-			Node node = checkAndCreate(root, sortableObject);
+			newNode = checkAndCreate(root, sortableObject);
+
 		}
-		insertFixUp();
+		insertFixUp(newNode);
+	}
+
+	private void insertFixUp(RedBlackNode newNode) {
+		while (newNode.getParent().getNodeColor().equals(NodeColor.Red)) {
+			// then new Node's grand parent has to be black
+			// if new node's parent is the left child of it parent
+			// parent of parent will exist since newNode's parent is Red
+			if (newNode.getParent().equals(newNode.getParent().getParent().getLeft())) {
+				RedBlackNode uncle = newNode.getParent().getParent().getRight();
+				if (uncle.getNodeColor().equals(NodeColor.Red)) {
+					newNode.getParent().setNodeColor(NodeColor.Black);
+					newNode.getParent().getParent().setNodeColor(NodeColor.Red);
+					uncle.setNodeColor(NodeColor.Black);
+				} else {
+					if (newNode.equals(newNode.getParent().getRight())) {
+						newNode = newNode.getParent();
+						leftRotate(newNode);
+					}
+					newNode.getParent().setNodeColor(NodeColor.Black);
+					newNode.getParent().getParent().setNodeColor(NodeColor.Red);
+					rightRotate(newNode.getParent().getParent());
+				}
+			} else if (newNode.getParent().equals(newNode.getParent().getParent().getRight())) {
+				RedBlackNode uncle = newNode.getParent().getParent().getLeft();
+				if (uncle.getNodeColor().equals(NodeColor.Red)) {
+					newNode.getParent().setNodeColor(NodeColor.Black);
+					newNode.getParent().getParent().setNodeColor(NodeColor.Red);
+					uncle.setNodeColor(NodeColor.Black);
+				} else {
+					if (newNode.equals(newNode.getParent().getLeft())) {
+						newNode = newNode.getParent();
+						rightRotate(newNode);
+					}
+					newNode.getParent().setNodeColor(NodeColor.Black);
+					newNode.getParent().getParent().setNodeColor(NodeColor.Red);
+					leftRotate(newNode.getParent().getParent());
+
+				}
+			}
+		}
+		root.setNodeColor(NodeColor.Black);
 	}
 
 	/**
@@ -84,11 +134,11 @@ public class RedBlackTree extends BinaryTree {
 	 * @param sortableObject
 	 * @return Node
 	 */
-	private Node checkAndCreate(Node node, SortableObject sortableObject) {
+	private RedBlackNode checkAndCreate(RedBlackNode node, SortableObject sortableObject) {
 		// should I go right or left ?
 		if (sortableObject.getValue() >= node.getSortableObject().getValue()) {
 			if (node.getRight().equals(RedBlackNode.NilNode)) {
-				Node right = createNode(sortableObject);
+				RedBlackNode right = createNode(sortableObject);
 				node.setRight(right);
 				return right;
 			} else {
@@ -96,18 +146,13 @@ public class RedBlackTree extends BinaryTree {
 			}
 		} else {
 			if (node.getLeft().equals(RedBlackNode.NilNode)) {
-				Node left = createNode(sortableObject);
+				RedBlackNode left = createNode(sortableObject);
 				node.setLeft(left);
 				return left;
 			} else {
 				return checkAndCreate(node.getLeft(), sortableObject);
 			}
 		}
-	}
-
-	private void insertFixUp() {
-		// TODO Auto-generated method stub
-
 	}
 
 	/**
@@ -119,12 +164,12 @@ public class RedBlackTree extends BinaryTree {
 	 */
 	private void leftRotate(RedBlackNode x) {
 		if (!x.getRight().equals(RedBlackNode.NilNode)) {
-			Node y = x.getRight();
+			RedBlackNode y = x.getRight();
 			if (!y.getLeft().equals(RedBlackNode.NilNode)) {
 				x.setRight(y.getLeft());
 			}
 			if (!x.getParent().equals(RedBlackNode.NilNode)) {
-				Node parent = x.getParent();
+				RedBlackNode parent = x.getParent();
 				if (parent.getLeft().equals(x)) {
 					parent.setLeft(y);
 				} else {
@@ -144,12 +189,12 @@ public class RedBlackTree extends BinaryTree {
 	 */
 	private void rightRotate(RedBlackNode y) {
 		if (!y.getLeft().equals(RedBlackNode.NilNode)) {
-			Node x = y.getLeft();
+			RedBlackNode x = y.getLeft();
 			if (!x.getRight().equals(RedBlackNode.NilNode)) {
 				y.setLeft(x.getRight());
 			}
 			if (!y.getParent().equals(RedBlackNode.NilNode)) {
-				Node parent = y.getParent();
+				RedBlackNode parent = y.getParent();
 				if (parent.getLeft().equals(y)) {
 					parent.setLeft(x);
 				} else {
@@ -162,9 +207,9 @@ public class RedBlackTree extends BinaryTree {
 		}
 	}
 
-	private Node createNode(SortableObject sortableObject) {
+	private RedBlackNode createNode(SortableObject sortableObject) {
 		RedBlackNode node = new RedBlackNode(sortableObject);
-		node.setNodeType(NodeType.Red);
+		node.setNodeColor(NodeColor.Red);
 		return node;
 	}
 
@@ -173,7 +218,7 @@ public class RedBlackTree extends BinaryTree {
 	 * 
 	 * @return
 	 */
-	private Node initializeRoot() {
+	private RedBlackNode initializeRoot() {
 		if (root == null) {
 			root = RedBlackNode.NilNode;
 		}
@@ -183,6 +228,162 @@ public class RedBlackTree extends BinaryTree {
 	@Override
 	public void deleteNodeWithValue(int value) {
 
+	}
+
+	/*
+	 * -----------------------------------------------------------------------
+	 * The following is the same as the Simple Binary Tree except Node is
+	 * replaced with RedBlackNode
+	 * -----------------------------------------------------------------------
+	 */
+	@Override
+	public SortableObject find(int key) {
+		return find(root, key).getSortableObject();
+	}
+
+	private RedBlackNode find(RedBlackNode node, int key) {
+		while (node != null && node.getSortableObject().getValue() != key) {
+			if (key < node.getSortableObject().getValue()) {
+				node = node.getLeft();
+			} else {
+				node = node.getRight();
+			}
+		}
+		return node;
+	}
+
+	@Override
+	public SortableObject findMax() {
+		return findMax(root).getSortableObject();
+	}
+
+	/**
+	 * Finds the max of the given Node's subtree
+	 * 
+	 * @param node
+	 * @return Node
+	 */
+	private RedBlackNode findMax(RedBlackNode node) {
+		RedBlackNode max = null;
+		for (; node != null; node = node.getRight()) {
+			max = node;
+		}
+		return max;
+	}
+
+	@Override
+	public SortableObject findMin() {
+		return findMin(root).getSortableObject();
+	}
+
+	/**
+	 * Finds the most min in the given Node's sub tree.
+	 * 
+	 * @param node
+	 * @return node
+	 */
+	private RedBlackNode findMin(RedBlackNode node) {
+		RedBlackNode min = null;
+		for (; node != null; node = node.getLeft()) {
+			min = node;
+		}
+		return min;
+	}
+
+	@Override
+	public SortableObject findPredecessor(int key) {
+		SortableObject predecessor = null;
+		RedBlackNode nodeForKey = find(root, key);
+		if (nodeForKey != null) {
+			if (nodeForKey.getLeft() != null) {
+				predecessor = findMax(nodeForKey.getLeft()).getSortableObject();
+			} else {
+				// go find the closest ancestor where which is on the right
+				RedBlackNode parentNode = nodeForKey.getParent();
+				while (parentNode != null && nodeForKey.equals(parentNode.getLeft())) {
+					nodeForKey = parentNode;
+					parentNode = parentNode.getParent();
+				}
+				if (parentNode != null) {
+					predecessor = parentNode.getSortableObject();
+				}
+			}
+		}
+		return predecessor;
+	}
+
+	@Override
+	public SortableObject findSuccessor(int key) {
+		RedBlackNode nodeForKey = find(root, key);
+		SortableObject successor = findSuccessor(nodeForKey).getSortableObject();
+		return successor;
+	}
+
+	private RedBlackNode findSuccessor(RedBlackNode node) {
+		RedBlackNode successor = null;
+		if (node != null) {
+			if (node.getRight() != null) {
+				successor = findMin(node.getRight());
+			} else {
+				// go find the closest ancestor where which is on the left
+				RedBlackNode parentNode = node.getParent();
+				while (parentNode != null && node.equals(parentNode.getRight())) {
+					node = parentNode;
+					parentNode = parentNode.getParent();
+				}
+				if (parentNode != null) {
+					successor = parentNode;
+				}
+			}
+		}
+		return successor;
+	}
+
+	@Override
+	public List<SortableObject> inOrder() {
+		// in order on binary will gives us sorted list
+		List<SortableObject> list = new ArrayList<SortableObject>();
+		inOrder(root, list);
+		return list;
+	}
+
+	private void inOrder(RedBlackNode node, List<SortableObject> list) {
+		if (node != null) {
+			inOrder(node.getLeft(), list);
+			if (!node.equals(RedBlackNode.NilNode))
+				list.add(node.getSortableObject());
+			inOrder(node.getRight(), list);
+		}
+	}
+
+	@Override
+	public List<SortableObject> postOrder() {
+		List<SortableObject> list = new ArrayList<SortableObject>();
+		postOrder(root, list);
+		return list;
+	}
+
+	private void postOrder(RedBlackNode node, List<SortableObject> list) {
+		if (node != null) {
+			postOrder(node.getLeft(), list);
+			postOrder(node.getRight(), list);
+			list.add(node.getSortableObject());
+		}
+	}
+
+	@Override
+	public List<SortableObject> preOrder() {
+		List<SortableObject> list = new ArrayList<SortableObject>();
+		preOrder(root, list);
+		return list;
+	}
+
+	private void preOrder(RedBlackNode node, List<SortableObject> list) {
+		if (node != null) {
+			list.add(node.getSortableObject());
+			preOrder(node.getLeft(), list);
+			preOrder(node.getRight(), list);
+		}
 	}
 
 }
