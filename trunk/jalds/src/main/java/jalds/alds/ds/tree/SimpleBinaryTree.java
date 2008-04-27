@@ -211,7 +211,7 @@ public class SimpleBinaryTree implements BinaryTree {
 	 * 
 	 * @param node
 	 * @param key
-	 * @return
+	 * @return Node
 	 */
 	private Node find(Node node, int key) {
 		while (node != null && node.getSortableObject().getValue() != key) {
