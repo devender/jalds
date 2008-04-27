@@ -20,7 +20,8 @@ package jalds.alds.ds.tree;
 import jalds.alds.SortableObject;
 
 /**
- * A node in the tree, User will not have to use this class, it is used internally by the package.
+ * A node in the tree, User will not have to use this class, it is used
+ * internally by the package.
  * 
  * @author Devender Gollapally
  * 
@@ -31,7 +32,13 @@ public class Node {
 	private Node left;
 	private Node right;
 	private SortableObject sortableObject;
-	private NodeType nodeType;
+
+	public Node() {
+	}
+
+	public Node(SortableObject sortableObject) {
+		this.sortableObject = sortableObject;
+	}
 
 	public Node getParent() {
 		return parent;
@@ -47,6 +54,7 @@ public class Node {
 
 	public void setLeft(Node left) {
 		this.left = left;
+		left.setParent(this);
 	}
 
 	public Node getRight() {
@@ -55,6 +63,7 @@ public class Node {
 
 	public void setRight(Node right) {
 		this.right = right;
+		right.setParent(this);
 	}
 
 	public SortableObject getSortableObject() {
@@ -63,14 +72,6 @@ public class Node {
 
 	public void setSortableObject(SortableObject sortableObject) {
 		this.sortableObject = sortableObject;
-	}
-
-	public NodeType getNodeType() {
-		return nodeType;
-	}
-
-	public void setNodeType(NodeType nodeType) {
-		this.nodeType = nodeType;
 	}
 
 	@Override
@@ -86,17 +87,16 @@ public class Node {
 		} else if (this.getParent() != null && other.getParent() != null && this.getParent().equals(other.getParent())) {
 			hasSameParent = true;
 		}
-		
+
 		if (hasSameParent) {
 			boolean hasSameKey = false;
-			if(this.getSortableObject()==null && other.getSortableObject()==null){
-				hasSameKey=true;
-			}else if(this.getSortableObject()!=null && other.getSortableObject()!=null &&this.getSortableObject().equals(other.getSortableObject())){
-				hasSameKey=true;
+			if (this.getSortableObject() == null && other.getSortableObject() == null) {
+				hasSameKey = true;
+			} else if (this.getSortableObject() != null && other.getSortableObject() != null && this.getSortableObject().equals(other.getSortableObject())) {
+				hasSameKey = true;
 			}
-			return hasSameKey;	
-		}else
-		{
+			return hasSameKey;
+		} else {
 			return false;
 		}
 	}

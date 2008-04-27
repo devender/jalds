@@ -21,20 +21,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jalds.alds.SortableObject;
+import jalds.alds.ds.tree.rb.RedBlackTree;
 
 /**
  * Maintains the following invariant
  * <p>
- * Let x be a node in the BST, if y is a node in the left subtree of x then key(y) < key(x) and if y
- * is is a node in the right subtree of x then key(y)>=key(x)
+ * Let x be a node in the BST, if y is a node in the left subtree of x then
+ * key(y) < key(x) and if y is is a node in the right subtree of x then
+ * key(y)>=key(x)
  * <p>
- * This is a very simple implementation of the Binary Tree, it hopes all the elements are inserted
- * in a random order, if a binary tree is created by inserting elements in a random order the height
- * of the tree will be approximately <em>O(n log n)</em> but things are rarely random in the real
- * world.For a faster implementation use the RedBlack tree, which is a balanced tree.
+ * This is a very simple implementation of the Binary Tree, it hopes all the
+ * elements are inserted in a random order, if a binary tree is created by
+ * inserting elements in a random order the height (The maximal length of a path
+ * in a tree is also called the height of the tree) of the tree will be
+ * approximately <em>O(n log n)</em> but things are rarely random in the real
+ * world, if node are inserted in a sequential order then the max tree height
+ * will be n-1 where n is the number of nodes.For a faster implementation use
+ * the RedBlack tree, which is a balanced tree.
  * <p>
- * The height of a tree is important since all operations such as Search,Insert,Delete..run in O(h)
- * time
+ * The height of a tree is important since all operations such as
+ * Search,Insert,Delete..run in O(h) time
  * 
  * @see RedBlackTree
  * 
@@ -54,7 +60,8 @@ public class BinaryTree {
 	}
 
 	/**
-	 * Insert the given Sortable Object into the Tree, also needs to know if duplicates are allowed.
+	 * Insert the given Sortable Object into the Tree, also needs to know if
+	 * duplicates are allowed.
 	 * 
 	 * @param sortableObject
 	 * @param allowDuplicates
@@ -75,7 +82,7 @@ public class BinaryTree {
 		// should I go right or left ?
 		if (sortableObject.getValue() >= node.getSortableObject().getValue()) {
 			if (node.getRight() == null) {
-				Node right = createNode(node, sortableObject);
+				Node right = new Node(sortableObject);
 				node.setRight(right);
 				return right;
 			} else {
@@ -83,7 +90,7 @@ public class BinaryTree {
 			}
 		} else {
 			if (node.getLeft() == null) {
-				Node left = createNode(node, sortableObject);
+				Node left = new Node(sortableObject);
 				node.setLeft(left);
 				return left;
 			} else {
@@ -92,25 +99,19 @@ public class BinaryTree {
 		}
 	}
 
-	protected Node createNode(Node parent, SortableObject sortableObject) {
-		Node node = new Node();
-		node.setParent(parent);
-		node.setSortableObject(sortableObject);
-		return node;
-	}
-
 	/**
 	 * Deletes the first node which has the given value.
 	 * <ul>
 	 * <li>Find the Node which has the given value</li>
 	 * <li>If the Node is the root node then delete the root</li>
-	 * <li>Else if the Node has no children then set the Parent of this node's link to child as
-	 * null.</li>
+	 * <li>Else if the Node has no children then set the Parent of this node's
+	 * link to child as null.</li>
 	 * <li>Else if the Node has only one child, move the child to the parent</li>
 	 * <li>If the Node has both children
 	 * <ul>
 	 * <li> Find the Node's Successor.</li>
-	 * <li> Replace this Node's Sortable object with the Successors' Sortable Object</li>
+	 * <li> Replace this Node's Sortable object with the Successors' Sortable
+	 * Object</li>
 	 * <li> Delete Successor </li>
 	 * </ul>
 	 * </li>
@@ -156,16 +157,19 @@ public class BinaryTree {
 	}
 
 	/**
-	 * Find the node with the smallest value greater than the give key, Note the given key must be
-	 * in the tree i.e A sortable object with the given key must be in the tree
+	 * Find the node with the smallest value greater than the give key, Note the
+	 * given key must be in the tree i.e A sortable object with the given key
+	 * must be in the tree
 	 * <p>
-	 * If a node which holds the given key is found and that node has a right child, the successor
-	 * of this node will be the node with the most min value in the right subtree.Else we start
-	 * going up the tree to find an ancestor which has the given node in its left subtree, that
-	 * would be the successor of this node.
+	 * If a node which holds the given key is found and that node has a right
+	 * child, the successor of this node will be the node with the most min
+	 * value in the right subtree.Else we start going up the tree to find an
+	 * ancestor which has the given node in its left subtree, that would be the
+	 * successor of this node.
 	 * <p>
-	 * <em>NOTE</em>: findSuccessor will work correctely only if there are no duplicates, if
-	 * duplicates are allowed it can return back null when you don't expect it.
+	 * <em>NOTE</em>: findSuccessor will work correctely only if there are no
+	 * duplicates, if duplicates are allowed it can return back null when you
+	 * don't expect it.
 	 * 
 	 * @param key
 	 * @return {@link SortableObject}
@@ -235,9 +239,9 @@ public class BinaryTree {
 
 	/*
 	 * private Node find(Node node, int key) { if (node == null ||
-	 * node.getSortableObject().getValue() == key) { return node; } else { if (key <
-	 * node.getSortableObject().getValue()) { return find(node.getLeft(), key); } else { return
-	 * find(node.getRight(), key); } } }
+	 * node.getSortableObject().getValue() == key) { return node; } else { if
+	 * (key < node.getSortableObject().getValue()) { return find(node.getLeft(),
+	 * key); } else { return find(node.getRight(), key); } } }
 	 */
 	protected Node find(Node node, int key) {
 		while (node != null && node.getSortableObject().getValue() != key) {
@@ -251,8 +255,8 @@ public class BinaryTree {
 	}
 
 	/**
-	 * Puts Root in the middle, traversing a binary tree in order will give you a sorted list of
-	 * elements. Takes O(n) time to make the list, where n is
+	 * Puts Root in the middle, traversing a binary tree in order will give you
+	 * a sorted list of elements. Takes O(n) time to make the list, where n is
 	 * <ul>
 	 * <li>Traverse the left subtree</li>
 	 * <li>Visit the node</li>
@@ -277,7 +281,8 @@ public class BinaryTree {
 	}
 
 	/**
-	 * Visit the Parent node before left and right subtrees (also know as depth first traversal)
+	 * Visit the Parent node before left and right subtrees (also know as depth
+	 * first traversal)
 	 * <ul>
 	 * <li>Visit the node</li>
 	 * <li>Traverse the left subtree</li>
