@@ -20,7 +20,9 @@ package jalds.alds.al.sorting;
 import jalds.alds.SortableObject;
 
 /**
- * All of the Sorting Classes implement this Class.
+ * All of the Sorting Classes implement this Interface. This way the user can
+ * easily replace one implementation with another and compare performances of
+ * various algorithms.
  * 
  * @author Devender Gollapally
  * 

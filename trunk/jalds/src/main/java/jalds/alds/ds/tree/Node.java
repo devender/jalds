@@ -33,48 +33,99 @@ public class Node {
 	private Node right;
 	private SortableObject sortableObject;
 
+	/**
+	 * Create an empty node.
+	 */
 	public Node() {
 	}
 
+	/**
+	 * Creates an node whose key is set to the supplied sortable object
+	 * 
+	 * @param sortableObject
+	 */
 	public Node(SortableObject sortableObject) {
 		this.sortableObject = sortableObject;
 	}
 
+	/**
+	 * Returns the parent of this node.
+	 * 
+	 * @return Node
+	 */
 	public Node getParent() {
 		return parent;
 	}
 
+	/**
+	 * Set the parent of this node.
+	 * 
+	 * @param parent
+	 */
 	public void setParent(Node parent) {
 		this.parent = parent;
 	}
 
+	/**
+	 * Returns the left child.
+	 * 
+	 * @return Node
+	 */
 	public Node getLeft() {
 		return left;
 	}
 
+	/**
+	 * Set the Left child.
+	 * 
+	 * @param left
+	 */
 	public void setLeft(Node left) {
 		this.left = left;
 		left.setParent(this);
 	}
 
+	/**
+	 * Returns the Right child of this node.
+	 * 
+	 * @return Node
+	 */
 	public Node getRight() {
 		return right;
 	}
 
+	/**
+	 * Set the right child.
+	 * 
+	 * @param right
+	 */
 	public void setRight(Node right) {
 		this.right = right;
 		right.setParent(this);
 	}
 
+	/**
+	 * Returns the Sortable Object Stored in this node.
+	 * 
+	 * @return SortableObect
+	 */
 	public SortableObject getSortableObject() {
 		return sortableObject;
 	}
 
+	/**
+	 * Set the sortable object for this node.
+	 * 
+	 * @param sortableObject
+	 */
 	public void setSortableObject(SortableObject sortableObject) {
 		this.sortableObject = sortableObject;
 	}
 
-	@Override
+	/**
+	 * Two Nodes are equal if they have the same parent and the value of their
+	 * sortable objects is the same.
+	 */
 	public boolean equals(Object obj) {
 		if (obj == null || obj.getClass() != this.getClass()) {
 			return false;

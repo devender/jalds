@@ -60,6 +60,12 @@ public class MergeSort extends AbstractComparisonSort {
 		return merge(left, right);
 	}
 
+	/**
+	 * Merges two arrays of Sortable objects and returns the merged array
+	 * @param left
+	 * @param right
+	 * @return SortableObject[]
+	 */
 	private SortableObject[] merge(SortableObject[] left, SortableObject[] right) {
 		SortableObject[] sortableObjects = new SortableObject[left.length + right.length];
 		int index = 0;

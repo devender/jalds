@@ -35,6 +35,13 @@ import jalds.alds.ds.tree.rb.RedBlackTree;
  * <p>
  * The height of a tree is important since all operations such as
  * Search,Insert,Delete..run in O(h) time
+ * <p>
+ * For a better implementation that guarantee that the a balanced tree is build
+ * use RedBlackTree. The difference between this and the RedBlack Tree is after
+ * every insertion and deletion the tree is balanced which could potentially add
+ * an overhead. So if the user knows that the elements will definitely be
+ * inserted in a random order this is probably a good enough implementation to
+ * use.
  * 
  * @see RedBlackTree
  * 
@@ -92,6 +99,11 @@ public class SimpleBinaryTree implements BinaryTree {
 		deleteNode(nodeToDelete);
 	}
 
+	/**
+	 * Deletes the given Node.
+	 * 
+	 * @param nodeToDelete
+	 */
 	private void deleteNode(Node nodeToDelete) {
 		Node parent = nodeToDelete.getParent();
 		// is this the root node ?
@@ -135,6 +147,12 @@ public class SimpleBinaryTree implements BinaryTree {
 		return successor;
 	}
 
+	/**
+	 * Finds the successor for the given node.
+	 * 
+	 * @param node
+	 * @return Node
+	 */
 	private Node findSuccessor(Node node) {
 		Node successor = null;
 		if (node != null) {
@@ -186,11 +204,14 @@ public class SimpleBinaryTree implements BinaryTree {
 		return find(root, key).getSortableObject();
 	}
 
-	/*
-	 * private Node find(Node node, int key) { if (node == null ||
-	 * node.getSortableObject().getValue() == key) { return node; } else { if
-	 * (key < node.getSortableObject().getValue()) { return find(node.getLeft(),
-	 * key); } else { return find(node.getRight(), key); } } }
+	/**
+	 * Finds a node with the given key, in the given node's sub tree, starts off
+	 * with the root and keeps walking down the tree till it finds the node,
+	 * discards half of the subtree on each iteration.
+	 * 
+	 * @param node
+	 * @param key
+	 * @return
 	 */
 	private Node find(Node node, int key) {
 		while (node != null && node.getSortableObject().getValue() != key) {
@@ -213,6 +234,13 @@ public class SimpleBinaryTree implements BinaryTree {
 		return list;
 	}
 
+	/**
+	 * Recursively calls itself, start off with the root calls
+	 * inOrder(left),node,inOrder(right).
+	 * 
+	 * @param node
+	 * @param list
+	 */
 	private void inOrder(Node node, List<SortableObject> list) {
 		if (node != null) {
 			inOrder(node.getLeft(), list);

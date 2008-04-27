@@ -20,13 +20,14 @@ package jalds.alds.al.sorting.comparisonsort;
 import jalds.alds.SortableObject;
 
 /**
- * Running time is <em>O(n log n)</em>, is In Place 
+ * Running time is <em>O(n log n)</em>, is In Place
+ * 
  * @author Devender Gollapally
- *
+ * 
  */
-public class HeapSort extends AbstractComparisonSort  {
+public class HeapSort extends AbstractComparisonSort {
 
 	public SortableObject[] sort(SortableObject[] unSortedList) {
-		return null;
+		throw new RuntimeException("Sorry Not Yet Implemented");
 	}
 }

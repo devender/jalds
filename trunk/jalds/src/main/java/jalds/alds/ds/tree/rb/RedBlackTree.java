@@ -66,14 +66,15 @@ public class RedBlackTree implements BinaryTree {
 
 	/**
 	 * Create a new node, colors it red and inserts it using the same logic as a
-	 * regular binary tree insert, after which it checks to see if the red black
-	 * tree properties are violated and fixes it.
+	 * regular binary tree insert after which it checks to see if the red black
+	 * tree properties are violated and fixes it using the insertFixUp
+	 * procedure.
 	 */
 	public void insertNode(SortableObject sortableObject, boolean allowDuplicates) {
 		if (!allowDuplicates && find(root, sortableObject.getValue()) != null) {
 			return;
 		}
-		
+
 		RedBlackNode y = RedBlackNode.NilNode;
 		RedBlackNode x = root;
 		while (!x.equals(RedBlackNode.NilNode)) {
@@ -95,38 +96,60 @@ public class RedBlackTree implements BinaryTree {
 				y.setRight(z);
 			}
 		}
-
 		insertFixUp(z);
 	}
 
 	/**
+	 * Creates a new node whose key is the Sortable Object and whose color is
+	 * Red
+	 * 
+	 * @param sortableObject
+	 * @return RedBlackNode
+	 */
+	private RedBlackNode createNode(SortableObject sortableObject) {
+		RedBlackNode node = new RedBlackNode(sortableObject);
+		node.setNodeColor(NodeColor.Red);
+		return node;
+	}
+
+	/**
 	 * Inserting a new node could have caused some some of the properties of the
-	 * RB Tree invalid, the insert fix up fixes these errors.
+	 * RB Tree to become invalid, the insert fix up fixes these errors.
 	 * <p>
+	 * The only 2 violations that can be introduced when a new node is inserted
+	 * are :
+	 * <ol>
+	 * <li> The root is no longer Black (violates property 2)</li>
+	 * <li> A red node gets a red child (violates property 4) </li>
+	 * </ol>
 	 * The Insert Fix Up can be categorized into 3 broad cases. Remember the new
 	 * node will always be red.
 	 * <ol>
 	 * <li> The New Node's Parent and the New Node's Parent's sibling (uncle)
 	 * are both Red, if a node's parent is red then both of its children should
 	 * be black (from property 4), in order to fix this violation we change the
-	 * node's parent and its uncle to black and the node grand parent to red</li>
-	 * <li> </li>
-	 * <li> </li>
+	 * node's parent and its uncle to black and the node grand parent to red,
+	 * and then set the new node to the grandparent node and call the procedure
+	 * again.</li>
+	 * <li> The Uncle is black, and the new node is the right child of the
+	 * parent, in this case we set the new node to the parent and do a left
+	 * rotate on the new node and then go to case 3</li>
+	 * <li> Case 3 where the new node is the left child of the parent, we set
+	 * the parent's color to black and the grandparent's color to red and do a
+	 * right rotate.</li>
 	 * </ol>
 	 * 
 	 * @param newNode
 	 */
 	private void insertFixUp(RedBlackNode newNode) {
 		while (newNode.getParent().getNodeColor().equals(NodeColor.Red)) {
-			// then new Node's grand parent has to be black
-			// if new node's parent is the left child of it parent
-			// parent of parent will exist since newNode's parent is Red
 			if (newNode.getParent().equals(newNode.getParent().getParent().getLeft())) {
 				RedBlackNode uncle = newNode.getParent().getParent().getRight();
 				if (uncle.getNodeColor().equals(NodeColor.Red)) {
 					newNode.getParent().setNodeColor(NodeColor.Black);
-					newNode.getParent().getParent().setNodeColor(NodeColor.Red);
 					uncle.setNodeColor(NodeColor.Black);
+					newNode.getParent().getParent().setNodeColor(NodeColor.Red);
+					newNode = newNode.getParent().getParent();
 				} else {
 					if (newNode.equals(newNode.getParent().getRight())) {
 						newNode = newNode.getParent();
@@ -140,8 +163,9 @@ public class RedBlackTree implements BinaryTree {
 				RedBlackNode uncle = newNode.getParent().getParent().getLeft();
 				if (uncle.getNodeColor().equals(NodeColor.Red)) {
 					newNode.getParent().setNodeColor(NodeColor.Black);
-					newNode.getParent().getParent().setNodeColor(NodeColor.Red);
 					uncle.setNodeColor(NodeColor.Black);
+					newNode.getParent().getParent().setNodeColor(NodeColor.Red);
+					newNode = newNode.getParent().getParent();
 				} else {
 					if (newNode.equals(newNode.getParent().getLeft())) {
 						newNode = newNode.getParent();
@@ -158,9 +182,10 @@ public class RedBlackTree implements BinaryTree {
 	}
 
 	/**
-	 * When we do a left rotate on a node we assume its right child(y) is not
-	 * nil.Makes right child(y) the new root of the subtree and the given node
-	 * as the left child of y.
+	 * When we do a left rotate on a node(known as x) we assume its right
+	 * child(y) is not nil. This procedure, makes right child( know as y ) the
+	 * new root of the subtree and x as the left child of y.If y has a left
+	 * child, it becomes x's right child.
 	 * 
 	 * @param node
 	 */
@@ -209,12 +234,6 @@ public class RedBlackTree implements BinaryTree {
 		}
 	}
 
-	private RedBlackNode createNode(SortableObject sortableObject) {
-		RedBlackNode node = new RedBlackNode(sortableObject);
-		node.setNodeColor(NodeColor.Red);
-		return node;
-	}
-
 	/**
 	 * If Root is null set it to Null Node else return root.
 	 * 
@@ -229,7 +248,7 @@ public class RedBlackTree implements BinaryTree {
 
 	@Override
 	public void deleteNodeWithValue(int value) {
-
+		throw new RuntimeException("Sorry Not Yet Implemented");
 	}
 
 	/*
