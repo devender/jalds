@@ -3,26 +3,27 @@ package test.jalds.alds.ds.tree;
 import jalds.alds.SortableObject;
 import jalds.alds.ds.tree.rb.RedBlackTree;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
 import junit.framework.TestCase;
 
 public class TestRedBlackTree extends TestCase {
-	private RedBlackTree binaryTree;
+	private RedBlackTree redBlackTree;
 
 	protected void setUp() throws Exception {
-		binaryTree = new RedBlackTree();
-		Random random = new Random();
+		redBlackTree = new RedBlackTree();
+		Random random = new Random(Calendar.getInstance().getTimeInMillis());
 		for (int i = 0; i < 10; i++) {
 			int key = random.nextInt(10);
-			binaryTree.insertNode(new SortableObject(key, key), true);
+			redBlackTree.insertNode(new SortableObject(key, key), true);
 		}
 	}
 
 	public void testInOrder() {
 		// walking in order should produce a sorted list
-		List<SortableObject> list = binaryTree.inOrder();
+		List<SortableObject> list = redBlackTree.inOrder();
 		orderTest(list);
 	}
 

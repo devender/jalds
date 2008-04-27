@@ -4,6 +4,7 @@ import jalds.alds.SortableObject;
 import jalds.alds.ds.tree.BinaryTree;
 import jalds.alds.ds.tree.SimpleBinaryTree;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -19,7 +20,7 @@ public class TestSimpleBinaryTree extends TestCase {
 
 	protected void setUp() throws Exception {
 		binaryTree = new SimpleBinaryTree();
-		Random random = new Random();
+		Random random = new Random(Calendar.getInstance().getTimeInMillis());
 		for (int i = 0; i < 10; i++) {
 			int key = random.nextInt(10);
 			binaryTree.insertNode(new SortableObject(key, key), true);

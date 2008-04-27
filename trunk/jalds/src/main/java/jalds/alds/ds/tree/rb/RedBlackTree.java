@@ -23,8 +23,6 @@ import jalds.alds.ds.tree.BinaryTree;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.NodeType;
-
 /**
  * A red black tree is a binary tree with one extra bit of storage per node, its
  * color which can either be black or red. By constraining the way nodes can be
@@ -75,17 +73,49 @@ public class RedBlackTree implements BinaryTree {
 		if (!allowDuplicates && find(root, sortableObject.getValue()) != null) {
 			return;
 		}
-		RedBlackNode newNode = null;
-		if (root.equals(RedBlackNode.NilNode)) {
-			root = createNode(sortableObject);
-			newNode = root;
-		} else {
-			newNode = checkAndCreate(root, sortableObject);
-
+		
+		RedBlackNode y = RedBlackNode.NilNode;
+		RedBlackNode x = root;
+		while (!x.equals(RedBlackNode.NilNode)) {
+			y = x;
+			if (sortableObject.getValue() < x.getSortableObject().getValue()) {
+				x = x.getLeft();
+			} else {
+				x = x.getRight();
+			}
 		}
-		insertFixUp(newNode);
+		RedBlackNode z = createNode(sortableObject);
+		z.setParent(y);
+		if (y.equals(root)) {
+			root = z;
+		} else {
+			if (z.getSortableObject().getValue() < y.getSortableObject().getValue()) {
+				y.setLeft(z);
+			} else {
+				y.setRight(z);
+			}
+		}
+
+		insertFixUp(z);
 	}
 
+	/**
+	 * Inserting a new node could have caused some some of the properties of the
+	 * RB Tree invalid, the insert fix up fixes these errors.
+	 * <p>
+	 * The Insert Fix Up can be categorized into 3 broad cases. Remember the new
+	 * node will always be red.
+	 * <ol>
+	 * <li> The New Node's Parent and the New Node's Parent's sibling (uncle)
+	 * are both Red, if a node's parent is red then both of its children should
+	 * be black (from property 4), in order to fix this violation we change the
+	 * node's parent and its uncle to black and the node grand parent to red</li>
+	 * <li> </li>
+	 * <li> </li>
+	 * </ol>
+	 * 
+	 * @param newNode
+	 */
 	private void insertFixUp(RedBlackNode newNode) {
 		while (newNode.getParent().getNodeColor().equals(NodeColor.Red)) {
 			// then new Node's grand parent has to be black
@@ -125,34 +155,6 @@ public class RedBlackTree implements BinaryTree {
 			}
 		}
 		root.setNodeColor(NodeColor.Black);
-	}
-
-	/**
-	 * Finds the right place to insert the node and returns the node created.
-	 * 
-	 * @param node
-	 * @param sortableObject
-	 * @return Node
-	 */
-	private RedBlackNode checkAndCreate(RedBlackNode node, SortableObject sortableObject) {
-		// should I go right or left ?
-		if (sortableObject.getValue() >= node.getSortableObject().getValue()) {
-			if (node.getRight().equals(RedBlackNode.NilNode)) {
-				RedBlackNode right = createNode(sortableObject);
-				node.setRight(right);
-				return right;
-			} else {
-				return checkAndCreate(node.getRight(), sortableObject);
-			}
-		} else {
-			if (node.getLeft().equals(RedBlackNode.NilNode)) {
-				RedBlackNode left = createNode(sortableObject);
-				node.setLeft(left);
-				return left;
-			} else {
-				return checkAndCreate(node.getLeft(), sortableObject);
-			}
-		}
 	}
 
 	/**
@@ -236,7 +238,9 @@ public class RedBlackTree implements BinaryTree {
 	 * replaced with RedBlackNode
 	 * -----------------------------------------------------------------------
 	 */
-	@Override
+	/**
+	 * {@inheritDoc}
+	 */
 	public SortableObject find(int key) {
 		return find(root, key).getSortableObject();
 	}
@@ -252,7 +256,9 @@ public class RedBlackTree implements BinaryTree {
 		return node;
 	}
 
-	@Override
+	/**
+	 * {@inheritDoc}
+	 */
 	public SortableObject findMax() {
 		return findMax(root).getSortableObject();
 	}
@@ -271,7 +277,9 @@ public class RedBlackTree implements BinaryTree {
 		return max;
 	}
 
-	@Override
+	/**
+	 * {@inheritDoc}
+	 */
 	public SortableObject findMin() {
 		return findMin(root).getSortableObject();
 	}
@@ -290,7 +298,9 @@ public class RedBlackTree implements BinaryTree {
 		return min;
 	}
 
-	@Override
+	/**
+	 * {@inheritDoc}
+	 */
 	public SortableObject findPredecessor(int key) {
 		SortableObject predecessor = null;
 		RedBlackNode nodeForKey = find(root, key);
@@ -312,7 +322,9 @@ public class RedBlackTree implements BinaryTree {
 		return predecessor;
 	}
 
-	@Override
+	/**
+	 * {@inheritDoc}
+	 */
 	public SortableObject findSuccessor(int key) {
 		RedBlackNode nodeForKey = find(root, key);
 		SortableObject successor = findSuccessor(nodeForKey).getSortableObject();
@@ -339,7 +351,9 @@ public class RedBlackTree implements BinaryTree {
 		return successor;
 	}
 
-	@Override
+	/**
+	 * {@inheritDoc}
+	 */
 	public List<SortableObject> inOrder() {
 		// in order on binary will gives us sorted list
 		List<SortableObject> list = new ArrayList<SortableObject>();
@@ -356,7 +370,9 @@ public class RedBlackTree implements BinaryTree {
 		}
 	}
 
-	@Override
+	/**
+	 * {@inheritDoc}
+	 */
 	public List<SortableObject> postOrder() {
 		List<SortableObject> list = new ArrayList<SortableObject>();
 		postOrder(root, list);
@@ -371,7 +387,9 @@ public class RedBlackTree implements BinaryTree {
 		}
 	}
 
-	@Override
+	/**
+	 * {@inheritDoc}
+	 */
 	public List<SortableObject> preOrder() {
 		List<SortableObject> list = new ArrayList<SortableObject>();
 		preOrder(root, list);
