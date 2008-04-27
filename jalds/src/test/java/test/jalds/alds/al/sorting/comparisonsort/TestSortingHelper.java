@@ -1,5 +1,6 @@
 package test.jalds.alds.al.sorting.comparisonsort;
 
+import java.util.Calendar;
 import java.util.Random;
 
 import jalds.alds.SortableObject;
@@ -13,7 +14,7 @@ public class TestSortingHelper {
 
 	public static SortableObject[] makeUnSortedList(int n) {
 		SortableObject[] sortableObjects = new SortableObject[n];
-		Random random = new Random();
+		Random random = new Random(Calendar.getInstance().getTimeInMillis());
 		for (int i = 0; i < n; i++) {
 			int d = random.nextInt(n*10);
 			SortableObject object = new SortableObject(d, d);

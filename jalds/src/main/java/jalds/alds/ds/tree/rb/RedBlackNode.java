@@ -18,7 +18,6 @@
 package jalds.alds.ds.tree.rb;
 
 import jalds.alds.SortableObject;
-import jalds.alds.ds.tree.Node;
 
 /**
  * A Red Black Node is extends a regular tree node and add one extra bit of

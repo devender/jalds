@@ -54,62 +54,38 @@ public class SimpleBinaryTree implements BinaryTree {
 	}
 
 	/**
-	 * Insert the given Sortable Object into the Tree, also needs to know if
-	 * duplicates are allowed.
-	 * 
-	 * @param sortableObject
-	 * @param allowDuplicates
+	 * {@inheritDoc}
 	 */
 	public void insertNode(SortableObject sortableObject, boolean allowDuplicates) {
 		if (!allowDuplicates && find(root, sortableObject.getValue()) != null) {
 			return;
 		}
-		if (root == null) {
-			root = new Node();
-			root.setSortableObject(sortableObject);
-		} else {
-			checkAndCreate(root, sortableObject);
-		}
-	}
 
-	private Node checkAndCreate(Node node, SortableObject sortableObject) {
-		// should I go right or left ?
-		if (sortableObject.getValue() >= node.getSortableObject().getValue()) {
-			if (node.getRight() == null) {
-				Node right = new Node(sortableObject);
-				node.setRight(right);
-				return right;
+		Node z = new Node(sortableObject);
+		Node y = null;
+		Node x = root;
+		while (x != null) {
+			y = x;
+			if (z.getSortableObject().getValue() < x.getSortableObject().getValue()) {
+				x = x.getLeft();
 			} else {
-				return checkAndCreate(node.getRight(), sortableObject);
+				x = x.getRight();
 			}
+		}
+		z.setParent(y);
+		if (y == null) {
+			root = z;
 		} else {
-			if (node.getLeft() == null) {
-				Node left = new Node(sortableObject);
-				node.setLeft(left);
-				return left;
+			if (z.getSortableObject().getValue() < y.getSortableObject().getValue()) {
+				y.setLeft(z);
 			} else {
-				return checkAndCreate(node.getLeft(), sortableObject);
+				y.setRight(z);
 			}
 		}
 	}
 
 	/**
-	 * Deletes the first node which has the given value.
-	 * <ul>
-	 * <li>Find the Node which has the given value</li>
-	 * <li>If the Node is the root node then delete the root</li>
-	 * <li>Else if the Node has no children then set the Parent of this node's
-	 * link to child as null.</li>
-	 * <li>Else if the Node has only one child, move the child to the parent</li>
-	 * <li>If the Node has both children
-	 * <ul>
-	 * <li> Find the Node's Successor.</li>
-	 * <li> Replace this Node's Sortable object with the Successors' Sortable
-	 * Object</li>
-	 * <li> Delete Successor </li>
-	 * </ul>
-	 * </li>
-	 * </ul>
+	 * {@inheritDoc}
 	 */
 	public void deleteNodeWithValue(int value) {
 		Node nodeToDelete = find(root, value);
@@ -151,22 +127,7 @@ public class SimpleBinaryTree implements BinaryTree {
 	}
 
 	/**
-	 * Find the node with the smallest value greater than the give key, Note the
-	 * given key must be in the tree i.e A sortable object with the given key
-	 * must be in the tree
-	 * <p>
-	 * If a node which holds the given key is found and that node has a right
-	 * child, the successor of this node will be the node with the most min
-	 * value in the right subtree.Else we start going up the tree to find an
-	 * ancestor which has the given node in its left subtree, that would be the
-	 * successor of this node.
-	 * <p>
-	 * <em>NOTE</em>: findSuccessor will work correctely only if there are no
-	 * duplicates, if duplicates are allowed it can return back null when you
-	 * don't expect it.
-	 * 
-	 * @param key
-	 * @return {@link SortableObject}
+	 * {@inheritDoc}
 	 */
 	public SortableObject findSuccessor(int key) {
 		Node nodeForKey = find(root, key);
@@ -195,10 +156,7 @@ public class SimpleBinaryTree implements BinaryTree {
 	}
 
 	/**
-	 * Symmetric to findSuccessor
-	 * 
-	 * @param key
-	 * @return SortableObject
+	 * {@inheritDoc}
 	 */
 	public SortableObject findPredecessor(int key) {
 		SortableObject predecessor = null;
@@ -222,10 +180,7 @@ public class SimpleBinaryTree implements BinaryTree {
 	}
 
 	/**
-	 * Find the sortable object whose value is equal to the given key
-	 * 
-	 * @param key
-	 * @return {@link SortableObject}
+	 * {@inheritDoc}
 	 */
 	public SortableObject find(int key) {
 		return find(root, key).getSortableObject();
@@ -249,15 +204,7 @@ public class SimpleBinaryTree implements BinaryTree {
 	}
 
 	/**
-	 * Puts Root in the middle, traversing a binary tree in order will give you
-	 * a sorted list of elements. Takes O(n) time to make the list, where n is
-	 * <ul>
-	 * <li>Traverse the left subtree</li>
-	 * <li>Visit the node</li>
-	 * <li>Traverse the right subtree</li>
-	 * </ul>
-	 * 
-	 * @return a list of Sortable objects collected using In-Order Traversal
+	 * {@inheritDoc}
 	 */
 	public List<SortableObject> inOrder() {
 		// in order on binary will gives us sorted list
@@ -275,15 +222,7 @@ public class SimpleBinaryTree implements BinaryTree {
 	}
 
 	/**
-	 * Visit the Parent node before left and right subtrees (also know as depth
-	 * first traversal)
-	 * <ul>
-	 * <li>Visit the node</li>
-	 * <li>Traverse the left subtree</li>
-	 * <li>Traverse the right subtree</li>
-	 * </ul>
-	 * 
-	 * @return post ordered list of Sortable Objects
+	 * {@inheritDoc}
 	 */
 	public List<SortableObject> preOrder() {
 		List<SortableObject> list = new ArrayList<SortableObject>();
@@ -300,14 +239,7 @@ public class SimpleBinaryTree implements BinaryTree {
 	}
 
 	/**
-	 * Vist parent after visiting left and right subtrees.
-	 * <ul>
-	 * <li>Traverse the left subtree</li>
-	 * <li>Traverse the right subtree</li>
-	 * <li>Visit the node</li>
-	 * </ul>
-	 * 
-	 * @return post order sorted list
+	 * {@inheritDoc}
 	 */
 	public List<SortableObject> postOrder() {
 		List<SortableObject> list = new ArrayList<SortableObject>();
@@ -324,9 +256,7 @@ public class SimpleBinaryTree implements BinaryTree {
 	}
 
 	/**
-	 * Find the Object with the max value
-	 * 
-	 * @return SortableObject
+	 * {@inheritDoc}
 	 */
 	public SortableObject findMax() {
 		return findMax(root).getSortableObject();
@@ -347,9 +277,7 @@ public class SimpleBinaryTree implements BinaryTree {
 	}
 
 	/**
-	 * Finds the Object with the Min Value
-	 * 
-	 * @return SortableObject
+	 * {@inheritDoc}
 	 */
 	public SortableObject findMin() {
 		return findMin(root).getSortableObject();
