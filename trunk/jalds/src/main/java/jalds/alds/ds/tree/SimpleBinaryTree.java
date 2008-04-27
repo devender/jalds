@@ -101,40 +101,68 @@ public class SimpleBinaryTree implements BinaryTree {
 
 	/**
 	 * Deletes the given Node.
+	 * <ul>
+	 * <li> First determines what node to splice/move (y) </li>
+	 * <ul>
+	 * <li> if given node has only one child then y = given node</li>
+	 * <li> if given node has both children then y = successor(node)</li>
+	 * </ul>
+	 * <li>Splice/Move y</li>
+	 * <ul>
+	 * <li>Find the non null child of y (x) </li>
+	 * <li>Set the parent of x as parent of y (making y and orphan).</li>
+	 * <li>If parent of y is null, i.e y was the root, set x as the new root</li>
+	 * <li>If y had a parent then set x as either the right node or the left
+	 * node of the parent, depending on what y was </li>
+	 * </ul>
+	 * <li>By now, if the given node had no children it would have been
+	 * deleted, if the given node had one child, the child would have been moved
+	 * into the node's spot.Only if the given node had 2 children, the successor
+	 * will found and the successor's not null child moved to the right spot and
+	 * the given node's value replaced with the successor's value.</li>
+	 * </ol>
 	 * 
 	 * @param nodeToDelete
 	 */
 	private void deleteNode(Node nodeToDelete) {
-		Node parent = nodeToDelete.getParent();
-		// is this the root node ?
-		if (parent == null) {
-			root = null;
-		} else if (nodeToDelete.getLeft() == null && nodeToDelete.getRight() == null) {
-			// easier if no kids
-			if (nodeToDelete.equals(parent.getLeft())) {
-				parent.setLeft(null);
-			} else {
-				parent.setRight(null);
-			}
+		// first let us determine what node to splice/move out
+		Node y = null;
+		if (nodeToDelete.getLeft() == null || nodeToDelete.getRight() == null) {
+			y = nodeToDelete;
 		} else {
-			if (nodeToDelete.getLeft() != null && nodeToDelete.getRight() != null) {
-				// has both children
-				Node successor = findSuccessor(nodeToDelete);
-				if (successor != null) {
-					nodeToDelete.setSortableObject(successor.getSortableObject());
-					deleteNode(successor);
-				} else {
-					throw new RuntimeException("Unable to find Successor");
-				}
-			} else if ((nodeToDelete.getLeft() != null && nodeToDelete.getRight() == null) || (nodeToDelete.getLeft() == null && nodeToDelete.getRight() != null)) {
-				// has only one child
-				Node child = (nodeToDelete.getLeft() != null) ? nodeToDelete.getLeft() : nodeToDelete.getRight();
-				if (nodeToDelete.equals(parent.getLeft())) {
-					parent.setLeft(child);
-				} else {
-					parent.setRight(child);
-				}
+			// or the successor if node to delete has both childs
+			y = findSuccessor(nodeToDelete);
+		}
+
+		// Now let us splice/move out y
+		Node x = null;
+		// first find the not null child of y
+		if (y.getLeft() != null) {
+			x = y.getLeft();
+		} else {
+			x = y.getRight();
+		}
+		// set x's parent same as y's parent, essentially y is an orphan now
+		if (x != null) {
+			x.setParent(y.getParent());
+		}
+		// if y was the root, set x as the new root
+		if (y.getParent() == null) {
+			root = x;
+		} else {
+			// if y was right set x as right or if y was left set x as the left
+			Node parent = y.getParent();
+			if (y.equals(parent.getLeft())) {
+				parent.setLeft(x);
+			} else {
+				parent.setRight(x);
 			}
+		}
+		// splicing is done, if we spliced/moved a node with no children then
+		// nothing more to do, but if we had moved either one of the children
+		// or the successor we will now replace the node to delete with y
+		if (!y.equals(nodeToDelete)) {
+			nodeToDelete.setSortableObject(y.getSortableObject());
 		}
 	}
 
