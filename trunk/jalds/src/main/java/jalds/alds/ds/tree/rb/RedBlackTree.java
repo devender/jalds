@@ -19,6 +19,7 @@ package jalds.alds.ds.tree.rb;
 
 import jalds.alds.SortableObject;
 import jalds.alds.ds.tree.BinaryTree;
+import jalds.alds.ds.tree.Node;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -247,9 +248,58 @@ public class RedBlackTree implements BinaryTree {
 		return root;
 	}
 
-	@Override
+	/**
+	 * {@inheritDoc} Similar to SimpleBinaryTree Delete, after delete checks to
+	 * see if the spliced/moved node is black and if it is calls delete fix up.
+	 */
 	public void deleteNodeWithValue(int value) {
-		throw new RuntimeException("Sorry Not Yet Implemented");
+		RedBlackNode nodeToDelete = find(root, value);
+		deleteNode(nodeToDelete);
+	}
+
+	/**
+	 * Similar to Simple Binary Tree Delete
+	 * 
+	 * @param nodeToDelete
+	 */
+	private void deleteNode(RedBlackNode nodeToDelete) {
+		// first let us determine what node to splice/move out
+		RedBlackNode y = null;
+		if (nodeToDelete.getLeft().equals(RedBlackNode.NilNode) || nodeToDelete.getRight().equals(RedBlackNode.NilNode)) {
+			y = nodeToDelete;
+		} else {
+			// or the successor if node to delete has both childs
+			y = findSuccessor(nodeToDelete);
+		}
+
+		// Now let us splice/move out y
+		RedBlackNode x = null;
+		// first find the not null child of y
+		if (!y.getLeft().equals(RedBlackNode.NilNode)) {
+			x = y.getLeft();
+		} else {
+			x = y.getRight();
+		}
+		// set x's parent same as y's parent, essentially y is an orphan now
+		x.setParent(y.getParent());
+		// if y was the root, set x as the new root
+		if (y.getParent().equals(RedBlackNode.NilNode)) {
+			root = x;
+		} else {
+			// if y was right set x as right or if y was left set x as the left
+			RedBlackNode parent = y.getParent();
+			if (y.equals(parent.getLeft())) {
+				parent.setLeft(x);
+			} else {
+				parent.setRight(x);
+			}
+		}
+		// splicing is done, if we spliced/moved a node with no children then
+		// nothing more to do, but if we had moved either one of the children
+		// or the successor we will now replace the node to delete with y
+		if (!y.equals(nodeToDelete)) {
+			nodeToDelete.setSortableObject(y.getSortableObject());
+		}
 	}
 
 	/*
@@ -266,7 +316,7 @@ public class RedBlackTree implements BinaryTree {
 	}
 
 	private RedBlackNode find(RedBlackNode node, int key) {
-		while (node != null && node.getSortableObject().getValue() != key) {
+		while (!node.equals(RedBlackNode.NilNode) && node.getSortableObject().getValue() != key) {
 			if (key < node.getSortableObject().getValue()) {
 				node = node.getLeft();
 			} else {
@@ -291,7 +341,7 @@ public class RedBlackTree implements BinaryTree {
 	 */
 	private RedBlackNode findMax(RedBlackNode node) {
 		RedBlackNode max = null;
-		for (; node != null; node = node.getRight()) {
+		for (; !node.equals(RedBlackNode.NilNode); node = node.getRight()) {
 			max = node;
 		}
 		return max;
@@ -312,7 +362,7 @@ public class RedBlackTree implements BinaryTree {
 	 */
 	private RedBlackNode findMin(RedBlackNode node) {
 		RedBlackNode min = null;
-		for (; node != null; node = node.getLeft()) {
+		for (; !node.equals(RedBlackNode.NilNode); node = node.getLeft()) {
 			min = node;
 		}
 		return min;
