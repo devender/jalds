@@ -122,6 +122,7 @@ public class RedBlackTree implements BinaryTree {
 	 * <li> The root is no longer Black (violates property 2)</li>
 	 * <li> A red node gets a red child (violates property 4) </li>
 	 * </ol>
+	 * <p>
 	 * The Insert Fix Up can be categorized into 3 broad cases. Remember the new
 	 * node will always be red.
 	 * <ol>
@@ -187,7 +188,7 @@ public class RedBlackTree implements BinaryTree {
 	 * new root of the subtree and x as the left child of y.If y has a left
 	 * child, it becomes x's right child.
 	 * 
-	 * @param node
+	 * @param x
 	 */
 	private void leftRotate(RedBlackNode x) {
 		if (!x.getRight().equals(RedBlackNode.NilNode)) {
@@ -237,7 +238,7 @@ public class RedBlackTree implements BinaryTree {
 	/**
 	 * If Root is null set it to Null Node else return root.
 	 * 
-	 * @return
+	 * @return RedBlackNode
 	 */
 	private RedBlackNode initializeRoot() {
 		if (root == null) {
