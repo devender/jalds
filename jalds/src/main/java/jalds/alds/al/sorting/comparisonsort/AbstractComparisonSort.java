@@ -21,8 +21,8 @@ import jalds.alds.SortableObject;
 import jalds.alds.al.sorting.Sort;
 
 /**
- * The base abstract comparison sort, implements Sort and provides helpfull methods to all of the
- * comparison sort classes.
+ * The base abstract comparison sort, implements Sort and provides helpfull
+ * methods to all of the comparison sort classes.
  * 
  * @author Devender Gollapally
  * 
@@ -33,6 +33,7 @@ public abstract class AbstractComparisonSort implements Sort {
 
 	/**
 	 * Swaps to elements in a given array
+	 * 
 	 * @param pos1
 	 * @param pos2
 	 * @param array

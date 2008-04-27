@@ -21,7 +21,8 @@ import jalds.alds.SortableObject;
 
 /**
  * A Red Black Node is extends a regular tree node and add one extra bit of
- * storage the color of the node.
+ * storage the color of the node.The users will probably never have to use this
+ * class directly.
  * 
  * @author Devender Gollapally
  * 
@@ -42,12 +43,20 @@ public class RedBlackNode {
 
 	private NodeColor nodeType;
 
+	/**
+	 * Constructs an empty Node.
+	 */
 	private RedBlackNode() {
 		this.setParent(NilNode);
 		this.setLeft(NilNode);
 		this.setRight(NilNode);
 	}
 
+	/**
+	 * Constructs a RedBackNode with the given Sortable Object
+	 * 
+	 * @param sortableObject
+	 */
 	public RedBlackNode(SortableObject sortableObject) {
 		this.setSortableObject(sortableObject);
 		this.setParent(NilNode);
@@ -55,47 +64,98 @@ public class RedBlackNode {
 		this.setRight(NilNode);
 	}
 
+	/**
+	 * Returns the color of this Node.
+	 */
 	public NodeColor getNodeColor() {
 		return nodeType;
 	}
 
+	/**
+	 * Set the color of this node.
+	 * 
+	 * @param nodeType
+	 */
 	public void setNodeColor(NodeColor nodeType) {
 		this.nodeType = nodeType;
 	}
 
+	/**
+	 * Return the Parent of this node.
+	 * 
+	 * @return RedBlackNode
+	 */
 	public RedBlackNode getParent() {
 		return parent;
 	}
 
+	/**
+	 * Set the Parent of this node.
+	 * 
+	 * @param parent
+	 */
 	public void setParent(RedBlackNode parent) {
 		this.parent = parent;
 	}
 
+	/**
+	 * Returns the left child
+	 * 
+	 * @return RedBlackNode
+	 */
 	public RedBlackNode getLeft() {
 		return left;
 	}
 
+	/**
+	 * Set the left child.
+	 * 
+	 * @param left
+	 */
 	public void setLeft(RedBlackNode left) {
 		this.left = left;
 	}
 
+	/**
+	 * Return the right child.
+	 * 
+	 * @return RedBlackNode
+	 */
 	public RedBlackNode getRight() {
 		return right;
 	}
 
+	/**
+	 * Set the right child.
+	 * 
+	 * @param right
+	 */
 	public void setRight(RedBlackNode right) {
 		this.right = right;
 	}
 
+	/**
+	 * Returns this Node's key
+	 * 
+	 * @return SortableObject
+	 */
 	public SortableObject getSortableObject() {
 		return sortableObject;
 	}
 
+	/**
+	 * Sets this Node's key
+	 * 
+	 * @param sortableObject
+	 */
 	public void setSortableObject(SortableObject sortableObject) {
 		this.sortableObject = sortableObject;
 	}
 
-	@Override
+	/**
+	 * Two RedBlackNodes are considered to be equal if they have the same parent
+	 * and same key.
+	 */
 	public boolean equals(Object obj) {
 		if (obj == null || obj.getClass() != this.getClass()) {
 			return false;

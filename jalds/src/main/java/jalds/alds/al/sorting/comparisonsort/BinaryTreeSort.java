@@ -24,10 +24,10 @@ import jalds.alds.ds.tree.SimpleBinaryTree;
 import java.util.List;
 
 /**
- * A sort algorithm that first builds a binary search tree of the keys then accesses the keys with
- * an in-order traversal. Sorts in <em> O(log n) </em>time.
- * 
- * source http://www.nist.gov/dads/HTML/treesort1.html
+ * A sort algorithm that first builds a binary search tree of the keys then
+ * accesses the keys with an in-order traversal. Sorts in <em> O(log n) </em>time,
+ * since all operations on a binary tree can be done in O(h) where h is the
+ * height of the tree.
  * 
  * @see BinaryTree
  * @author Devender Gollapally

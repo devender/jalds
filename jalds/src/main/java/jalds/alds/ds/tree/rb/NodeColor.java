@@ -18,9 +18,10 @@
 package jalds.alds.ds.tree.rb;
 
 /**
+ * Only used by RedBlack trees, indicates color of each node.
  * 
  * @author Devender R. Gollapally
- *
+ * 
  */
 public enum NodeColor {
 

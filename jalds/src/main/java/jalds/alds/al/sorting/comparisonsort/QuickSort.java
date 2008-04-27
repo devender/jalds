@@ -27,7 +27,7 @@ import jalds.alds.SortableObject;
 public class QuickSort extends AbstractComparisonSort  {
 
 	public SortableObject[] sort(SortableObject[] unSortedList) {
-		return null;
+		throw new RuntimeException("Sorry Not Yet Implemented");
 	}
 
 }

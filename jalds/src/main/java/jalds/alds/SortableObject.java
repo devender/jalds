@@ -58,6 +58,11 @@ public class SortableObject {
 		this.value = value;
 	}
 
+	/**
+	 * Returns the Object Stored
+	 * 
+	 * @return Object
+	 */
 	public Object getObject() {
 		return object;
 	}
