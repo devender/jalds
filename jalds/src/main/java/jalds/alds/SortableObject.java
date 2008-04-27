@@ -18,14 +18,15 @@
 package jalds.alds;
 
 /**
- * Sortable Object is used in all of the Sorting Classes and also in some of the Data Structures,
- * User will need to use this class
+ * Sortable Object is used in all of the Sorting Classes and also in some of the
+ * Data Structures, User will need to use this class in order to use this
+ * package.
  * <p>
- * It needs both the object and that object's value in order to sort, if the object value is not
- * provided it uses the hashcode of the provided object.
+ * It needs both the object and that object's value in order to sort, if the
+ * object value is not provided it uses the hashcode of the provided object.
  * <p>
- * All of the algorithms and datastructures in this package will only rely on the Value and will not
- * use the object itself.
+ * All of the algorithms and datastructures in this package will only rely on
+ * the Value and will not use the object itself.
  * 
  * @author Devender Gollapally
  * 
@@ -35,9 +36,9 @@ public class SortableObject {
 	private int value;
 
 	/**
-	 * Constructs a Sortable Object whose value is the hash code of the provided object. It is
-	 * preferred that the user provide the value, this should only be used if you are providing a
-	 * custom hash code for your object.
+	 * Constructs a Sortable Object whose value is the hash code of the provided
+	 * object. It is preferred that the user provide the value, this should only
+	 * be used if you are providing a custom hash code for your object.
 	 * 
 	 * @param object
 	 */
@@ -62,9 +63,9 @@ public class SortableObject {
 	}
 
 	/**
-	 * Returns the value of the object, which is used for comparisons and sorting. If you provided a
-	 * value when creating the object that value will be used or the hashcode of that object will be
-	 * used.
+	 * Returns the value of the object, which is used for comparisons and
+	 * sorting. If you provided a value when creating the object that value will
+	 * be used or the hashcode of that object will be used.
 	 * 
 	 * See the constructor.
 	 * 
