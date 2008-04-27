@@ -24,12 +24,6 @@ import jalds.alds.SortableObject;
 import jalds.alds.ds.tree.rb.RedBlackTree;
 
 /**
- * Maintains the following invariant
- * <p>
- * Let x be a node in the BST, if y is a node in the left subtree of x then
- * key(y) < key(x) and if y is is a node in the right subtree of x then
- * key(y)>=key(x)
- * <p>
  * This is a very simple implementation of the Binary Tree, it hopes all the
  * elements are inserted in a random order, if a binary tree is created by
  * inserting elements in a random order the height (The maximal length of a path
@@ -47,9 +41,9 @@ import jalds.alds.ds.tree.rb.RedBlackTree;
  * @author Devender Gollapally
  * 
  */
-public class BinaryTree {
+public class SimpleBinaryTree implements BinaryTree {
 
-	protected Node root;
+	private Node root;
 
 	public Node getRoot() {
 		return root;
@@ -243,7 +237,7 @@ public class BinaryTree {
 	 * (key < node.getSortableObject().getValue()) { return find(node.getLeft(),
 	 * key); } else { return find(node.getRight(), key); } } }
 	 */
-	protected Node find(Node node, int key) {
+	private Node find(Node node, int key) {
 		while (node != null && node.getSortableObject().getValue() != key) {
 			if (key < node.getSortableObject().getValue()) {
 				node = node.getLeft();

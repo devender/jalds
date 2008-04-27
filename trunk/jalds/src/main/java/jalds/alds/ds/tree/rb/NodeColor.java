@@ -22,7 +22,7 @@ package jalds.alds.ds.tree.rb;
  * @author Devender R. Gollapally
  *
  */
-public enum NodeType {
+public enum NodeColor {
 
 	Red, Black;
 }
