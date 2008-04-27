@@ -41,6 +41,10 @@ public class RedBlackNode {
 		NilNode.setNodeColor(NodeColor.Black);
 	}
 
+	public static boolean isNilNode(RedBlackNode redBlackNode) {
+		return NilNode.equals(redBlackNode);
+	}
+
 	private NodeColor nodeType;
 
 	/**
