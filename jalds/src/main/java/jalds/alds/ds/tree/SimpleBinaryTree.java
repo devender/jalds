@@ -56,10 +56,6 @@ public class SimpleBinaryTree implements BinaryTree {
 		return root;
 	}
 
-	public void setRoot(Node root) {
-		this.root = root;
-	}
-
 	/**
 	 * {@inheritDoc}
 	 */
@@ -351,24 +347,5 @@ public class SimpleBinaryTree implements BinaryTree {
 			min = node;
 		}
 		return min;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		print(root, builder);
-
-		return builder.toString();
-	}
-
-	private void print(Node node, StringBuilder builder) {
-		if (node == null) {
-			return;
-		}
-		builder.append(node.getSortableObject().getValue());
-		builder.append("\n__|\n");
-		print(node.getLeft(), builder);
-		builder.append("|__\n");
-		print(node.getRight(), builder);
 	}
 }

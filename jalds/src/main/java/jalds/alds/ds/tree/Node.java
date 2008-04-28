@@ -82,7 +82,8 @@ public class Node {
 	 */
 	public void setLeft(Node left) {
 		this.left = left;
-		left.setParent(this);
+		if (left != null)
+			left.setParent(this);
 	}
 
 	/**
@@ -101,7 +102,8 @@ public class Node {
 	 */
 	public void setRight(Node right) {
 		this.right = right;
-		right.setParent(this);
+		if (right != null)
+			right.setParent(this);
 	}
 
 	/**

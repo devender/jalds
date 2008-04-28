@@ -19,7 +19,6 @@ package jalds.alds.ds.tree.rb;
 
 import jalds.alds.SortableObject;
 import jalds.alds.ds.tree.BinaryTree;
-import jalds.alds.ds.tree.Node;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +87,7 @@ public class RedBlackTree implements BinaryTree {
 		}
 		RedBlackNode z = createNode(sortableObject);
 		z.setParent(y);
-		if (y.equals(root)) {
+		if (y.equals(RedBlackNode.NilNode)) {
 			root = z;
 		} else {
 			if (z.getSortableObject().getValue() < y.getSortableObject().getValue()) {
@@ -97,6 +96,9 @@ public class RedBlackTree implements BinaryTree {
 				y.setRight(z);
 			}
 		}
+		z.setLeft(RedBlackNode.NilNode);
+		z.setRight(RedBlackNode.NilNode);
+		z.setNodeColor(NodeColor.Red);
 		insertFixUp(z);
 	}
 
@@ -300,6 +302,18 @@ public class RedBlackTree implements BinaryTree {
 		if (!y.equals(nodeToDelete)) {
 			nodeToDelete.setSortableObject(y.getSortableObject());
 		}
+
+		if (y.getNodeColor().equals(NodeColor.Black)) {
+			deleteFixup(x);
+		}
+	}
+
+	/**
+	 * 
+	 * @param x
+	 */
+	private void deleteFixup(RedBlackNode x) {
+
 	}
 
 	/*
@@ -432,7 +446,7 @@ public class RedBlackTree implements BinaryTree {
 	}
 
 	private void inOrder(RedBlackNode node, List<SortableObject> list) {
-		if (node != null) {
+		if (!node.equals(RedBlackNode.NilNode)) {
 			inOrder(node.getLeft(), list);
 			if (!node.equals(RedBlackNode.NilNode))
 				list.add(node.getSortableObject());
@@ -450,7 +464,7 @@ public class RedBlackTree implements BinaryTree {
 	}
 
 	private void postOrder(RedBlackNode node, List<SortableObject> list) {
-		if (node != null) {
+		if (!node.equals(RedBlackNode.NilNode)) {
 			postOrder(node.getLeft(), list);
 			postOrder(node.getRight(), list);
 			list.add(node.getSortableObject());
@@ -467,7 +481,7 @@ public class RedBlackTree implements BinaryTree {
 	}
 
 	private void preOrder(RedBlackNode node, List<SortableObject> list) {
-		if (node != null) {
+		if (!node.equals(RedBlackNode.NilNode)) {
 			list.add(node.getSortableObject());
 			preOrder(node.getLeft(), list);
 			preOrder(node.getRight(), list);

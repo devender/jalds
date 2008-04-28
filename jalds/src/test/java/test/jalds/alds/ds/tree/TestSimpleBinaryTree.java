@@ -1,7 +1,6 @@
 package test.jalds.alds.ds.tree;
 
 import jalds.alds.SortableObject;
-import jalds.alds.ds.tree.BinaryTree;
 import jalds.alds.ds.tree.SimpleBinaryTree;
 
 import java.util.Calendar;
@@ -16,7 +15,7 @@ import junit.framework.TestCase;
  * 
  */
 public class TestSimpleBinaryTree extends TestCase {
-	private BinaryTree binaryTree;
+	private SimpleBinaryTree binaryTree;
 
 	protected void setUp() throws Exception {
 		binaryTree = new SimpleBinaryTree();
@@ -27,10 +26,23 @@ public class TestSimpleBinaryTree extends TestCase {
 		}
 	}
 
+	public void testRoot() {
+		assertNotNull(binaryTree.getRoot());
+	}
+
 	public void testInOrder() {
 		// walking in order should produce a sorted list
 		List<SortableObject> list = binaryTree.inOrder();
 		orderTest(list);
+	}
+
+	public void testAllOrder() {
+		List<SortableObject> inOrder = binaryTree.inOrder();
+		List<SortableObject> postOrder = binaryTree.postOrder();
+		List<SortableObject> preOrder = binaryTree.preOrder();
+		assertTrue(inOrder.size() == postOrder.size());
+		assertTrue(postOrder.size() == preOrder.size());
+
 	}
 
 	public void testFind() {
@@ -85,24 +97,9 @@ public class TestSimpleBinaryTree extends TestCase {
 	}
 
 	public void testDelete() {
-		int n = 20;
-
-		for (int indexToDelete = 0; indexToDelete < n; indexToDelete++) {
-			binaryTree = new SimpleBinaryTree();
-			Random random = new Random();
-			for (int i = 0; i < 20; i++) {
-				int key = random.nextInt(20);
-				binaryTree.insertNode(new SortableObject(key, key), false);
-			}
-
-			List<SortableObject> list = binaryTree.inOrder();
-			if (n > list.size()) {
-				continue;
-			}
-			int key = list.get(n).getValue();
-
-			binaryTree.deleteNodeWithValue(key);
-			assertNull(binaryTree.find(key));
+		List<SortableObject> list = binaryTree.inOrder();
+		for (SortableObject sortableObject : list) {
+			binaryTree.deleteNodeWithValue(sortableObject.getValue());
 			orderTest(binaryTree.inOrder());
 		}
 	}
