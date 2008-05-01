@@ -19,6 +19,7 @@ package jalds.alds.ds.tree.rb;
 
 import jalds.alds.SortableObject;
 import jalds.alds.ds.tree.BinaryTree;
+import jalds.alds.ds.tree.Node;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -196,9 +197,11 @@ public class RedBlackTree implements BinaryTree {
 	private void leftRotate(RedBlackNode x) {
 		if (!x.getRight().equals(RedBlackNode.NilNode)) {
 			RedBlackNode y = x.getRight();
+			x.setRight(y.getLeft());
 			if (!y.getLeft().equals(RedBlackNode.NilNode)) {
-				x.setRight(y.getLeft());
+				y.getLeft().setParent(x);
 			}
+			y.setParent(x.getParent());
 			if (!x.getParent().equals(RedBlackNode.NilNode)) {
 				RedBlackNode parent = x.getParent();
 				if (parent.getLeft().equals(x)) {
@@ -210,6 +213,7 @@ public class RedBlackTree implements BinaryTree {
 				this.root = y;
 			}
 			y.setLeft(x);
+			x.setParent(y);
 		}
 	}
 
@@ -218,23 +222,26 @@ public class RedBlackTree implements BinaryTree {
 	 * 
 	 * @param y
 	 */
-	private void rightRotate(RedBlackNode y) {
-		if (!y.getLeft().equals(RedBlackNode.NilNode)) {
-			RedBlackNode x = y.getLeft();
-			if (!x.getRight().equals(RedBlackNode.NilNode)) {
-				y.setLeft(x.getRight());
+	private void rightRotate(RedBlackNode x) {
+		if (!x.getLeft().equals(RedBlackNode.NilNode)) {
+			RedBlackNode y = x.getLeft();
+			x.setLeft(y.getRight());
+			if (!y.getRight().equals(RedBlackNode.NilNode)) {
+				y.getRight().setParent(x);
 			}
-			if (!y.getParent().equals(RedBlackNode.NilNode)) {
-				RedBlackNode parent = y.getParent();
-				if (parent.getLeft().equals(y)) {
-					parent.setLeft(x);
+			y.setParent(x.getParent());
+			if (!x.getParent().equals(RedBlackNode.NilNode)) {
+				RedBlackNode parent = x.getParent();
+				if (parent.getLeft().equals(x)) {
+					parent.setLeft(y);
 				} else {
-					parent.setRight(x);
+					parent.setRight(y);
 				}
 			} else {
-				this.root = x;
+				this.root = y;
 			}
-			x.setRight(y);
+			y.setRight(x);
+			x.setParent(y);
 		}
 	}
 
@@ -382,24 +389,28 @@ public class RedBlackTree implements BinaryTree {
 		return min;
 	}
 
+
 	/**
 	 * {@inheritDoc}
 	 */
 	public SortableObject findPredecessor(int key) {
-		SortableObject predecessor = null;
-		RedBlackNode nodeForKey = find(root, key);
-		if (nodeForKey != null) {
-			if (nodeForKey.getLeft() != null) {
-				predecessor = findMax(nodeForKey.getLeft()).getSortableObject();
+		RedBlackNode predecessor = find(root, key);
+		return findPredecessor(predecessor).getSortableObject();
+	}
+
+	private RedBlackNode findPredecessor(RedBlackNode node) {
+		RedBlackNode predecessor = node;
+		if (!node.equals(RedBlackNode.NilNode)) {
+			if (!node.getLeft().equals(RedBlackNode.NilNode)) {
+				predecessor = findMax(node);
 			} else {
-				// go find the closest ancestor where which is on the right
-				RedBlackNode parentNode = nodeForKey.getParent();
-				while (parentNode != null && nodeForKey.equals(parentNode.getLeft())) {
-					nodeForKey = parentNode;
+				RedBlackNode parentNode = node.getParent();
+				while (parentNode != null && node.equals(parentNode.getLeft())) {
+					node = parentNode;
 					parentNode = parentNode.getParent();
 				}
 				if (parentNode != null) {
-					predecessor = parentNode.getSortableObject();
+					predecessor = parentNode;
 				}
 			}
 		}
@@ -416,9 +427,9 @@ public class RedBlackTree implements BinaryTree {
 	}
 
 	private RedBlackNode findSuccessor(RedBlackNode node) {
-		RedBlackNode successor = null;
-		if (node != null) {
-			if (node.getRight() != null) {
+		RedBlackNode successor = node;
+		if (!node.equals(RedBlackNode.NilNode)) {
+			if (!node.getRight().equals(RedBlackNode.NilNode)) {
 				successor = findMin(node.getRight());
 			} else {
 				// go find the closest ancestor where which is on the left
