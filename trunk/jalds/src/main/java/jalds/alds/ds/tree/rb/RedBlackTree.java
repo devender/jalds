@@ -19,7 +19,6 @@ package jalds.alds.ds.tree.rb;
 
 import jalds.alds.SortableObject;
 import jalds.alds.ds.tree.BinaryTree;
-import jalds.alds.ds.tree.Node;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -164,7 +163,7 @@ public class RedBlackTree implements BinaryTree {
 					newNode.getParent().getParent().setNodeColor(NodeColor.Red);
 					rightRotate(newNode.getParent().getParent());
 				}
-			} else if (newNode.getParent().equals(newNode.getParent().getParent().getRight())) {
+			} else {
 				RedBlackNode uncle = newNode.getParent().getParent().getLeft();
 				if (uncle.getNodeColor().equals(NodeColor.Red)) {
 					newNode.getParent().setNodeColor(NodeColor.Black);
@@ -179,7 +178,6 @@ public class RedBlackTree implements BinaryTree {
 					newNode.getParent().setNodeColor(NodeColor.Black);
 					newNode.getParent().getParent().setNodeColor(NodeColor.Red);
 					leftRotate(newNode.getParent().getParent());
-
 				}
 			}
 		}
@@ -401,21 +399,18 @@ public class RedBlackTree implements BinaryTree {
 		}
 	}
 
-	private RedBlackNode findPredecessor(RedBlackNode node) {
-		RedBlackNode predecessor = node;
+	private RedBlackNode findPredecessor(RedBlackNode node) {		
 		if (!node.getLeft().equals(RedBlackNode.NilNode)) {
-			System.out.println("finding max");
-			predecessor = findMax(node.getLeft());
+			return findMax(node.getLeft());
 		} else {
-			System.out.println("looping");
 			RedBlackNode parentNode = node.getParent();
 			while (!parentNode.equals(RedBlackNode.NilNode) && node.equals(parentNode.getLeft())) {
-				node = parentNode;
-				predecessor = parentNode;
+				node = parentNode;				
 				parentNode = parentNode.getParent();
 			}
+			return parentNode;
 		}
-		return predecessor;
+		
 	}
 
 	/**
