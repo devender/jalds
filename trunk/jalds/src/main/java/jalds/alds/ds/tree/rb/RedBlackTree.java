@@ -389,29 +389,30 @@ public class RedBlackTree implements BinaryTree {
 		return min;
 	}
 
-
 	/**
 	 * {@inheritDoc}
 	 */
 	public SortableObject findPredecessor(int key) {
-		RedBlackNode predecessor = find(root, key);
-		return findPredecessor(predecessor).getSortableObject();
+		RedBlackNode node = find(root, key);
+		if (node != null) {
+			return findPredecessor(node).getSortableObject();
+		} else {
+			return null;
+		}
 	}
 
 	private RedBlackNode findPredecessor(RedBlackNode node) {
 		RedBlackNode predecessor = node;
-		if (!node.equals(RedBlackNode.NilNode)) {
-			if (!node.getLeft().equals(RedBlackNode.NilNode)) {
-				predecessor = findMax(node);
-			} else {
-				RedBlackNode parentNode = node.getParent();
-				while (parentNode != null && node.equals(parentNode.getLeft())) {
-					node = parentNode;
-					parentNode = parentNode.getParent();
-				}
-				if (parentNode != null) {
-					predecessor = parentNode;
-				}
+		if (!node.getLeft().equals(RedBlackNode.NilNode)) {
+			System.out.println("finding max");
+			predecessor = findMax(node.getLeft());
+		} else {
+			System.out.println("looping");
+			RedBlackNode parentNode = node.getParent();
+			while (!parentNode.equals(RedBlackNode.NilNode) && node.equals(parentNode.getLeft())) {
+				node = parentNode;
+				predecessor = parentNode;
+				parentNode = parentNode.getParent();
 			}
 		}
 		return predecessor;
@@ -422,8 +423,11 @@ public class RedBlackTree implements BinaryTree {
 	 */
 	public SortableObject findSuccessor(int key) {
 		RedBlackNode nodeForKey = find(root, key);
-		SortableObject successor = findSuccessor(nodeForKey).getSortableObject();
-		return successor;
+		if (nodeForKey != null) {
+			return findSuccessor(nodeForKey).getSortableObject();
+		} else {
+			return null;
+		}
 	}
 
 	private RedBlackNode findSuccessor(RedBlackNode node) {
