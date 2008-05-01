@@ -87,21 +87,19 @@ public class TestRedBlackTree extends TestCase {
 		}
 	}
 
+	public void testInOrder() {
+		// walking in order should produce a sorted list
+		orderTest(redBlackTree.inOrder());
+	}
+
 	public void testPredecessor() {
 		List<SortableObject> list = redBlackTree.inOrder();
-		for (int i = list.size() - 1; i > 0; i--) {			
+		for (int i = list.size() - 1; i > 1; i--) {
 			int key = list.get(i).getValue();
 			SortableObject object = redBlackTree.findPredecessor(key);
 			assertTrue(object.getValue() <= key);
 		}
 	}
-
-	//
-	// public void testInOrder() {
-	// // walking in order should produce a sorted list
-	// orderTest(redBlackTree.inOrder());
-	// }
-	//
 
 	private void orderTest(List<SortableObject> list) {
 		int value = Integer.MIN_VALUE;

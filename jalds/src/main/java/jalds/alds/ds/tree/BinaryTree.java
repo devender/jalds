@@ -84,7 +84,8 @@ public interface BinaryTree {
 	SortableObject findSuccessor(int key);
 
 	/**
-	 * Symmetric to findSuccessor
+	 * Symmetric to findSuccessor, and like the Successor can return null if
+	 * there are duplicate values in the tree.
 	 * 
 	 * @param key
 	 * @return SortableObject
