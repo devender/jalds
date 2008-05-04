@@ -47,6 +47,7 @@ import java.util.List;
  * same number of black nodes </li>
  * </ol>
  * <p>
+ * <em>NOTE: Does not work if duplicates are allowed </em>
  * Source Introduction To Algorithms book
  * 
  * @author Devender Gollapally
@@ -71,7 +72,7 @@ public class RedBlackTree implements BinaryTree {
 	 * procedure.
 	 */
 	public void insertNode(SortableObject sortableObject, boolean allowDuplicates) {
-		if (!allowDuplicates && find(root, sortableObject.getValue()) != null) {
+		if (!allowDuplicates && !find(root, sortableObject.getValue()).equals(RedBlackNode.NilNode)) {
 			return;
 		}
 
@@ -79,7 +80,7 @@ public class RedBlackTree implements BinaryTree {
 		RedBlackNode x = root;
 		while (!x.equals(RedBlackNode.NilNode)) {
 			y = x;
-			if (sortableObject.getValue() < x.getSortableObject().getValue()) {
+			if (sortableObject.getValue() <= x.getSortableObject().getValue()) {
 				x = x.getLeft();
 			} else {
 				x = x.getRight();
@@ -90,7 +91,7 @@ public class RedBlackTree implements BinaryTree {
 		if (y.equals(RedBlackNode.NilNode)) {
 			root = z;
 		} else {
-			if (z.getSortableObject().getValue() < y.getSortableObject().getValue()) {
+			if (z.getSortableObject().getValue() <= y.getSortableObject().getValue()) {
 				y.setLeft(z);
 			} else {
 				y.setRight(z);
@@ -336,7 +337,7 @@ public class RedBlackTree implements BinaryTree {
 
 	private RedBlackNode find(RedBlackNode node, int key) {
 		while (!node.equals(RedBlackNode.NilNode) && node.getSortableObject().getValue() != key) {
-			if (key < node.getSortableObject().getValue()) {
+			if (key <= node.getSortableObject().getValue()) {
 				node = node.getLeft();
 			} else {
 				node = node.getRight();
@@ -399,18 +400,18 @@ public class RedBlackTree implements BinaryTree {
 		}
 	}
 
-	private RedBlackNode findPredecessor(RedBlackNode node) {		
+	private RedBlackNode findPredecessor(RedBlackNode node) {
 		if (!node.getLeft().equals(RedBlackNode.NilNode)) {
 			return findMax(node.getLeft());
 		} else {
 			RedBlackNode parentNode = node.getParent();
 			while (!parentNode.equals(RedBlackNode.NilNode) && node.equals(parentNode.getLeft())) {
-				node = parentNode;				
+				node = parentNode;
 				parentNode = parentNode.getParent();
 			}
 			return parentNode;
 		}
-		
+
 	}
 
 	/**
@@ -496,6 +497,38 @@ public class RedBlackTree implements BinaryTree {
 			preOrder(node.getLeft(), list);
 			preOrder(node.getRight(), list);
 		}
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		if (!root.equals(RedBlackNode.NilNode)) {
+			stringBuilder.append(root.getSortableObject().getValue() + "\n");
+			int indent = 1;
+			print(root.getLeft(), true, stringBuilder, indent);
+			print(root.getRight(), false, stringBuilder, indent);
+		}
+		return stringBuilder.toString();
+	}
+
+	private void print(RedBlackNode node, boolean left, StringBuilder stringBuilder, int indent) {
+		if (!node.equals(RedBlackNode.NilNode)) {
+			StringBuilder ind = new StringBuilder();
+			if (left) {
+				ind.append("|");
+			} else {
+				ind.append("R");
+			}
+
+			for (int i = 0; i < indent; i++) {
+				ind = ind.append("_");
+			}
+			stringBuilder.append(ind.toString() + node.getSortableObject().getValue() + "\n");
+			indent++;
+			print(node.getLeft(), true, stringBuilder, indent);
+			print(node.getRight(), false, stringBuilder, indent);
+		}
+
 	}
 
 }

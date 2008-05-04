@@ -22,16 +22,71 @@ public class TestRedBlackTree extends TestCase {
 	}
 
 	protected void setUp() throws Exception {
-		createRedBlackTree(true, 20);
+		createRedBlackTree(false, 20);
 	}
 
 	public void testSimple() {
 		assertNotNull(redBlackTree);
 	}
 
+	public void testFind() {
+		List<SortableObject> list = redBlackTree.inOrder();
+		for (SortableObject object : list) {
+			assertNotNull(redBlackTree.find(object.getValue()));
+		}
+	}
+
 	public void testLargeTree() {
 		createRedBlackTree(false, 1000);
 		orderTest(redBlackTree.inOrder());
+	}
+
+	public void testAllOrder() {
+		List<SortableObject> inOrder = redBlackTree.inOrder();
+		List<SortableObject> postOrder = redBlackTree.postOrder();
+		List<SortableObject> preOrder = redBlackTree.preOrder();
+		assertTrue(inOrder.size() == postOrder.size());
+		assertTrue(postOrder.size() == preOrder.size());
+	}
+
+	public void testMax() {
+		List<SortableObject> list = redBlackTree.inOrder();
+		if (list.size() > 0) {
+			SortableObject maxKnown = list.get(list.size() - 1);
+			SortableObject max = redBlackTree.findMax();
+			assertEquals(maxKnown.getValue(), max.getValue());
+		}
+	}
+
+	public void testMin() {
+		List<SortableObject> list = redBlackTree.inOrder();
+		if (list.size() > 0) {
+			SortableObject minKnown = list.get(0);
+			SortableObject min = redBlackTree.findMin();
+			assertEquals(minKnown.getValue(), min.getValue());
+		}
+	}
+
+	public void testSuccessor() {
+		List<SortableObject> list = redBlackTree.inOrder();
+		for (int i = 0; i < list.size() - 2; i++) {
+			int key = list.get(i).getValue();
+			SortableObject object = redBlackTree.findSuccessor(key);
+			assertTrue(object.getValue() >= key);
+		}
+	}
+
+	public void testInOrder() { // walking in order should produce a sorted
+		orderTest(redBlackTree.inOrder());
+	}
+
+	public void testPredecessor() {
+		List<SortableObject> list = redBlackTree.inOrder();
+		for (int i = list.size() - 1; i > 1; i--) {
+			int key = list.get(i).getValue();
+			SortableObject object = redBlackTree.findPredecessor(key);
+			assertTrue(object.getValue() <= key);
+		}
 	}
 
 	public void testNoDups() {
@@ -48,59 +103,6 @@ public class TestRedBlackTree extends TestCase {
 		}
 	}
 
-	public void testAllOrder() {
-		List<SortableObject> inOrder = redBlackTree.inOrder();
-		List<SortableObject> postOrder = redBlackTree.postOrder();
-		List<SortableObject> preOrder = redBlackTree.preOrder();
-		assertTrue(inOrder.size() > 0);
-		assertTrue(inOrder.size() == postOrder.size());
-		assertTrue(postOrder.size() == preOrder.size());
-	}
-
-	public void testFind() {
-		List<SortableObject> list = redBlackTree.inOrder();
-		for (SortableObject object : list) {
-			assertNotNull(redBlackTree.find(object.getValue()));
-		}
-	}
-
-	public void testMax() {
-		List<SortableObject> list = redBlackTree.inOrder();
-		SortableObject maxKnown = list.get(list.size() - 1);
-		SortableObject max = redBlackTree.findMax();
-		assertEquals(maxKnown.getValue(), max.getValue());
-	}
-
-	public void testMin() {
-		List<SortableObject> list = redBlackTree.inOrder();
-		SortableObject minKnown = list.get(0);
-		SortableObject min = redBlackTree.findMin();
-		assertEquals(minKnown.getValue(), min.getValue());
-	}
-
-	public void testSuccessor() {
-		List<SortableObject> list = redBlackTree.inOrder();
-		for (int i = 0; i < list.size() - 2; i++) {
-			int key = list.get(i).getValue();
-			SortableObject object = redBlackTree.findSuccessor(key);
-			assertTrue(object.getValue() >= key);
-		}
-	}
-
-	public void testInOrder() {
-		// walking in order should produce a sorted list
-		orderTest(redBlackTree.inOrder());
-	}
-
-	public void testPredecessor() {
-		List<SortableObject> list = redBlackTree.inOrder();
-		for (int i = list.size() - 1; i > 1; i--) {
-			int key = list.get(i).getValue();
-			SortableObject object = redBlackTree.findPredecessor(key);
-			assertTrue(object.getValue() <= key);
-		}
-	}
-
 	private void orderTest(List<SortableObject> list) {
 		int value = Integer.MIN_VALUE;
 		for (int i = 0; i < list.size(); i++) {
@@ -109,4 +111,5 @@ public class TestRedBlackTree extends TestCase {
 			value = object.getValue();
 		}
 	}
+
 }
