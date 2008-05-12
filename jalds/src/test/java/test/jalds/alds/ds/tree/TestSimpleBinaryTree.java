@@ -22,7 +22,7 @@ public class TestSimpleBinaryTree extends TestCase {
 		Random random = new Random(Calendar.getInstance().getTimeInMillis());
 		for (int i = 0; i < 10; i++) {
 			int key = random.nextInt(10);
-			binaryTree.insertNode(new SortableObject(key, key), true);
+			binaryTree.insertNode(new SortableObject(key, key));
 		}
 	}
 
@@ -71,7 +71,7 @@ public class TestSimpleBinaryTree extends TestCase {
 		Random random = new Random();
 		for (int i = 0; i < 20; i++) {
 			int key = random.nextInt(10);
-			binaryTree.insertNode(new SortableObject(key, key), false);
+			binaryTree.insertNode(new SortableObject(key, key));
 		}
 		List<SortableObject> list = binaryTree.inOrder();
 		for (int i = 0; i < list.size() - 2; i++) {
@@ -86,7 +86,7 @@ public class TestSimpleBinaryTree extends TestCase {
 		Random random = new Random();
 		for (int i = 0; i < 20; i++) {
 			int key = random.nextInt(10);
-			binaryTree.insertNode(new SortableObject(key, key), false);
+			binaryTree.insertNode(new SortableObject(key, key));
 		}
 		List<SortableObject> list = binaryTree.inOrder();
 		for (int i = list.size() - 1; i > 0; i--) {

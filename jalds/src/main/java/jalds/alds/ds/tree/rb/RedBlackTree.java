@@ -47,7 +47,7 @@ import java.util.List;
  * same number of black nodes </li>
  * </ol>
  * <p>
- * <em>NOTE: Does not work if duplicates are allowed </em>
+ * 
  * Source Introduction To Algorithms book
  * 
  * @author Devender Gollapally
@@ -71,8 +71,8 @@ public class RedBlackTree implements BinaryTree {
 	 * tree properties are violated and fixes it using the insertFixUp
 	 * procedure.
 	 */
-	public void insertNode(SortableObject sortableObject, boolean allowDuplicates) {
-		if (!allowDuplicates && !find(root, sortableObject.getValue()).equals(RedBlackNode.NilNode)) {
+	public void insertNode(SortableObject sortableObject) {
+		if (!find(root, sortableObject.getValue()).equals(RedBlackNode.NilNode)) {
 			return;
 		}
 
@@ -282,7 +282,9 @@ public class RedBlackTree implements BinaryTree {
 
 		// Now let us splice/move out y
 		RedBlackNode x = null;
-		// first find the not null child of y
+		// first find the not null child of y,
+		// y will have at most one child, since either y has no children or y is
+		// the successor
 		if (!y.getLeft().equals(RedBlackNode.NilNode)) {
 			x = y.getLeft();
 		} else {
