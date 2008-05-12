@@ -35,16 +35,16 @@ import jalds.alds.SortableObject;
 public interface BinaryTree {
 
 	/**
-	 * Insert the given Sortable Object into the Tree, also needs to know if
-	 * duplicates are allowed.
+	 * Insert the given Sortable Object into the Tree, if duplicates are sent,
+	 * it will just ignore it
 	 * 
 	 * @param sortableObject
 	 * @param allowDuplicates
 	 */
-	void insertNode(SortableObject sortableObject, boolean allowDuplicates);
+	void insertNode(SortableObject sortableObject);
 
 	/**
-	 * Deletes the first node which has the given value.
+	 * Deletes the node which has the given value.
 	 * <ul>
 	 * <li>Find the Node which has the given value</li>
 	 * <li>If the Node is the root node then delete the root</li>

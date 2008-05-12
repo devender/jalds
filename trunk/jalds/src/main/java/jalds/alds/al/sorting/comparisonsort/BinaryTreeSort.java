@@ -38,7 +38,7 @@ public class BinaryTreeSort extends AbstractComparisonSort {
 	public SortableObject[] sort(SortableObject[] unSortedList) {
 		BinaryTree binaryTree = new SimpleBinaryTree();
 		for (SortableObject sortableObject : unSortedList) {
-			binaryTree.insertNode(sortableObject, true);
+			binaryTree.insertNode(sortableObject);
 		}
 		List<SortableObject> list = binaryTree.inOrder();
 		unSortedList = new SortableObject[list.size()];

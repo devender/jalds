@@ -59,8 +59,8 @@ public class SimpleBinaryTree implements BinaryTree {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void insertNode(SortableObject sortableObject, boolean allowDuplicates) {
-		if (!allowDuplicates && find(root, sortableObject.getValue()) != null) {
+	public void insertNode(SortableObject sortableObject) {
+		if (find(root, sortableObject.getValue()) != null) {
 			return;
 		}
 

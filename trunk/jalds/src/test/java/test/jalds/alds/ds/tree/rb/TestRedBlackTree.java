@@ -12,17 +12,17 @@ import junit.framework.TestCase;
 public class TestRedBlackTree extends TestCase {
 	private RedBlackTree redBlackTree;
 
-	private void createRedBlackTree(boolean allowDups, int n) {
+	private void createRedBlackTree(int n) {
 		redBlackTree = new RedBlackTree();
 		Random random = new Random(Calendar.getInstance().getTimeInMillis());
 		for (int i = 0; i < n; i++) {
 			int key = random.nextInt(n);
-			redBlackTree.insertNode(new SortableObject(key, key), allowDups);
+			redBlackTree.insertNode(new SortableObject(key, key));
 		}
 	}
 
 	protected void setUp() throws Exception {
-		createRedBlackTree(false, 20);
+		createRedBlackTree(20);
 	}
 
 	public void testSimple() {
@@ -37,7 +37,7 @@ public class TestRedBlackTree extends TestCase {
 	}
 
 	public void testLargeTree() {
-		createRedBlackTree(false, 1000);
+		createRedBlackTree(1000);
 		orderTest(redBlackTree.inOrder());
 	}
 
@@ -90,7 +90,7 @@ public class TestRedBlackTree extends TestCase {
 	}
 
 	public void testNoDups() {
-		createRedBlackTree(false, 20);
+		createRedBlackTree(20);
 		List<SortableObject> list = redBlackTree.inOrder();
 		for (SortableObject object : list) {
 			int numberOfElementsWithSameValue = 0;
