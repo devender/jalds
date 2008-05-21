@@ -321,6 +321,7 @@ public class RedBlackTree implements BinaryTree {
 	 * @param x
 	 */
 	private void deleteFixup(RedBlackNode x) {
+		throw new RuntimeException("Sorry Not Yet Implemented");
 
 	}
 
