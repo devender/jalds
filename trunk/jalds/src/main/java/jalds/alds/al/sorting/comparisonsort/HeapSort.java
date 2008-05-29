@@ -18,6 +18,8 @@
 package jalds.alds.al.sorting.comparisonsort;
 
 import jalds.alds.SortableObject;
+import jalds.alds.ds.heaps.Heap;
+import jalds.alds.ds.heaps.MinHeapImpl;
 
 /**
  * Running time is <em>O(n log n)</em>, is In Place
@@ -28,6 +30,16 @@ import jalds.alds.SortableObject;
 public class HeapSort extends AbstractComparisonSort {
 
 	public SortableObject[] sort(SortableObject[] unSortedList) {
-		throw new RuntimeException("Sorry Not Yet Implemented");
+		Heap heap = new MinHeapImpl();
+		for (SortableObject object : unSortedList) {
+			heap.insert(object);
+		}
+
+		for (int i = 0; i < unSortedList.length; i++) {
+			unSortedList[i] = heap.extract();
+		}
+
+		return unSortedList;
+
 	}
 }
