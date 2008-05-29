@@ -23,7 +23,9 @@ import jalds.alds.SortableObject;
  * QuickSort is an algorithm whose worst case running time is Q(n^2), but is
  * remarkably efficient on the average and expected run time is )(n log n)
  * 
- * Recursively partations an array based on an element.
+ * This is a divide and conqure algorithm, on each run divides the given
+ * partation into elements less than and elements greater than a given piviot
+ * element, till it gets down to one element.
  * 
  * @author Devender Gollapally
  * 
@@ -45,9 +47,14 @@ public class QuickSort extends AbstractComparisonSort {
 	}
 
 	/**
-	 * any element that is smaller than the given element is moved to the front
-	 * of the array+1 and finally the given element is moved to the front of the
-	 * array+1
+	 * As the name says partitions the array into 2 sections the first half has
+	 * all elements that are smaller than the index element and the second half
+	 * has all elements that are greater than.
+	 * 
+	 * In order to do this, it compares each element from start to index of the
+	 * element-1, checks to see if it is less than the index element, if it is
+	 * it will move it to the first partation of the array and will finally move
+	 * the index element to the the end of the first half.
 	 * 
 	 * @param unSortedList
 	 * @param startIndex
