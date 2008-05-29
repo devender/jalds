@@ -7,7 +7,27 @@
 	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>jalds</name>
-	<url>http://maven.apache.org</url>
+	<url>http://code.google.com/p/jalds/</url>
+	<developers>
+		<developer>
+			<id>devender</id>
+			<name>Devender</name>
+			<email>devender.gollapally@gmail.edu</email>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<organization>jalds</organization>
+			<timezone>-7</timezone>
+		</developer>
+	</developers>
+	<scm>
+		<connection>
+			scm:svn:https://jalds.googlecode.com/svn/trunk/jalds/
+		</connection>
+		<developerConnection>
+			scm:svn:https://jalds.googlecode.com/svn/trunk/jalds/
+		</developerConnection>
+	</scm>
 	<reporting>
 		<plugins>
 			<plugin>
@@ -42,6 +62,14 @@
 	<build>
 		<testSourceDirectory>src/test/java</testSourceDirectory>
 		<plugins>
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<tagBase>
+						https://jalds.googlecode.com/svn/tags/
+					</tagBase>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
