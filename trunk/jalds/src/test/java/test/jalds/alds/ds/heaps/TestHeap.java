@@ -3,10 +3,11 @@ package test.jalds.alds.ds.heaps;
 import jalds.alds.SortableObject;
 import jalds.alds.ds.heaps.Heap;
 import jalds.alds.ds.heaps.MaxHeapImpl;
+import jalds.alds.ds.heaps.MinHeapImpl;
 
 public class TestHeap extends junit.framework.TestCase {
 
-	public void testInsert() {
+	public void testMaxHeap() {
 		Heap heap = new MaxHeapImpl();
 		for (int i = 0; i < 10; i++) {
 			heap.insert(new SortableObject(i, i));
@@ -16,8 +17,19 @@ public class TestHeap extends junit.framework.TestCase {
 			SortableObject sortableObject = heap.extract();
 			assertEquals(i, sortableObject.getValue());
 		}
+	}
+	
+	public void testMinHeap()
+	{
+		Heap heap = new MinHeapImpl();
+		for (int i = 0; i < 10; i++) {
+			heap.insert(new SortableObject(i, i));
+		}
 
-		// assertEquals(9, heap.size());
+		for (int i = 0; i < 10; i++) {
+			SortableObject sortableObject = heap.extract();
+			assertEquals(i, sortableObject.getValue());
+		}
 	}
 
 }

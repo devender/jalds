@@ -20,13 +20,6 @@ import jalds.alds.SortableObject;
 public interface Heap {
 
 	/**
-	 * initialize the heap, useful if you need to re-initialize the heap
-	 * 
-	 * @return
-	 */
-	Heap initialize();
-
-	/**
 	 * Insert a new object into the heap, if this violates the heap property
 	 * then another procedure is called to fix it.
 	 * 
