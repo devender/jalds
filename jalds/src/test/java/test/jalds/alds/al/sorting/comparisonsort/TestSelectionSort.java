@@ -21,7 +21,7 @@ public class TestSelectionSort extends TestSorting {
 		Sort sort = new SelectionSort();
 		sort.sort(objects);
 		long t2 = Calendar.getInstance().getTimeInMillis();
-		System.out.println("Selection   || " + objects.length + " || " + (t2 - t1));
+		System.out.println("Selection   || " +  (t2 - t1));
 		return objects;
 	}
 

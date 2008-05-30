@@ -21,7 +21,7 @@ public class TestBubbleSort extends TestSorting {
 		Sort sort = new BubbleSort();
 		sort.sort(objects);
 		long t2 = Calendar.getInstance().getTimeInMillis();
-		System.out.println("Bubble Sort || " + objects.length + " || " + (t2 - t1));
+		System.out.println("Bubble Sort || " +  (t2 - t1));
 		return objects;
 	}
 

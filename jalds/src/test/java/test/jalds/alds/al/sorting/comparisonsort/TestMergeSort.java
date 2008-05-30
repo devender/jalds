@@ -16,7 +16,7 @@ public class TestMergeSort extends TestSorting {
 		Sort sort = new MergeSort();
 		objects = sort.sort(objects);
 		long t2 = Calendar.getInstance().getTimeInMillis();
-		System.out.println("Merge Sort  || " + objects.length + " || " + (t2 - t1));
+		System.out.println("Merge Sort  || " + (t2 - t1));
 		return objects;
 	}
 

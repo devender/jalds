@@ -16,7 +16,7 @@ public class TestQuickSort extends TestSorting {
 		Sort sort = new QuickSort();
 		objects = sort.sort(objects);
 		long t2 = Calendar.getInstance().getTimeInMillis();
-		System.out.println("Quick       || " + objects.length + " || " + (t2 - t1));
+		System.out.println("Quick       || "  + (t2 - t1));
 		return objects;
 	}
 
