@@ -1,5 +1,6 @@
-package test.jalds.alds.al.sorting.comparisonsort;
+package test.jalds.alds.al.sorting;
 
+import test.jalds.alds.al.sorting.comparisonsort.TestSortingHelper;
 import junit.framework.TestCase;
 import jalds.alds.SortableObject;
 
@@ -14,7 +15,7 @@ public abstract class TestSorting extends TestCase {
 		SortableObject[] objects = TestSortingHelper.makeUnSortedList(5000);
 		objects = sortEm(objects);
 		int value = Integer.MIN_VALUE;
-		for (int i = 0; i < objects.length; i++) {
+		for (int i = 0; i < objects.length; i++) {			
 			assertTrue(objects[i].getValue() >= value);
 			value = objects[i].getValue();
 		}

@@ -6,6 +6,8 @@ import jalds.alds.al.sorting.comparisonsort.QuickSort;
 
 import java.util.Calendar;
 
+import test.jalds.alds.al.sorting.TestSorting;
+
 public class TestQuickSort extends TestSorting {
 
 	@Override
