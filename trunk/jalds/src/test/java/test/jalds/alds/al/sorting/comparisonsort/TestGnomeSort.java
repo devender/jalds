@@ -21,7 +21,7 @@ public class TestGnomeSort extends TestSorting {
 		Sort sort = new GnomeSort();
 		sort.sort(objects);
 		long t2 = Calendar.getInstance().getTimeInMillis();
-		System.out.println("Gnome  Sort || " + objects.length + " || " + (t2 - t1));
+		System.out.println("Gnome  Sort || "  + (t2 - t1));
 		return objects;
 	}
 

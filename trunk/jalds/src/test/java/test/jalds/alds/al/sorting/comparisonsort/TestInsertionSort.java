@@ -21,7 +21,7 @@ public class TestInsertionSort extends TestSorting {
 		Sort sort = new InsertionSort();
 		sort.sort(objects);
 		long t2 = Calendar.getInstance().getTimeInMillis();
-		System.out.println("Insertion   || " + objects.length + " || " + (t2 - t1));
+		System.out.println("Insertion   || " + (t2 - t1));
 		return objects;
 	}
 

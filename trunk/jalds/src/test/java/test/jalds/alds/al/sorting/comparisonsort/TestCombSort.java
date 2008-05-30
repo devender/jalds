@@ -21,7 +21,7 @@ public class TestCombSort extends TestSorting {
 		Sort sort = new CombSort();
 		sort.sort(objects);
 		long t2 = Calendar.getInstance().getTimeInMillis();
-		System.out.println("Comb   Sort || " + objects.length + " || " + (t2 - t1));
+		System.out.println("Comb   Sort || " + (t2 - t1));
 		return objects;
 	}
 

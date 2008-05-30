@@ -21,7 +21,7 @@ public class TestCocktailSort extends TestSorting {
 		Sort sort = new CocktailSort();
 		sort.sort(objects);
 		long t2 = Calendar.getInstance().getTimeInMillis();
-		System.out.println("CockTail    || " + objects.length + " || " + (t2 - t1));
+		System.out.println("CockTail    || " + (t2 - t1));
 		return objects;
 	}
 

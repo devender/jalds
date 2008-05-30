@@ -16,7 +16,7 @@ public class TestHeapSort extends TestSorting {
 		Sort sort = new HeapSort();
 		objects = sort.sort(objects);
 		long t2 = Calendar.getInstance().getTimeInMillis();
-		System.out.println("HeapSort    || " + objects.length + " || " + (t2 - t1));
+		System.out.println("HeapSort    || " + (t2 - t1));
 		return objects;
 	}
 

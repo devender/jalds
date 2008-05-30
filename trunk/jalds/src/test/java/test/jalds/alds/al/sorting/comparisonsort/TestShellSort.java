@@ -21,7 +21,7 @@ public class TestShellSort extends TestSorting {
 		Sort sort = new ShellSort();
 		sort.sort(objects);
 		long t2 = Calendar.getInstance().getTimeInMillis();
-		System.out.println("Shell Sort  || " + objects.length + " || " + (t2 - t1));
+		System.out.println("Shell Sort  || " + (t2 - t1));
 		return objects;
 	}
 

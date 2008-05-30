@@ -21,7 +21,7 @@ public class TestBinaryTreeSort extends TestSorting {
 		Sort sort = new BinaryTreeSort();
 		objects = sort.sort(objects);
 		long t2 = Calendar.getInstance().getTimeInMillis();
-		System.out.println("BinaryTree  || " + objects.length + " || " + (t2 - t1));
+		System.out.println("BinaryTree  || "  +(t2 - t1));
 		return objects;
 	}
 

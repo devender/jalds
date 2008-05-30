@@ -16,7 +16,7 @@ public class TestCountingSort extends TestSorting {
 		Sort sort = new CountingSort();
 		objects = sort.sort(objects);
 		long t2 = Calendar.getInstance().getTimeInMillis();		
-		System.out.println("Counting    || " + objects.length + " || " + (t2 - t1));
+		System.out.println("Counting    || "  + (t2 - t1));
 		return objects;
 	}
 }
