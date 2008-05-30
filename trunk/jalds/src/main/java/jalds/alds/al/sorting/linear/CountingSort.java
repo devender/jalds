@@ -1,0 +1,60 @@
+package jalds.alds.al.sorting.linear;
+
+import jalds.alds.SortableObject;
+import jalds.alds.al.sorting.Sort;
+
+/**
+ * <ul>
+ * <li>Find the MaxValue in the given unsorted set.</li>
+ * <li>Create a second set with length 0..MaxValue. (lets call this C set) it
+ * reperesents the number of times a given value appears in the unsorted set</li>
+ * <li>For each value in the unsorted set increment the corresponding element
+ * in the second set</li>
+ * <li>Create a empty set with size same as the unsorted set (lets call this b)</li>
+ * <li>For each element (i) in the unsorted set
+ * <ul>
+ * <li> place it in b(c(i))</li>
+ * <li> decrement c(i)</li>
+ * </ul>
+ * </li>
+ * </ul>
+ * 
+ * 
+ * @author Devender
+ * 
+ */
+public class CountingSort implements Sort {
+
+	public SortableObject[] sort(SortableObject[] unSortedList) {
+		int maxValue = 0;
+		for (SortableObject object : unSortedList) {
+			if (object.getValue() > maxValue) {
+				maxValue = object.getValue();
+			}
+		}
+
+		int[] c = new int[maxValue + 1];
+
+		// how many times does a value appear
+		for (SortableObject object : unSortedList) {
+			c[object.getValue()] = c[object.getValue()] + 1;
+		}
+
+		// where in the resulting array can the element go into, number of input
+		// elements less than i
+		for (int i = 0; i < c.length; i++) {
+			if (i - 1 > 0) {
+				c[i] = c[i] + c[i - 1];
+			}
+		}
+		SortableObject[] b = new SortableObject[unSortedList.length];
+
+		for (int j = unSortedList.length - 1; j >= 0; j--) {
+			SortableObject object = unSortedList[j];
+			int i = c[object.getValue()];
+			b[i - 1] = object;
+			c[object.getValue()] = c[object.getValue()] - 1;
+		}
+		return b;
+	}
+}

@@ -2,6 +2,8 @@ package test.jalds.alds.al.sorting.comparisonsort;
 
 import java.util.Calendar;
 
+import test.jalds.alds.al.sorting.TestSorting;
+
 import jalds.alds.SortableObject;
 import jalds.alds.al.sorting.Sort;
 import jalds.alds.al.sorting.comparisonsort.BinaryTreeSort;

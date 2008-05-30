@@ -11,6 +11,7 @@ import test.jalds.alds.al.sorting.comparisonsort.TestInsertionSort;
 import test.jalds.alds.al.sorting.comparisonsort.TestMergeSort;
 import test.jalds.alds.al.sorting.comparisonsort.TestSelectionSort;
 import test.jalds.alds.al.sorting.comparisonsort.TestShellSort;
+import test.jalds.alds.al.sorting.linear.TestCountingSort;
 
 /**
  * Runs the all of the Comparison Sort unit tests so the user can see how the performance varies
@@ -19,7 +20,7 @@ import test.jalds.alds.al.sorting.comparisonsort.TestShellSort;
  * @author Devender Gollapally
  * 
  */
-public class TestComparisonSorts {
+public class TestSorts {
 
 	public static Test suite() {
 		TestSuite suite = new TestSuite("Testing Comparison Sorts");
@@ -34,6 +35,8 @@ public class TestComparisonSorts {
 		suite.addTestSuite(TestShellSort.class);
 		suite.addTestSuite(TestBinaryTreeSort.class);
 		suite.addTestSuite(TestMergeSort.class);
+		suite.addTestSuite(TestCountingSort.class);
+		
 		return suite;
 
 	}
