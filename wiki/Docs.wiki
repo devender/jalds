@@ -1,0 +1,1 @@
+﻿Docs are over [http://jalds.googlecode.com/svn/wiki/apidocs/index.html here]
