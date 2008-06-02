@@ -1,5 +1,11 @@
 package jalds.alds.ds.graphs;
 
+/**
+ * A Class to represent a graph, has useful methods to add an edge and vertex
+ * 
+ * @author Devender Gollapally
+ * 
+ */
 public class Graph {
 	private Vertex[][] adjacencyList = null;
 	private Type type;
@@ -16,6 +22,15 @@ public class Graph {
 		adjacencyList[preLength][0] = vertex;
 	}
 
+	/**
+	 * Adds an edge from a into b, if it is an UN directed graph will also add
+	 * the edge from b into a
+	 * 
+	 * NOTE: At present does not check for duplicates.
+	 * 
+	 * @param a
+	 * @param b
+	 */
 	public void addEdge(Vertex a, Vertex b) {
 		for (int i = 0; i < adjacencyList.length; i++) {
 			Vertex[] vertexs = adjacencyList[i];
@@ -49,6 +64,18 @@ public class Graph {
 
 		adjacencyList = newAdjacencyList;
 		return adjacencyList;
+	}
+
+	public int numberOfVertices() {
+		return adjacencyList.length;
+	}
+
+	public int numberOfEdges() {
+		int numberOfEdges = 0;
+		for (int i = 0; i < adjacencyList.length; i++) {
+			numberOfEdges = numberOfEdges + adjacencyList[i].length-1;
+		}
+		return numberOfEdges;
 	}
 
 	public String toString() {

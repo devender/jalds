@@ -29,7 +29,10 @@ public class TestGraph extends TestCase {
 		graph.addEdge(a2, a4);
 		graph.addEdge(a2, a3);
 		graph.addEdge(a3, a4);
+		graph.addEdge(a5, a4);
 
+		assertEquals(5, graph.numberOfVertices());
+		assertEquals(14, graph.numberOfEdges());
 		System.out.println(graph.toString());
 
 	}
