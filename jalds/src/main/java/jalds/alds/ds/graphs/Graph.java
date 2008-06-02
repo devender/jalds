@@ -1,7 +1,8 @@
 package jalds.alds.ds.graphs;
 
 /**
- * A Class to represent a graph, has useful methods to add an edge and vertex
+ * A simple class to represent a graph, has useful methods to add an edge and
+ * vertex.
  * 
  * @author Devender Gollapally
  * 
@@ -10,12 +11,28 @@ public class Graph {
 	private Vertex[][] adjacencyList = null;
 	private Type type;
 
+	/**
+	 * Creates a new graph which can be either directed or un-directed
+	 * 
+	 * @param type
+	 */
 	public Graph(Type type) {
 		adjacencyList = new Vertex[0][];
 		this.type = type;
 	}
 
+	/**
+	 * Adds a new vertex to the graph
+	 * 
+	 * @param vertex
+	 */
 	public void addVertex(Vertex vertex) {
+		// check for duplicates
+		for (int i = 0; i < adjacencyList.length; i++) {
+			if (adjacencyList[0][0].equals(vertex)) {
+				return;
+			}
+		}
 		int preLength = adjacencyList.length;
 		increaseVertices();
 		adjacencyList[preLength] = new Vertex[1];
@@ -35,6 +52,7 @@ public class Graph {
 		for (int i = 0; i < adjacencyList.length; i++) {
 			Vertex[] vertexs = adjacencyList[i];
 			int preLength = vertexs.length;
+
 			if (vertexs[0].equals(a)) {
 				vertexs = increaseSize(vertexs);
 				vertexs[preLength] = b;
@@ -44,6 +62,7 @@ public class Graph {
 				vertexs[preLength] = a;
 				adjacencyList[i] = vertexs;
 			}
+
 		}
 	}
 
@@ -55,6 +74,11 @@ public class Graph {
 		return newVertexs;
 	}
 
+	/**
+	 * Increases the number of vertices in this graph by one
+	 * 
+	 * @return
+	 */
 	private Vertex[][] increaseVertices() {
 		Vertex[][] newAdjacencyList = new Vertex[adjacencyList.length + 1][];
 
@@ -66,14 +90,24 @@ public class Graph {
 		return adjacencyList;
 	}
 
+	/**
+	 * Returns the total number of vertices in this graph
+	 * 
+	 * @return
+	 */
 	public int numberOfVertices() {
 		return adjacencyList.length;
 	}
 
+	/**
+	 * Returns the total number of edges in this graph
+	 * 
+	 * @return
+	 */
 	public int numberOfEdges() {
 		int numberOfEdges = 0;
 		for (int i = 0; i < adjacencyList.length; i++) {
-			numberOfEdges = numberOfEdges + adjacencyList[i].length-1;
+			numberOfEdges = numberOfEdges + adjacencyList[i].length - 1;
 		}
 		return numberOfEdges;
 	}
@@ -93,6 +127,12 @@ public class Graph {
 		return builder.toString();
 	}
 
+	/**
+	 * Represents the type of Graph either a directed or un-directed
+	 * 
+	 * @author Devender Gollapally
+	 * 
+	 */
 	public enum Type {
 		DIRECTED, UNDIRECTED;
 	}
