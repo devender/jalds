@@ -23,9 +23,11 @@ public class Graph {
 			if (vertexs[0].equals(a)) {
 				vertexs = increaseSize(vertexs);
 				vertexs[preLength] = b;
+				adjacencyList[i] = vertexs;
 			} else if (type.equals(Type.UNDIRECTED) && vertexs[0].equals(b)) {
 				vertexs = increaseSize(vertexs);
 				vertexs[preLength] = a;
+				adjacencyList[i] = vertexs;
 			}
 		}
 	}
