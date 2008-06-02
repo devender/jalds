@@ -28,11 +28,10 @@ public class Graph {
 	 */
 	public void addVertex(Vertex vertex) {
 		// check for duplicates
-		for (int i = 0; i < adjacencyList.length; i++) {
-			if (adjacencyList[0][0].equals(vertex)) {
-				return;
-			}
+		if (getVertexIndex(vertex) != -1) {
+			return;
 		}
+
 		int preLength = adjacencyList.length;
 		increaseVertices();
 		adjacencyList[preLength] = new Vertex[1];
@@ -66,6 +65,12 @@ public class Graph {
 		}
 	}
 
+	/**
+	 * Increases size of the given Vertex[] array by 1
+	 * 
+	 * @param vertexs
+	 * @return
+	 */
 	private Vertex[] increaseSize(Vertex[] vertexs) {
 		Vertex[] newVertexs = new Vertex[vertexs.length + 1];
 		for (int i = 0; i < vertexs.length; i++) {
@@ -75,7 +80,7 @@ public class Graph {
 	}
 
 	/**
-	 * Increases the number of vertices in this graph by one
+	 * Increases the total number of vertices in this graph by one
 	 * 
 	 * @return
 	 */
@@ -106,30 +111,97 @@ public class Graph {
 	 */
 	public int numberOfEdges() {
 		int numberOfEdges = 0;
-		for (int i = 0; i < adjacencyList.length; i++) {
+		for (int i = 0; i < numberOfVertices(); i++) {
 			numberOfEdges = numberOfEdges + adjacencyList[i].length - 1;
 		}
 		return numberOfEdges;
 	}
 
+	/**
+	 * Returns the internal graph representation in the form of an adjacency
+	 * list
+	 * 
+	 * @return
+	 */
 	public Vertex[][] getAdjacencyList() {
 		return adjacencyList;
 	}
 
-	public void getAdjacencyMatrix() {
+	/**
+	 * Returns the internal graph representation in the form of a adjacency
+	 * matrix, NOTE this method will construct the matrix everytime you call it,
+	 * since graph uses a list and not the matrix .
+	 */
+	public int[][] getAdjacencyMatrix() {
+		int[][] matrix = new int[numberOfVertices()][];
+		for (int i = 0; i < matrix.length; i++) {
+			matrix[i] = new int[numberOfVertices()];
+		}
 
+		for (int i = 0; i < numberOfVertices(); i++) {
+			Vertex[] edges = adjacencyList[i];
+			if (edges.length > 1) {
+				int indexOfRow = getVertexIndex(edges[0]);
+				for (int j = 1; j < edges.length; j++) {
+					int indexOfColumn = getVertexIndex(edges[j]);
+					matrix[indexOfRow][indexOfColumn] = 1;
+				}
+			}
+		}
+
+		return matrix;
 	}
 
+	/**
+	 * Returns the index of the vertex in the adjacency list if the vertex is
+	 * not present else returns -1
+	 * 
+	 * @param vertex
+	 * @return
+	 */
+	private int getVertexIndex(Vertex vertex) {
+		for (int i = 0; i < numberOfVertices(); i++) {
+			if (adjacencyList[i][0].equals(vertex)) {
+				return i;
+			}
+		}
+
+		return -1;
+	}
+
+	/**
+	 * Prints the graph's adjacency list
+	 */
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 
-		for (int i = 0; i < adjacencyList.length; i++) {
+		for (int i = 0; i < numberOfVertices(); i++) {
 			Vertex[] vertexs = adjacencyList[i];
 			for (int j = 0; j < vertexs.length; j++) {
 				builder.append(vertexs[j]);
 				builder.append("->");
 			}
 			builder.append("/ \n");
+		}
+
+		return builder.toString();
+	}
+
+	/**
+	 * Useful to print out the graph as an adjacency matrix
+	 * 
+	 * @return
+	 */
+	public String matrixToString() {
+		StringBuilder builder = new StringBuilder();
+		int[][] matrix = getAdjacencyMatrix();
+		for (int i = 0; i < matrix.length; i++) {
+			int edges[] = matrix[i];
+			for (int j = 0; j < edges.length; j++) {
+				builder.append(edges[j]);
+				builder.append(" ");
+			}
+			builder.append("\n");
 		}
 
 		return builder.toString();
