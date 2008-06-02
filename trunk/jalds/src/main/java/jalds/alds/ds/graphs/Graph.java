@@ -112,6 +112,14 @@ public class Graph {
 		return numberOfEdges;
 	}
 
+	public Vertex[][] getAdjacencyList() {
+		return adjacencyList;
+	}
+
+	public void getAdjacencyMatrix() {
+
+	}
+
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 
