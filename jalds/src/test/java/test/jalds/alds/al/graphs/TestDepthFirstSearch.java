@@ -38,11 +38,17 @@ public class TestDepthFirstSearch extends TestCase {
 		Map<Vertex, Integer> finishedAtMap = depthFirstSearch.getFinishedAtMap();
 
 		for (Vertex vertex : set) {
-			assertTrue(discoveredAtMap.containsKey(vertex));
 			assertTrue(predecessorMap.containsKey(vertex));
+			assertTrue(discoveredAtMap.containsKey(vertex));
+			int d = discoveredAtMap.get(vertex);
+			assertTrue(d > 0);
 			assertTrue(finishedAtMap.containsKey(vertex));
-			
+			int f = finishedAtMap.get(vertex);
+			assertTrue(f > 0);
+			assertTrue(f > d);
 		}
+		
+		assertTrue(depthFirstSearch.getBlackEdge().size() == 2);
 
 	}
 }
