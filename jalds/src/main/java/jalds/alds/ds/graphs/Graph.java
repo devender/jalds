@@ -1,5 +1,8 @@
 package jalds.alds.ds.graphs;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * A simple class to represent a graph, has useful methods to add an edge and
  * vertex.
@@ -40,7 +43,8 @@ public class Graph {
 
 	/**
 	 * Adds an edge from a into b, if it is an UN directed graph will also add
-	 * the edge from b into a
+	 * the edge from b into a, if the vertex was not previously added using the
+	 * addVertex method, this will add it
 	 * 
 	 * NOTE: At present does not check for duplicates.
 	 * 
@@ -48,6 +52,14 @@ public class Graph {
 	 * @param b
 	 */
 	public void addEdge(Vertex a, Vertex b) {
+		if (getVertexIndex(a) == -1) {
+			addVertex(a);
+		}
+
+		if (getVertexIndex(b) == -1) {
+			addVertex(b);
+		}
+
 		for (int i = 0; i < adjacencyList.length; i++) {
 			Vertex[] vertexs = adjacencyList[i];
 			int preLength = vertexs.length;
@@ -153,6 +165,30 @@ public class Graph {
 	}
 
 	/**
+	 * If the given vertex is in the graph will return all the adjacent vertices
+	 * of the given vertex
+	 * 
+	 * @param vertex
+	 * @return
+	 */
+	public Vertex[] getAllAdjacentVertices(Vertex vertex) {
+		int index = getVertexIndex(vertex);
+		if (index > 0) {
+			Vertex[] vertexs = adjacencyList[index];
+
+			if (vertexs.length > 1) {
+				Vertex[] adjacent = new Vertex[vertexs.length - 1];
+				for (int i = 1; i < vertexs.length; i++) {
+					adjacent[i - 1] = vertexs[i];
+				}
+				return adjacent;
+			}
+		}
+
+		return null;
+	}
+
+	/**
 	 * Returns the index of the vertex in the adjacency list if the vertex is
 	 * not present else returns -1
 	 * 
@@ -208,12 +244,25 @@ public class Graph {
 	}
 
 	/**
+	 * Returns a list of all vertices in this graph
+	 * 
+	 * @return
+	 */
+	public Set<Vertex> getVertices() {
+		Set<Vertex> set = new HashSet<Vertex>(numberOfEdges());
+		for (int i = 0; i < numberOfVertices(); i++) {
+			set.add(adjacencyList[i][0]);
+		}
+		return set;
+	}
+
+	/**
 	 * Represents the type of Graph either a directed or un-directed
 	 * 
 	 * @author Devender Gollapally
 	 * 
 	 */
-	public enum Type {
+	public static enum Type {
 		DIRECTED, UNDIRECTED;
 	}
 
