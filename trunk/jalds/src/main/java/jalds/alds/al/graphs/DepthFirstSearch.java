@@ -16,6 +16,8 @@ import jalds.alds.ds.graphs.Vertex;
  * source. If any undiscovered vertices remain then one of them is selected as
  * the new source and the search is repeated.
  * 
+ * O(V+E)
+ * 
  * @author Devender Gollapally
  * 
  */
@@ -27,6 +29,8 @@ public class DepthFirstSearch {
 	private Map<Vertex, Vertex> predecessorMap;
 	private Map<Vertex, Integer> discoveredAtMap;
 	private Map<Vertex, Integer> finishedAtMap;
+	private Map<Vertex, Vertex> treeEdge;
+	private Map<Vertex, Vertex> blackEdge;
 
 	public DepthFirstSearch(Graph graph) {
 		this.graph = graph;
@@ -34,6 +38,8 @@ public class DepthFirstSearch {
 		predecessorMap = new HashMap<Vertex, Vertex>();
 		discoveredAtMap = new HashMap<Vertex, Integer>();
 		finishedAtMap = new HashMap<Vertex, Integer>();
+		treeEdge = new HashMap<Vertex, Vertex>();
+		blackEdge = new HashMap<Vertex, Vertex>();
 	}
 
 	public void compute() {
@@ -50,6 +56,16 @@ public class DepthFirstSearch {
 		}
 	}
 
+	/**
+	 * Visits the given vertex, gets all of its adjacent vertices and visits
+	 * them recursively. while exploring each edge it will classify each edge as
+	 * either a tree edge or a black edge. A tree edge (u,v) is an edge that was
+	 * first discovered if v was first discovered from u that is V was white
+	 * when it was discovered.A black edge (u,v) is an edge connecting u to an
+	 * ancestor, that is v is gray when (u,v) is discovered.
+	 * 
+	 * @param vertex
+	 */
 	private void visit(Vertex vertex) {
 		colorMap.put(vertex, Color.GRAY);
 		time = time + 1;
@@ -58,8 +74,15 @@ public class DepthFirstSearch {
 		Vertex[] vertices = graph.getAllAdjacentVertices(vertex);
 		if (vertices != null) {
 			for (Vertex adjacentVertex : vertices) {
-				if (colorMap.get(adjacentVertex).compareTo(Color.WHITE) == 0) {
+				switch (colorMap.get(adjacentVertex)) {
+				case WHITE:
 					predecessorMap.put(adjacentVertex, vertex);
+					visit(adjacentVertex);
+					treeEdge.put(vertex, adjacentVertex);
+					break;
+				case GRAY:
+					blackEdge.put(vertex, adjacentVertex);
+					break;
 				}
 			}
 		}
@@ -79,6 +102,20 @@ public class DepthFirstSearch {
 
 	public Map<Vertex, Integer> getFinishedAtMap() {
 		return finishedAtMap;
+	}
+
+	public Map<Vertex, Vertex> getTreeEdge() {
+		return treeEdge;
+	}
+
+	/**
+	 * If the size of this Map is greater than 1, it means that we have an
+	 * acyclic map.
+	 * 
+	 * @return
+	 */
+	public Map<Vertex, Vertex> getBlackEdge() {
+		return blackEdge;
 	}
 
 }
