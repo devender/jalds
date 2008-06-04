@@ -9,6 +9,10 @@ import junit.framework.TestCase;
 
 public class TestBreadthFirstGraphSearch extends TestCase {
 
+	/**
+	 * Take a look at the graph on page 533 of introduction to algorithms to get
+	 * a picture of this graph
+	 */
 	public void test() {
 		Vertex r = new Vertex(82);
 		Vertex s = new Vertex(83);
@@ -32,7 +36,7 @@ public class TestBreadthFirstGraphSearch extends TestCase {
 		graph.addEdge(y, u);
 
 		BreadthFirstGraphSearch breadthFirstGraphSearch = new BreadthFirstGraphSearch(graph, s);
-		Map<Vertex, Integer> distanceMap = breadthFirstGraphSearch.buildTree();
+		Map<Vertex, Integer> distanceMap = breadthFirstGraphSearch.compute();
 		assertEquals(1, (int) distanceMap.get(r));
 		assertEquals(2, (int) distanceMap.get(v));
 		assertEquals(0, (int) distanceMap.get(s));

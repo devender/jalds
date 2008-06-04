@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
@@ -26,9 +25,9 @@ import java.util.concurrent.ArrayBlockingQueue;
  * To keep track of progress breadth first search colors each vertex white, gray
  * or black. All vertices start out white and my later become gray and then
  * black.A vertex is discovered the first time it is encountered during the
- * search at which time it becomes non white. Gray and black vertices, therefore
- * have been discovered but BFS distinguishes between them to ensure that the
- * search proceeds in a breadth first manner.
+ * search at which time it becomes gray. Gray and black vertices, therefore have
+ * been discovered but BFS distinguishes between them to ensure that the search
+ * proceeds in a breadth first manner.
  * 
  * <br>
  * Source Introduction To Algorithms
@@ -52,7 +51,23 @@ public class BreadthFirstGraphSearch {
 		predecessorMap = new HashMap<Vertex, Vertex>();
 	}
 
-	public Map<Vertex, Integer> buildTree() {
+	/**
+	 * Computes the shortest distance from each vertex to the source. <br>
+	 * 
+	 * Colors the source grey since it has already been discovered, and inserts
+	 * into a queue.Then runs a while loop as long as there are any nodes in the
+	 * queue. <br>
+	 * 
+	 * In the while loop, extracts a node from the queue, then get all of it
+	 * adjacent nodes and for each adjacent node runs a for loop<br>
+	 * 
+	 * For loop: if a node is white, then colors the node grey and sets the
+	 * distance from it to the source as the distance from its parent to the
+	 * source +1, enter it into the queue. Else color it black.
+	 * 
+	 * @return
+	 */
+	public Map<Vertex, Integer> compute() {
 		Set<Vertex> set = graph.getVertices();
 		for (Vertex vertex : set) {
 			colorMap.put(vertex, Color.WHITE);
@@ -69,7 +84,6 @@ public class BreadthFirstGraphSearch {
 		while (!queue.isEmpty()) {
 			Vertex vertex = queue.remove();
 			Vertex[] adjacentVertices = graph.getAllAdjacentVertices(vertex);
-			System.out.println("Checking "+vertex);
 			if (adjacentVertices != null) {
 				for (Vertex adjacentVertex : adjacentVertices) {
 					if (colorMap.get(adjacentVertex).equals(Color.WHITE)) {
