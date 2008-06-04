@@ -63,8 +63,9 @@ public class BreadthFirstGraphSearch {
 	 * 
 	 * For loop: if a node is white, then colors the node grey and sets the
 	 * distance from it to the source as the distance from its parent to the
-	 * source +1, enter it into the queue. Else color it black.
+	 * source +1, enter it into the tail of queue. Else color it black.
 	 * 
+	 * runs in O(number of vertices + number of edges)
 	 * @return
 	 */
 	public Map<Vertex, Integer> compute() {
