@@ -34,8 +34,6 @@ public class TestGraph extends TestCase {
 
 		assertEquals(5, graph.numberOfVertices());
 		assertEquals(14, graph.numberOfEdges());
-		System.out.println(graph.toString());
-		System.out.println(graph.matrixToString());
 
 	}
 
@@ -69,8 +67,7 @@ public class TestGraph extends TestCase {
 		graph.addEdge(a6, a6);
 		assertEquals(6, graph.numberOfVertices());
 		assertEquals(8, graph.numberOfEdges());
-		System.out.println(graph.toString());
-		System.out.println(graph.matrixToString());
+
 	}
 
 }

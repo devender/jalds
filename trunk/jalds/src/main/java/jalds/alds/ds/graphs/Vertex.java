@@ -1,5 +1,11 @@
 package jalds.alds.ds.graphs;
 
+/**
+ * Represents a Vertex in a graph.
+ * 
+ * @author Devender
+ * 
+ */
 public class Vertex {
 
 	private int name;
@@ -10,10 +16,6 @@ public class Vertex {
 
 	public int getName() {
 		return name;
-	}
-
-	public void setName(int name) {
-		this.name = name;
 	}
 
 	public String toString() {
@@ -28,4 +30,9 @@ public class Vertex {
 
 		return (this.name == other.name);
 	}
+
+	public int hashCode() {
+		return 37 * name;
+	}
+
 }
