@@ -66,6 +66,7 @@ public class BreadthFirstGraphSearch {
 	 * source +1, enter it into the tail of queue. Else color it black.
 	 * 
 	 * runs in O(number of vertices + number of edges)
+	 * 
 	 * @return
 	 */
 	public Map<Vertex, Integer> compute() {
@@ -100,7 +101,4 @@ public class BreadthFirstGraphSearch {
 		return distanceMap;
 	}
 
-	public static enum Color {
-		WHITE, GRAY, BLACK;
-	}
 }
