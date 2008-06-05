@@ -17,7 +17,9 @@
  */
 package jalds.alds.al.graphs;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -48,6 +50,7 @@ public class DepthFirstSearch {
 	private Map<Vertex, Integer> finishedAtMap;
 	private Map<Vertex, Vertex> treeEdge;
 	private Map<Vertex, Vertex> blackEdge;
+	private List<FinishedEventObserver> finishedEventObserversList;
 
 	public DepthFirstSearch(Graph graph) {
 		this.graph = graph;
@@ -57,6 +60,7 @@ public class DepthFirstSearch {
 		finishedAtMap = new HashMap<Vertex, Integer>();
 		treeEdge = new HashMap<Vertex, Vertex>();
 		blackEdge = new HashMap<Vertex, Vertex>();
+		finishedEventObserversList = new ArrayList<FinishedEventObserver>();
 	}
 
 	public void compute() {
@@ -68,6 +72,7 @@ public class DepthFirstSearch {
 
 		for (Vertex vertex : set) {
 			if (colorMap.get(vertex).compareTo(Color.WHITE) == 0) {
+				System.out.println("Call Visit on " + vertex.getPrettyName());
 				visit(vertex);
 			}
 		}
@@ -84,15 +89,18 @@ public class DepthFirstSearch {
 	 * @param vertex
 	 */
 	private void visit(Vertex vertex) {
+		System.out.println("Visit " + vertex.getPrettyName());
 		colorMap.put(vertex, Color.GRAY);
 		time = time + 1;
 		discoveredAtMap.put(vertex, time);
 
 		Vertex[] vertices = graph.getAllAdjacentVertices(vertex);
 		if (vertices != null) {
+
 			for (Vertex adjacentVertex : vertices) {
 				switch (colorMap.get(adjacentVertex)) {
 				case WHITE:
+					System.out.println("white");
 					predecessorMap.put(adjacentVertex, vertex);
 					visit(adjacentVertex);
 					treeEdge.put(vertex, adjacentVertex);
@@ -106,7 +114,18 @@ public class DepthFirstSearch {
 
 		time = time + 1;
 		finishedAtMap.put(vertex, time);
+		notifyFinishedEvent(vertex);
 		colorMap.put(vertex, Color.BLACK);
+	}
+
+	private void notifyFinishedEvent(Vertex vertex) {
+		for (FinishedEventObserver eventObserver : finishedEventObserversList) {
+			eventObserver.update(vertex, discoveredAtMap.get(vertex), finishedAtMap.get(vertex));
+		}
+	}
+
+	public void registerFinishedEventObserver(FinishedEventObserver finishedEventObserver) {
+		finishedEventObserversList.add(finishedEventObserver);
 	}
 
 	public Map<Vertex, Vertex> getPredecessorMap() {
