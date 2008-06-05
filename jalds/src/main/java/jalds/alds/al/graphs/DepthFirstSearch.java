@@ -118,12 +118,22 @@ public class DepthFirstSearch {
 		colorMap.put(vertex, Color.BLACK);
 	}
 
+	/**
+	 * 
+	 * @param vertex
+	 */
 	private void notifyFinishedEvent(Vertex vertex) {
 		for (FinishedEventObserver eventObserver : finishedEventObserversList) {
 			eventObserver.update(vertex, discoveredAtMap.get(vertex), finishedAtMap.get(vertex));
 		}
 	}
 
+	/**
+	 * Useful if you want to observe when depth first is finished processing a
+	 * node
+	 * 
+	 * @param finishedEventObserver
+	 */
 	public void registerFinishedEventObserver(FinishedEventObserver finishedEventObserver) {
 		finishedEventObserversList.add(finishedEventObserver);
 	}
@@ -154,4 +164,8 @@ public class DepthFirstSearch {
 		return blackEdge;
 	}
 
+	public boolean isAcyclic() {
+		return blackEdge.size() == 0;
+
+	}
 }
