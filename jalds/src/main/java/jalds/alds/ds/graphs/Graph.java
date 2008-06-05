@@ -190,7 +190,7 @@ public class Graph {
 	 */
 	public Vertex[] getAllAdjacentVertices(Vertex vertex) {
 		int index = getVertexIndex(vertex);
-		if (index > 0) {
+		if (index >= 0) {
 			Vertex[] vertexs = adjacencyList[index];
 
 			if (vertexs.length > 1) {
@@ -266,7 +266,7 @@ public class Graph {
 	 * @return
 	 */
 	public Set<Vertex> getVertices() {
-		Set<Vertex> set = new HashSet<Vertex>(numberOfEdges());
+		Set<Vertex> set = new HashSet<Vertex>(numberOfVertices());
 		for (int i = 0; i < numberOfVertices(); i++) {
 			set.add(adjacencyList[i][0]);
 		}

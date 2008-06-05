@@ -26,9 +26,18 @@ package jalds.alds.ds.graphs;
 public class Vertex {
 
 	private int name;
+	private String prettyName;
 
 	public Vertex(int name) {
 		this.name = name;
+	}
+
+	public void setPrettyName(String prettyName) {
+		this.prettyName = prettyName;
+	}
+
+	public String getPrettyName() {
+		return prettyName;
 	}
 
 	public int getName() {
