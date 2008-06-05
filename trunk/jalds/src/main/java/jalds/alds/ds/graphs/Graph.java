@@ -48,7 +48,7 @@ public class Graph {
 	 */
 	public void addVertex(Vertex vertex) {
 		// check for duplicates
-		if (getVertexIndex(vertex) != -1) {
+		if (containsVertex(vertex)) {
 			return;
 		}
 
@@ -56,6 +56,14 @@ public class Graph {
 		increaseVertices();
 		adjacencyList[preLength] = new Vertex[1];
 		adjacencyList[preLength][0] = vertex;
+	}
+
+	private boolean containsVertex(Vertex vertex) {
+		if (getVertexIndex(vertex) == -1) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	/**
@@ -69,13 +77,8 @@ public class Graph {
 	 * @param b
 	 */
 	public void addEdge(Vertex a, Vertex b) {
-		if (getVertexIndex(a) == -1) {
-			addVertex(a);
-		}
-
-		if (getVertexIndex(b) == -1) {
-			addVertex(b);
-		}
+		addVertex(a);
+		addVertex(b);
 
 		for (int i = 0; i < adjacencyList.length; i++) {
 			Vertex[] vertexs = adjacencyList[i];
@@ -189,8 +192,8 @@ public class Graph {
 	 * @return
 	 */
 	public Vertex[] getAllAdjacentVertices(Vertex vertex) {
-		int index = getVertexIndex(vertex);
-		if (index >= 0) {
+		if (containsVertex(vertex)) {
+			int index = getVertexIndex(vertex);
 			Vertex[] vertexs = adjacencyList[index];
 
 			if (vertexs.length > 1) {
@@ -218,7 +221,6 @@ public class Graph {
 				return i;
 			}
 		}
-
 		return -1;
 	}
 
