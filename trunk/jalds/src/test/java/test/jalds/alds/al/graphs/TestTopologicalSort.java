@@ -40,10 +40,14 @@ public class TestTopologicalSort extends TestCase {
 
 		TopologicalSort sort = new TopologicalSort(graph);
 		List<Vertex> list = sort.compute();
-		System.out.println();
-		for (Vertex vertex : list) {
-			System.out.print(vertex + "->");
-		}
+		assertTrue(list.indexOf(socks) < list.indexOf(shoes));
+		assertTrue(list.indexOf(shirt) < list.indexOf(tie));
+		assertTrue(list.indexOf(shirt) < list.indexOf(jacket));
+		assertTrue(list.indexOf(tie) < list.indexOf(jacket));
+		assertTrue(list.indexOf(pants) < list.indexOf(belt));
+		assertTrue(list.indexOf(pants) < list.indexOf(shoes));
+		assertTrue(list.indexOf(undershorts) < list.indexOf(shoes));
+		assertTrue(list.indexOf(undershorts) < list.indexOf(pants));
 
 	}
 }
