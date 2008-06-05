@@ -51,6 +51,7 @@ public class TestDepthFirstSearch extends TestCase {
 		}
 
 		assertTrue(depthFirstSearch.getBlackEdge().size() == 2);
+		assertFalse(depthFirstSearch.isAcyclic());
 
 	}
 }
