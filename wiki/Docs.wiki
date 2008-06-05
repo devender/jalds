@@ -1,1 +1,2 @@
 ﻿Docs are over [http://jalds.googlecode.com/svn/wiki/apidocs/index.html here]
+Coverage report [http://jalds.googlecode.com/svn/wiki/cobertura/index.html here]
