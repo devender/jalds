@@ -46,12 +46,6 @@ public class TestDepthFirstSearch extends TestCase {
 		Map<Vertex, Integer> discoveredAtMap = depthFirstSearch.getDiscoveredAtMap();
 		Map<Vertex, Integer> finishedAtMap = depthFirstSearch.getFinishedAtMap();
 
-		assertTrue(discoveredAtMap.get(u) < finishedAtMap.get(u));
-		assertTrue(discoveredAtMap.get(v) < finishedAtMap.get(v));
-		assertTrue(discoveredAtMap.get(w) < finishedAtMap.get(w));
-		assertTrue(discoveredAtMap.get(x) < finishedAtMap.get(x));
-		assertTrue(discoveredAtMap.get(y) < finishedAtMap.get(y));
-		assertTrue(discoveredAtMap.get(z) < finishedAtMap.get(z));
 		
 		for (Vertex vertex : set) {
 			assertTrue(discoveredAtMap.containsKey(vertex));

@@ -100,7 +100,6 @@ public class DepthFirstSearch {
 			for (Vertex adjacentVertex : vertices) {
 				switch (colorMap.get(adjacentVertex)) {
 				case WHITE:
-					System.out.println("white");
 					predecessorMap.put(adjacentVertex, vertex);
 					visit(adjacentVertex);
 					treeEdge.put(vertex, adjacentVertex);
@@ -114,6 +113,7 @@ public class DepthFirstSearch {
 
 		time = time + 1;
 		finishedAtMap.put(vertex, time);
+		System.out.println("finished " + vertex.getPrettyName() + " " + discoveredAtMap.get(vertex) + "/" + time);
 		notifyFinishedEvent(vertex);
 		colorMap.put(vertex, Color.BLACK);
 	}
