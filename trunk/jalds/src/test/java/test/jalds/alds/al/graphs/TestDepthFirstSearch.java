@@ -11,18 +11,12 @@ import junit.framework.TestCase;
 public class TestDepthFirstSearch extends TestCase {
 
 	public void test() {
-		Vertex u = new Vertex(85);
-		u.setPrettyName("u");
-		Vertex v = new Vertex(86);
-		v.setPrettyName("v");
-		Vertex w = new Vertex(87);
-		w.setPrettyName("w");
-		Vertex x = new Vertex(88);
-		x.setPrettyName("x");
-		Vertex y = new Vertex(89);
-		y.setPrettyName("y");
-		Vertex z = new Vertex(90);
-		z.setPrettyName("z");
+		Vertex u = new Vertex("u");
+		Vertex v = new Vertex("v");
+		Vertex w = new Vertex("w");
+		Vertex x = new Vertex("x");
+		Vertex y = new Vertex("y");
+		Vertex z = new Vertex("z");
 
 		Graph graph = new Graph(Graph.Type.DIRECTED);
 
@@ -46,7 +40,6 @@ public class TestDepthFirstSearch extends TestCase {
 		Map<Vertex, Integer> discoveredAtMap = depthFirstSearch.getDiscoveredAtMap();
 		Map<Vertex, Integer> finishedAtMap = depthFirstSearch.getFinishedAtMap();
 
-		
 		for (Vertex vertex : set) {
 			assertTrue(discoveredAtMap.containsKey(vertex));
 			int d = discoveredAtMap.get(vertex);

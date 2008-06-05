@@ -25,27 +25,18 @@ package jalds.alds.ds.graphs;
  */
 public class Vertex {
 
-	private int name;
-	private String prettyName;
+	private String name;
 
-	public Vertex(int name) {
+	public Vertex(String name) {
 		this.name = name;
 	}
 
-	public void setPrettyName(String prettyName) {
-		this.prettyName = prettyName;
-	}
-
-	public String getPrettyName() {
-		return prettyName;
-	}
-
-	public int getName() {
+	public String getName() {
 		return name;
 	}
 
 	public String toString() {
-		return Integer.toString(name);
+		return name;
 	}
 
 	public boolean equals(Object obj) {
@@ -54,11 +45,11 @@ public class Vertex {
 		}
 		Vertex other = (Vertex) obj;
 
-		return (this.name == other.name);
+		return (this.name.equals(other.name));
 	}
 
 	public int hashCode() {
-		return 37 * name;
+		return 37 * name.hashCode();
 	}
 
 }

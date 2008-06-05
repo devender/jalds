@@ -14,14 +14,14 @@ public class TestBreadthFirstGraphSearch extends TestCase {
 	 * a picture of this graph
 	 */
 	public void test() {
-		Vertex r = new Vertex(82);
-		Vertex s = new Vertex(83);
-		Vertex t = new Vertex(84);
-		Vertex u = new Vertex(85);
-		Vertex v = new Vertex(86);
-		Vertex w = new Vertex(87);
-		Vertex x = new Vertex(88);
-		Vertex y = new Vertex(89);
+		Vertex r = new Vertex("r");
+		Vertex s = new Vertex("s");
+		Vertex t = new Vertex("t");
+		Vertex u = new Vertex("u");
+		Vertex v = new Vertex("v");
+		Vertex w = new Vertex("w");
+		Vertex x = new Vertex("x");
+		Vertex y = new Vertex("y");
 
 		Graph graph = new Graph(Graph.Type.UNDIRECTED);
 		graph.addEdge(v, r);
@@ -45,5 +45,8 @@ public class TestBreadthFirstGraphSearch extends TestCase {
 		assertEquals(2, (int) distanceMap.get(x));
 		assertEquals(3, (int) distanceMap.get(u));
 		assertEquals(3, (int) distanceMap.get(y));
+		assertEquals("s->w->x->y->", breadthFirstGraphSearch.printShortestPath(s, y));
+		assertEquals("s->w->t->", breadthFirstGraphSearch.printShortestPath(s, t));
+
 	}
 }
