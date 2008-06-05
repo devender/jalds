@@ -118,4 +118,24 @@ public class BreadthFirstGraphSearch {
 		return distanceMap;
 	}
 
+	public String printShortestPath(Vertex s, Vertex v) {
+		StringBuffer buffer = new StringBuffer();
+		printShortestPath(s, v, buffer);
+		return buffer.toString();
+	}
+
+	private void printShortestPath(Vertex s, Vertex v, StringBuffer buffer) {
+		if (v.equals(source)) {
+			buffer.append(source.getName());
+			buffer.append("->");
+		} else {
+			if (predecessorMap.get(v) == null) {
+				buffer.append("No Path");
+			} else {
+				printShortestPath(s, predecessorMap.get(v), buffer);
+				buffer.append(v.getName());
+				buffer.append("->");
+			}
+		}
+	}
 }

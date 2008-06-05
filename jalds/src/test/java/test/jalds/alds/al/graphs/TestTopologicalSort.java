@@ -10,24 +10,15 @@ import junit.framework.TestCase;
 public class TestTopologicalSort extends TestCase {
 
 	public void test() {
-		Vertex undershorts = new Vertex(1);
-		undershorts.setPrettyName("undershorts");
-		Vertex pants = new Vertex(2);
-		pants.setPrettyName("pants");
-		Vertex belt = new Vertex(3);
-		belt.setPrettyName("belt");
-		Vertex shirt = new Vertex(4);
-		shirt.setPrettyName("shirt");
-		Vertex tie = new Vertex(5);
-		tie.setPrettyName("tie");
-		Vertex jacket = new Vertex(6);
-		jacket.setPrettyName("jacket");
-		Vertex socks = new Vertex(7);
-		socks.setPrettyName("socks");
-		Vertex shoes = new Vertex(8);
-		shoes.setPrettyName("shoes");
-		Vertex watch = new Vertex(9);
-		watch.setPrettyName("watch");
+		Vertex undershorts = new Vertex("undershorts");
+		Vertex pants = new Vertex("pants");
+		Vertex belt = new Vertex("belt");
+		Vertex shirt = new Vertex("shirt");
+		Vertex tie = new Vertex("tie");
+		Vertex jacket = new Vertex("jacket");
+		Vertex socks = new Vertex("socks");
+		Vertex shoes = new Vertex("shoes");
+		Vertex watch = new Vertex("watch");
 
 		Graph graph = new Graph(Graph.Type.DIRECTED);
 		graph.addVertex(watch);
@@ -51,7 +42,7 @@ public class TestTopologicalSort extends TestCase {
 		List<Vertex> list = sort.compute();
 		System.out.println();
 		for (Vertex vertex : list) {
-			System.out.print(vertex.getPrettyName() + "->");
+			System.out.print(vertex + "->");
 		}
 
 	}

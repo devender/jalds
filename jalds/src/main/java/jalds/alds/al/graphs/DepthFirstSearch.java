@@ -72,7 +72,7 @@ public class DepthFirstSearch {
 
 		for (Vertex vertex : set) {
 			if (colorMap.get(vertex).compareTo(Color.WHITE) == 0) {
-				System.out.println("Call Visit on " + vertex.getPrettyName());
+				System.out.println("Call Visit on " + vertex.getName());
 				visit(vertex);
 			}
 		}
@@ -89,7 +89,7 @@ public class DepthFirstSearch {
 	 * @param vertex
 	 */
 	private void visit(Vertex vertex) {
-		System.out.println("Visit " + vertex.getPrettyName());
+		System.out.println("Visit " + vertex.getName());
 		colorMap.put(vertex, Color.GRAY);
 		time = time + 1;
 		discoveredAtMap.put(vertex, time);
@@ -113,7 +113,7 @@ public class DepthFirstSearch {
 
 		time = time + 1;
 		finishedAtMap.put(vertex, time);
-		System.out.println("finished " + vertex.getPrettyName() + " " + discoveredAtMap.get(vertex) + "/" + time);
+		System.out.println("finished " + vertex.getName() + " " + discoveredAtMap.get(vertex) + "/" + time);
 		notifyFinishedEvent(vertex);
 		colorMap.put(vertex, Color.BLACK);
 	}
