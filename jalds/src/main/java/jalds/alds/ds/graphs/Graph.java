@@ -306,6 +306,15 @@ public class Graph {
 	}
 
 	/**
+	 * Returns the graph type of this graph
+	 * 
+	 * @return
+	 */
+	public Type getType() {
+		return type;
+	}
+
+	/**
 	 * Represents the type of Graph either a directed or un-directed
 	 * 
 	 * @author Devender Gollapally
