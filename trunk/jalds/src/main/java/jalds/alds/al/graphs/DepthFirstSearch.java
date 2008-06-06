@@ -67,19 +67,35 @@ public class DepthFirstSearch {
 	}
 
 	public void compute() {
+		init();
+
+		Set<Vertex> set = graph.getVertices();
+		for (Vertex vertex : set) {
+			process(vertex);
+		}
+	}
+
+	public Set<Vertex> init() {
 		Set<Vertex> set = graph.getVertices();
 		for (Vertex vertex : set) {
 			colorMap.put(vertex, Color.WHITE);
 			predecessorMap.put(vertex, null);
 		}
+		return set;
+	}
 
-		for (Vertex vertex : set) {
-			if (colorMap.get(vertex).compareTo(Color.WHITE) == 0) {
-				List<Vertex> depthFirstTree = new LinkedList<Vertex>();		
-				depthFirstTree.add(vertex);
-				visit(vertex, depthFirstTree);
-				depthFirstForest.add(depthFirstTree);
-			}
+	/**
+	 * This was made public so that we can call process vertex in any order from
+	 * a different object
+	 * 
+	 * @param vertex
+	 */
+	public void process(Vertex vertex) {
+		if (colorMap.get(vertex).compareTo(Color.WHITE) == 0) {
+			List<Vertex> depthFirstTree = new LinkedList<Vertex>();
+			depthFirstTree.add(vertex);
+			visit(vertex, depthFirstTree);
+			depthFirstForest.add(depthFirstTree);
 		}
 	}
 
@@ -93,7 +109,7 @@ public class DepthFirstSearch {
 	 * 
 	 * @param vertex
 	 */
-	private void visit(Vertex vertex, List<Vertex> depthFirstTree) {				
+	private void visit(Vertex vertex, List<Vertex> depthFirstTree) {
 		colorMap.put(vertex, Color.GRAY);
 		time = time + 1;
 		discoveredAtMap.put(vertex, time);
@@ -105,7 +121,7 @@ public class DepthFirstSearch {
 				depthFirstTree.add(adjacentVertex);
 				switch (colorMap.get(adjacentVertex)) {
 				case WHITE:
-					predecessorMap.put(adjacentVertex, vertex);					
+					predecessorMap.put(adjacentVertex, vertex);
 					visit(adjacentVertex, depthFirstTree);
 					treeEdge.put(vertex, adjacentVertex);
 					break;
