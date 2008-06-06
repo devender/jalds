@@ -19,6 +19,7 @@ package jalds.alds.al.graphs;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -51,6 +52,7 @@ public class DepthFirstSearch {
 	private Map<Vertex, Vertex> treeEdge;
 	private Map<Vertex, Vertex> blackEdge;
 	private List<FinishedEventObserver> finishedEventObserversList;
+	private List<List<Vertex>> depthFirstForest;
 
 	public DepthFirstSearch(Graph graph) {
 		this.graph = graph;
@@ -61,6 +63,7 @@ public class DepthFirstSearch {
 		treeEdge = new HashMap<Vertex, Vertex>();
 		blackEdge = new HashMap<Vertex, Vertex>();
 		finishedEventObserversList = new ArrayList<FinishedEventObserver>();
+		depthFirstForest = new LinkedList<List<Vertex>>();
 	}
 
 	public void compute() {
@@ -72,8 +75,10 @@ public class DepthFirstSearch {
 
 		for (Vertex vertex : set) {
 			if (colorMap.get(vertex).compareTo(Color.WHITE) == 0) {
-				System.out.println("Call Visit on " + vertex.getName());
-				visit(vertex);
+				List<Vertex> depthFirstTree = new LinkedList<Vertex>();		
+				depthFirstTree.add(vertex);
+				visit(vertex, depthFirstTree);
+				depthFirstForest.add(depthFirstTree);
 			}
 		}
 	}
@@ -88,8 +93,7 @@ public class DepthFirstSearch {
 	 * 
 	 * @param vertex
 	 */
-	private void visit(Vertex vertex) {
-		System.out.println("Visit " + vertex.getName());
+	private void visit(Vertex vertex, List<Vertex> depthFirstTree) {				
 		colorMap.put(vertex, Color.GRAY);
 		time = time + 1;
 		discoveredAtMap.put(vertex, time);
@@ -98,10 +102,11 @@ public class DepthFirstSearch {
 		if (vertices != null) {
 
 			for (Vertex adjacentVertex : vertices) {
+				depthFirstTree.add(adjacentVertex);
 				switch (colorMap.get(adjacentVertex)) {
 				case WHITE:
-					predecessorMap.put(adjacentVertex, vertex);
-					visit(adjacentVertex);
+					predecessorMap.put(adjacentVertex, vertex);					
+					visit(adjacentVertex, depthFirstTree);
 					treeEdge.put(vertex, adjacentVertex);
 					break;
 				case GRAY:
@@ -167,5 +172,9 @@ public class DepthFirstSearch {
 	public boolean isAcyclic() {
 		return blackEdge.size() == 0;
 
+	}
+
+	public List<List<Vertex>> getDepthFirstForest() {
+		return depthFirstForest;
 	}
 }

@@ -20,7 +20,9 @@ public class TransposeGraph {
 	public Graph transpose(Graph graph) {
 		if (graph.getType() == Graph.Type.DIRECTED) {
 			Graph transposedGraph = new Graph(Graph.Type.DIRECTED);
+			
 			Vertex[][] adjacencyList = graph.getAdjacencyList();
+			
 			for (Vertex[] vertices : adjacencyList) {
 				if (vertices.length > 0) {
 					Vertex from = vertices[0];
