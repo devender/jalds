@@ -1,6 +1,11 @@
 package jalds.alds.al.graphs;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 import jalds.alds.ds.graphs.Graph;
+import jalds.alds.ds.graphs.Vertex;
 
 /**
  * Finds the strongly connected components in a given directed graph
@@ -19,7 +24,22 @@ public class StronglyConnectedComponents {
 
 	public void compute(Graph graph) {
 		DepthFirstSearch dfs = new DepthFirstSearch(graph);
-		TransposeGraphService tg = new TransposeGraphService();
-	
+		dfs.getFinishedAtMap();
+
+		TransposeGraphService tgs = new TransposeGraphService();
+		Graph transposedGraph = tgs.transpose(graph);
+
+		DepthFirstSearch dfst = new DepthFirstSearch(transposedGraph);
+		dfst.init();
+
+	}
+
+	private List<Vertex> getDescendingFinishedTime(Map<Vertex, Integer> map) {
+		List<Vertex> list = new LinkedList<Vertex>();
+		for (Vertex vertex : map.keySet()) {
+			int f = map.get(vertex);
+			
+		}
+
 	}
 }
