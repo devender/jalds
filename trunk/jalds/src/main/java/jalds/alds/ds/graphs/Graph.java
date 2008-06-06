@@ -29,6 +29,7 @@ import java.util.Set;
  */
 public class Graph {
 	private Vertex[][] adjacencyList = null;
+	private int[][] adjacencyMatrix = null;
 	private Type type;
 
 	/**
@@ -71,12 +72,24 @@ public class Graph {
 	 * the edge from b into a, if the vertex was not previously added using the
 	 * addVertex method, this will add it
 	 * 
+	 * In an un directed graph self loops are forbidden, so will not add any
+	 * edges to the graph<br>
 	 * NOTE: At present does not check for duplicates.
 	 * 
 	 * @param a
 	 * @param b
 	 */
 	public void addEdge(Vertex a, Vertex b) {
+		// cycles are not allowed in undirected graphs
+		if (a.equals(b) && Graph.Type.UNDIRECTED == this.type) {
+			return;
+		}
+
+		// (a,b) and (b,a) are considered as same in an undirected graph
+		if (containsEdge(a, b) && Graph.Type.UNDIRECTED == this.type) {
+			return;
+		}
+
 		addVertex(a);
 		addVertex(b);
 
@@ -93,7 +106,19 @@ public class Graph {
 				vertexs[preLength] = a;
 				adjacencyList[i] = vertexs;
 			}
+		}
 
+		buildAdjacencyMatrix();
+	}
+
+	public boolean containsEdge(Vertex a, Vertex b) {
+		int indexA = getVertexIndex(a);
+		int indexB = getVertexIndex(b);
+		int[][] m = getAdjacencyMatrix();
+		if (m != null && indexA >= 0 && indexB >= 0 && m[indexA][indexB] == 1) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -160,11 +185,9 @@ public class Graph {
 	}
 
 	/**
-	 * Returns the internal graph representation in the form of a adjacency
-	 * matrix, NOTE this method will construct the matrix everytime you call it,
-	 * since graph uses a list and not the matrix .
+	 * Builds the Adjancency Matrix
 	 */
-	public int[][] getAdjacencyMatrix() {
+	private void buildAdjacencyMatrix() {
 		int[][] matrix = new int[numberOfVertices()][];
 		for (int i = 0; i < matrix.length; i++) {
 			matrix[i] = new int[numberOfVertices()];
@@ -180,8 +203,15 @@ public class Graph {
 				}
 			}
 		}
+		adjacencyMatrix = matrix;
+	}
 
-		return matrix;
+	/**
+	 * Returns the internal graph representation in the form of a adjacency
+	 * matrix
+	 */
+	public int[][] getAdjacencyMatrix() {
+		return adjacencyMatrix;
 	}
 
 	/**

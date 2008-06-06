@@ -27,6 +27,15 @@ public class TestGraph extends TestCase {
 		graph.addEdge(a3, a4);
 		graph.addEdge(a5, a4);
 
+		assertTrue(graph.containsEdge(a1, a2));
+		assertFalse(graph.containsEdge(a1, a3));
+		assertTrue(graph.containsEdge(a1, a5));
+		assertTrue(graph.containsEdge(a2, a5));
+		assertTrue(graph.containsEdge(a2, a4));
+		assertTrue(graph.containsEdge(a2, a3));
+		assertTrue(graph.containsEdge(a3, a4));
+		assertTrue(graph.containsEdge(a5, a4));
+
 		assertEquals(5, graph.numberOfVertices());
 		assertEquals(14, graph.numberOfEdges());
 		int[][] is = graph.getAdjacencyMatrix();
@@ -116,7 +125,7 @@ public class TestGraph extends TestCase {
 		assertEquals(1, is[4][3]);
 		assertEquals(0, is[4][4]);
 		assertEquals(0, is[4][5]);
-		
+
 		assertEquals(0, is[5][0]);
 		assertEquals(0, is[5][1]);
 		assertEquals(0, is[5][2]);

@@ -7,7 +7,7 @@ import jalds.alds.SortableObject;
 /**
  * 
  * @author Devender Gollapally
- *
+ * 
  */
 public abstract class TestSorting extends TestCase {
 
@@ -15,7 +15,7 @@ public abstract class TestSorting extends TestCase {
 		SortableObject[] objects = TestSortingHelper.makeUnSortedList(100);
 		objects = sortEm(objects);
 		int value = Integer.MIN_VALUE;
-		for (int i = 0; i < objects.length; i++) {			
+		for (int i = 0; i < objects.length && objects[i] != null; i++) {
 			assertTrue(objects[i].getValue() >= value);
 			value = objects[i].getValue();
 		}
