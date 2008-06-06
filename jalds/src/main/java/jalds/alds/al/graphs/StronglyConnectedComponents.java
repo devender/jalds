@@ -1,5 +1,7 @@
 package jalds.alds.al.graphs;
 
+import jalds.alds.ds.graphs.Graph;
+
 /**
  * Finds the strongly connected components in a given directed graph
  * 
@@ -15,4 +17,9 @@ package jalds.alds.al.graphs;
  */
 public class StronglyConnectedComponents {
 
+	public void compute(Graph graph) {
+		DepthFirstSearch dfs = new DepthFirstSearch(graph);
+		TransposeGraphService tg = new TransposeGraphService();
+	
+	}
 }

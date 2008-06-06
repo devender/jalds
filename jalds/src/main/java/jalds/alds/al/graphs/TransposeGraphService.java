@@ -9,7 +9,7 @@ import jalds.alds.ds.graphs.Vertex;
  * @author Devender Gollapally
  * 
  */
-public class TransposeGraph {
+public class TransposeGraphService {
 
 	/**
 	 * Returns a new graph which is the transpose of the given one

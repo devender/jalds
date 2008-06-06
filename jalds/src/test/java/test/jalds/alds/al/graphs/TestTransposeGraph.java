@@ -1,6 +1,6 @@
 package test.jalds.alds.al.graphs;
 
-import jalds.alds.al.graphs.TransposeGraph;
+import jalds.alds.al.graphs.TransposeGraphService;
 import jalds.alds.ds.graphs.Graph;
 import jalds.alds.ds.graphs.Vertex;
 import junit.framework.TestCase;
@@ -24,7 +24,7 @@ public class TestTransposeGraph extends TestCase {
 		graph.addEdge(a4, a2);
 		graph.addEdge(a5, a4);
 		graph.addEdge(a6, a6);
-		TransposeGraph transposeGraph = new TransposeGraph();
+		TransposeGraphService transposeGraph = new TransposeGraphService();
 		Graph transposed = transposeGraph.transpose(graph);
 
 		assertEquals(6, transposed.numberOfVertices());
