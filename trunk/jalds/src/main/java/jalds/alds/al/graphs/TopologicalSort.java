@@ -34,9 +34,6 @@ public class TopologicalSort implements FinishedEventObserver {
 		Map<Vertex, Integer> finishedAtMap = depthFirstSearch.getFinishedAtMap();
 		Map<Vertex, Integer> discoveredAtMap = depthFirstSearch.getDiscoveredAtMap();
 
-		for (Vertex vertex : list) {
-			System.out.println(vertex.getName() + " " + discoveredAtMap.get(vertex) + "/" + finishedAtMap.get(vertex));
-		}
 		return list;
 	}
 
