@@ -17,15 +17,16 @@
  */
 package jalds.alds.al.graphs;
 
+import jalds.alds.ds.graphs.Graph;
+import jalds.alds.ds.graphs.Vertex;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import jalds.alds.ds.graphs.Graph;
-import jalds.alds.ds.graphs.Vertex;
 
 /**
  * Searches deaper in the graph whenever possible. In DFS edges are explored out
@@ -52,7 +53,7 @@ public class DepthFirstSearch {
 	private Map<Vertex, Vertex> treeEdge;
 	private Map<Vertex, Vertex> blackEdge;
 	private List<FinishedEventObserver> finishedEventObserversList;
-	private List<List<Vertex>> depthFirstForest;
+	private Set<Set<Vertex>> depthFirstForest;
 
 	public DepthFirstSearch(Graph graph) {
 		this.graph = graph;
@@ -63,7 +64,7 @@ public class DepthFirstSearch {
 		treeEdge = new HashMap<Vertex, Vertex>();
 		blackEdge = new HashMap<Vertex, Vertex>();
 		finishedEventObserversList = new ArrayList<FinishedEventObserver>();
-		depthFirstForest = new LinkedList<List<Vertex>>();
+		depthFirstForest = new HashSet<Set<Vertex>>();
 	}
 
 	public void compute() {
@@ -92,7 +93,7 @@ public class DepthFirstSearch {
 	 */
 	public void process(Vertex vertex) {
 		if (colorMap.get(vertex).compareTo(Color.WHITE) == 0) {
-			List<Vertex> depthFirstTree = new LinkedList<Vertex>();
+			Set<Vertex> depthFirstTree = new HashSet<Vertex>();
 			depthFirstTree.add(vertex);
 			visit(vertex, depthFirstTree);
 			depthFirstForest.add(depthFirstTree);
@@ -109,7 +110,8 @@ public class DepthFirstSearch {
 	 * 
 	 * @param vertex
 	 */
-	private void visit(Vertex vertex, List<Vertex> depthFirstTree) {
+	private void visit(Vertex vertex, Set<Vertex> depthFirstTree) {
+		depthFirstTree.add(vertex);
 		colorMap.put(vertex, Color.GRAY);
 		time = time + 1;
 		discoveredAtMap.put(vertex, time);
@@ -118,7 +120,6 @@ public class DepthFirstSearch {
 		if (vertices != null) {
 
 			for (Vertex adjacentVertex : vertices) {
-				depthFirstTree.add(adjacentVertex);
 				switch (colorMap.get(adjacentVertex)) {
 				case WHITE:
 					predecessorMap.put(adjacentVertex, vertex);
@@ -190,7 +191,7 @@ public class DepthFirstSearch {
 
 	}
 
-	public List<List<Vertex>> getDepthFirstForest() {
+	public Set<Set<Vertex>> getDepthFirstForest() {
 		return depthFirstForest;
 	}
 }

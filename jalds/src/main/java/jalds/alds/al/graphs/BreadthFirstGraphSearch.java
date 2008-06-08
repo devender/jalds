@@ -118,6 +118,13 @@ public class BreadthFirstGraphSearch {
 		return distanceMap;
 	}
 
+	/**
+	 * Returns a String which shows the shortest path between the source vertex and any other vertex
+	 * 
+	 * @param s
+	 * @param v
+	 * @return
+	 */
 	public String printShortestPath(Vertex s, Vertex v) {
 		StringBuffer buffer = new StringBuffer();
 		printShortestPath(s, v, buffer);
