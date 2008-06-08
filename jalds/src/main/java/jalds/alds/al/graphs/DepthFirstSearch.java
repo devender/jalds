@@ -38,8 +38,7 @@ import java.util.Set;
  * 
  * O(V+E)
  * 
- * DFS forms a a depth first forest containing possibilly several depth first
- * trees.
+ * DFS forms a a depth first forest containing several depth first trees.
  * 
  * @author Devender Gollapally
  * 
@@ -183,15 +182,25 @@ public class DepthFirstSearch {
 	 * 
 	 * @return
 	 */
-	public Map<Vertex, Vertex> getBlackEdge() {
+	public Map<Vertex, Vertex> getBlackEdges() {
 		return blackEdge;
 	}
 
+	/**
+	 * Returns true of the graph has no cycles.
+	 * 
+	 * @return
+	 */
 	public boolean isAcyclic() {
 		return blackEdge.size() == 0;
 
 	}
 
+	/**
+	 * Returns the depth first forest created by running DFS
+	 * 
+	 * @return
+	 */
 	public Set<Set<Vertex>> getDepthFirstForest() {
 		return depthFirstForest;
 	}
