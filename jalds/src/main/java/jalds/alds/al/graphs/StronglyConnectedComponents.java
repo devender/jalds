@@ -2,7 +2,7 @@ package jalds.alds.al.graphs;
 
 import jalds.alds.SortableObject;
 import jalds.alds.al.sorting.Sort;
-import jalds.alds.al.sorting.comparisonsort.CombSort;
+import jalds.alds.al.sorting.comparisonsort.QuickSort;
 import jalds.alds.ds.graphs.Graph;
 import jalds.alds.ds.graphs.Vertex;
 
@@ -13,11 +13,19 @@ import java.util.Set;
  * Finds the strongly connected components in a given directed graph
  * 
  * A strongly connected component of a directed graph G=(V,E) is a max set of
- * vertices C such that for every pair of vertices u and v in C u is reachable
+ * vertices C such that for every pair of vertices u and v in C, u is reachable
  * from v and v is reachable from u.
  * 
- * To find the strongly connected component in given graph G, we transpose G,
- * both G and G(t) will have the same strongly connected component
+ * To find the strongly connected components in given graph G
+ * <ol>
+ * <li>Run DFS on the given graph</li>
+ * <li>Create G^t which is the transpose of the given graph</li>
+ * <li>Run DFS on G^t, but in the main loop of DFS we consider the vertices in
+ * order of decreasing finished time produced by 1.
+ * <li>
+ * <li>Output the depth first forest produced by 3</li>
+ * </ol>
+ * 
  * 
  * @author Devender Gollapally
  * 
@@ -43,7 +51,7 @@ public class StronglyConnectedComponents {
 		}
 
 		Set<Set<Vertex>> depthFirstForest = dfst.getDepthFirstForest();
-		
+
 		for (Set<Vertex> depthFirstTree : depthFirstForest) {
 			print(depthFirstTree);
 		}
@@ -64,7 +72,7 @@ public class StronglyConnectedComponents {
 		for (Vertex vertex : map.keySet()) {
 			sortableObjects[j++] = new SortableObject(vertex, map.get(vertex));
 		}
-		Sort sort = new CombSort();
+		Sort sort = new QuickSort();
 		sortableObjects = sort.sort(sortableObjects);
 		Vertex[] vertexs = new Vertex[sortableObjects.length];
 
