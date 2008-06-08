@@ -23,16 +23,16 @@ public class TestDepthFirstSearch extends TestCase {
 
 		graph.addEdge(u, v);
 		graph.addEdge(u, x);
-		
+
 		graph.addEdge(x, v);
-		
+
 		graph.addEdge(v, y);
-		
+
 		graph.addEdge(y, x);
-		
-		graph.addEdge(w, y);		
+
+		graph.addEdge(w, y);
 		graph.addEdge(w, z);
-		
+
 		graph.addEdge(z, z);
 
 		assertEquals(8, graph.numberOfEdges());
@@ -56,22 +56,6 @@ public class TestDepthFirstSearch extends TestCase {
 
 		assertTrue(depthFirstSearch.getBlackEdge().size() == 2);
 		assertFalse(depthFirstSearch.isAcyclic());
-		List<List<Vertex>> depthFirstForest = depthFirstSearch.getDepthFirstForest();
-		assertEquals(4, depthFirstForest.size());
-		List<Vertex> depthFirstTree = depthFirstForest.get(0);
-		printList(depthFirstTree);
-		depthFirstTree = depthFirstForest.get(1);
-		printList(depthFirstTree);
-		depthFirstTree = depthFirstForest.get(2);
-		printList(depthFirstTree);
-		depthFirstTree = depthFirstForest.get(3);
-		printList(depthFirstTree);
 	}
 
-	private void printList(List<Vertex> list) {
-		for (Vertex vertex : list) {
-			System.out.print(vertex);
-		}
-		System.out.println();
-	}
 }

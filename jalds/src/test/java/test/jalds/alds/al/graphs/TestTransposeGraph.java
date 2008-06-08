@@ -38,4 +38,52 @@ public class TestTransposeGraph extends TestCase {
 		assertTrue(transposed.containsEdge(a4, a5));
 		assertTrue(transposed.containsEdge(a6, a6));
 	}
+
+	public void test2() {
+		Vertex a = new Vertex("a");
+		Vertex b = new Vertex("b");
+		Vertex c = new Vertex("c");
+		Vertex d = new Vertex("d");
+		Vertex e = new Vertex("e");
+		Vertex f = new Vertex("f");
+		Vertex g = new Vertex("g");
+		Vertex h = new Vertex("h");
+		Graph graph = new Graph(Graph.Type.DIRECTED);
+
+		graph.addEdge(a, b);
+		graph.addEdge(b, c);
+		graph.addEdge(b, e);
+		graph.addEdge(b, f);
+		graph.addEdge(c, d);
+		graph.addEdge(c, g);
+		graph.addEdge(d, c);
+		graph.addEdge(d, h);
+		graph.addEdge(e, a);
+		graph.addEdge(e, f);
+		graph.addEdge(f, g);
+		graph.addEdge(g, f);
+		graph.addEdge(g, h);
+		graph.addEdge(h, h);
+		TransposeGraphService transposeGraph = new TransposeGraphService();
+		Graph transposed = transposeGraph.transpose(graph);
+		assertTrue(transposed.containsEdge(b, a));
+
+		assertTrue(transposed.containsEdge(a, e));
+
+		assertTrue(transposed.containsEdge(e, b));
+
+		assertTrue(transposed.containsEdge(c, b));
+
+		assertTrue(transposed.containsEdge(c, d));
+
+		assertTrue(transposed.containsEdge(h, h));
+		assertTrue(transposed.containsEdge(h, g));
+		assertTrue(transposed.containsEdge(d, c));
+
+		assertTrue(transposed.containsEdge(f, e));
+		assertTrue(transposed.containsEdge(f, g));
+		assertTrue(transposed.containsEdge(f, b));
+		assertTrue(transposed.containsEdge(g, f));
+
+	}
 }
