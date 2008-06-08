@@ -1,11 +1,15 @@
 package jalds.alds.al.graphs;
 
+import jalds.alds.SortableObject;
+import jalds.alds.al.sorting.Sort;
+import jalds.alds.al.sorting.comparisonsort.CombSort;
+import jalds.alds.ds.graphs.Graph;
+import jalds.alds.ds.graphs.Vertex;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import jalds.alds.ds.graphs.Graph;
-import jalds.alds.ds.graphs.Vertex;
+import java.util.Set;
 
 /**
  * Finds the strongly connected components in a given directed graph
@@ -22,24 +26,56 @@ import jalds.alds.ds.graphs.Vertex;
  */
 public class StronglyConnectedComponents {
 
-	public void compute(Graph graph) {
+	public Set<Set<Vertex>> compute(Graph graph) {
+		// Compute depth first on the original graph
 		DepthFirstSearch dfs = new DepthFirstSearch(graph);
-		dfs.getFinishedAtMap();
+		dfs.compute();
 
+		// transpose the graph
 		TransposeGraphService tgs = new TransposeGraphService();
 		Graph transposedGraph = tgs.transpose(graph);
 
+		// compute depth first on the transposed graph but order the vertices in
+		// decending finished time order
 		DepthFirstSearch dfst = new DepthFirstSearch(transposedGraph);
 		dfst.init();
-
-	}
-
-	private List<Vertex> getDescendingFinishedTime(Map<Vertex, Integer> map) {
-		List<Vertex> list = new LinkedList<Vertex>();
-		for (Vertex vertex : map.keySet()) {
-			int f = map.get(vertex);
-			
+		System.out.println("--");
+		Vertex[] list = getDescendingFinishedTime(dfs.getFinishedAtMap());
+		for (Vertex vertex : list) {
+			dfst.process(vertex);
 		}
 
+		Set<Set<Vertex>> depthFirstForest = dfst.getDepthFirstForest();
+		for (Set<Vertex> depthFirstTree : depthFirstForest) {
+			print(depthFirstTree);
+		}
+
+		return depthFirstForest;
 	}
+
+	private void print(Set<Vertex> list) {
+		for (Vertex vertex : list) {
+			System.out.print(vertex);
+		}
+		System.out.println();
+	}
+
+	private Vertex[] getDescendingFinishedTime(Map<Vertex, Integer> map) {
+		SortableObject[] sortableObjects = new SortableObject[map.size()];
+		int j = 0;
+		for (Vertex vertex : map.keySet()) {
+			sortableObjects[j++] = new SortableObject(vertex, map.get(vertex));
+		}
+		Sort sort = new CombSort();
+		sortableObjects = sort.sort(sortableObjects);
+		Vertex[] vertexs = new Vertex[sortableObjects.length];
+
+		j = 0;
+		for (int i = sortableObjects.length - 1; i >= 0; i--) {
+			vertexs[j++] = (Vertex) sortableObjects[i].getObject();
+		}
+
+		return vertexs;
+	}
+
 }
