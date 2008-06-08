@@ -23,21 +23,23 @@ import jalds.alds.ds.graphs.Vertex;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 /**
- * Searches deaper in the graph whenever possible. In DFS edges are explored out
+ * Searches deeper in the graph whenever possible. In DFS edges are explored out
  * of the most recently discovered vertex v that still has unexplored edges
- * leaving it. When all of v edges are explored the search backtracks to explore
- * edges leaving the vertex from which v was discovered. The process continues
- * till we have discovered all the vertices that are reachable from the original
- * source. If any undiscovered vertices remain then one of them is selected as
- * the new source and the search is repeated.
+ * leaving it. When all of v's edges are explored the search backtracks to
+ * explore edges leaving the vertex from which v was discovered. The process
+ * continues till we have discovered all the vertices that are reachable from
+ * the original source. If any undiscovered vertices remain then one of them is
+ * selected as the new source and the search is repeated.
  * 
  * O(V+E)
+ * 
+ * DFS forms a a depth first forest containing possibilly several depth first
+ * trees.
  * 
  * @author Devender Gollapally
  * 
@@ -135,7 +137,6 @@ public class DepthFirstSearch {
 
 		time = time + 1;
 		finishedAtMap.put(vertex, time);
-		System.out.println("finished " + vertex.getName() + " " + discoveredAtMap.get(vertex) + "/" + time);
 		notifyFinishedEvent(vertex);
 		colorMap.put(vertex, Color.BLACK);
 	}

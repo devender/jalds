@@ -4,7 +4,8 @@ import jalds.alds.ds.graphs.Graph;
 import jalds.alds.ds.graphs.Vertex;
 
 /**
- * Used to transpose a directed graph
+ * Used to transpose a directed graph, if a graph has an edge (u,v) the
+ * transposed graph will have the edge (v,u)
  * 
  * @author Devender Gollapally
  * 
@@ -20,9 +21,9 @@ public class TransposeGraphService {
 	public Graph transpose(Graph graph) {
 		if (graph.getType() == Graph.Type.DIRECTED) {
 			Graph transposedGraph = new Graph(Graph.Type.DIRECTED);
-			
+
 			Vertex[][] adjacencyList = graph.getAdjacencyList();
-			
+
 			for (Vertex[] vertices : adjacencyList) {
 				if (vertices.length > 0) {
 					Vertex from = vertices[0];

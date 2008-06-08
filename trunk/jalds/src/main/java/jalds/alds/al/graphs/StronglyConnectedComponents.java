@@ -6,8 +6,6 @@ import jalds.alds.al.sorting.comparisonsort.CombSort;
 import jalds.alds.ds.graphs.Graph;
 import jalds.alds.ds.graphs.Vertex;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -39,13 +37,13 @@ public class StronglyConnectedComponents {
 		// decending finished time order
 		DepthFirstSearch dfst = new DepthFirstSearch(transposedGraph);
 		dfst.init();
-		System.out.println("--");
 		Vertex[] list = getDescendingFinishedTime(dfs.getFinishedAtMap());
 		for (Vertex vertex : list) {
 			dfst.process(vertex);
 		}
 
 		Set<Set<Vertex>> depthFirstForest = dfst.getDepthFirstForest();
+		
 		for (Set<Vertex> depthFirstTree : depthFirstForest) {
 			print(depthFirstTree);
 		}
