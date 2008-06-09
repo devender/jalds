@@ -255,6 +255,22 @@ public class Graph {
 	}
 
 	/**
+	 * If the given vertex is in the graph returns the number of edges
+	 * entering/incident to the given vertex. For an undirected graph the in
+	 * degree and out degree is the same.
+	 * 
+	 * @param vertex
+	 * @return
+	 */
+	public int getInDegree(Vertex vertex) {
+		int index = getVertexIndex(vertex);
+		if (index != -1) {
+			return adjacencyList[index].length - 1;
+		}
+		return 0;
+	}
+
+	/**
 	 * Prints the graph's adjacency list
 	 */
 	public String toString() {
