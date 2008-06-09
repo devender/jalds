@@ -17,17 +17,49 @@
  */
 package jalds.alds.al.graphs;
 
+import jalds.alds.ds.graphs.Graph;
+
 /**
  * A Eulerian path is a path in a graph which visits each edge exactly once.A
  * Eulerian circuit is an eulerian path which starts and ends on the same
  * vertex.
  * <ul>
- * Euler's Theorems
- * <li> </li> 
+ * <li> A connected un-directed graph has a Eulerian cycle if every graph vertex
+ * has an even degree</li>
+ * <li> A connected un-directed graph has a Eulerian cycle if it can be
+ * decomposed into edge disjoint cycles. </li>
+ * <li> A connected un-directed graph has a Eulerian path if at most two
+ * vertices in the graph are of odd degree.</li>
  * </ul>
+ * 
+ * <ul>
+ * <li> A directed connected graph has a Eulerian cycle if every vertex has
+ * equal in and out degrees. </li>
+ * <li> A directed graph has Eulerian cycle if it is connected and can be
+ * decomposed into edge disjoint directed cycles </li>
+ * </ul>
+ * 
  * @author Devender Gollapally
  * 
  */
 public class EulerianPath {
+	private Graph graph;
 
+	/**
+	 * 
+	 * @param graph
+	 *            The graph in which a Euler's path is searched.
+	 */
+	public EulerianPath(Graph graph) {
+		this.graph = graph;
+	}
+
+	public void compute() {
+		switch (graph.getType()) {
+		case DIRECTED:
+			break;
+		case UNDIRECTED:
+			break;
+		}
+	}
 }
