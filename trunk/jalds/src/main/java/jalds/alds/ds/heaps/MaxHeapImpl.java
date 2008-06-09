@@ -17,7 +17,6 @@
  */
 package jalds.alds.ds.heaps;
 
-
 /**
  * A simple max heap implementation
  * 
@@ -27,7 +26,7 @@ package jalds.alds.ds.heaps;
 public class MaxHeapImpl extends AbstractHeap implements Heap {
 
 	/**
-	 * use the child with the
+	 * use the child with the max value
 	 * 
 	 * @param i
 	 */
@@ -37,11 +36,14 @@ public class MaxHeapImpl extends AbstractHeap implements Heap {
 			int right = right(i);
 			int childToUse = i;
 
-			if (left < list.size() && list.get(i).getValue() < list.get(left).getValue()) {
+			if (left < list.size()
+					&& list.get(i).getValue() < list.get(left).getValue()) {
 				childToUse = left;
 			}
 
-			if (right < list.size() && list.get(childToUse).getValue() < list.get(right).getValue()) {
+			if (right < list.size()
+					&& list.get(childToUse).getValue() < list.get(right)
+							.getValue()) {
 				childToUse = right;
 			}
 
@@ -54,9 +56,14 @@ public class MaxHeapImpl extends AbstractHeap implements Heap {
 		}
 	}
 
+	/**
+	 * Run when a new element is inserted into the heap
+	 */
 	protected void heapup(int index) {
 		int parentIndex = parent(index);
-		if (parentIndex > -1 && list.get(index).getValue() > list.get(parentIndex).getValue()) {
+		if (parentIndex > -1
+				&& list.get(index).getValue() > list.get(parentIndex)
+						.getValue()) {
 			swap(parentIndex, index);
 			heapup(parentIndex);
 		}
