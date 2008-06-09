@@ -86,7 +86,7 @@ public class Graph {
 		}
 
 		// (a,b) and (b,a) are considered as same in an undirected graph
-		if (containsEdge(a, b) && Graph.Type.UNDIRECTED == this.type) {
+		if ((containsEdge(a, b) || containsEdge(a, b)) && Graph.Type.UNDIRECTED == this.type) {
 			return;
 		}
 
@@ -111,6 +111,13 @@ public class Graph {
 		buildAdjacencyMatrix();
 	}
 
+	/**
+	 * Checks if the given edge is in graph
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
 	public boolean containsEdge(Vertex a, Vertex b) {
 		int indexA = getVertexIndex(a);
 		int indexB = getVertexIndex(b);
