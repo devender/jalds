@@ -17,6 +17,17 @@
  */
 package jalds.alds.al.graphs;
 
+/**
+ * A Eulerian path is a path in a graph which visits each edge exactly once.A
+ * Eulerian circuit is an eulerian path which starts and ends on the same
+ * vertex.
+ * <ul>
+ * Euler's Theorems
+ * <li> </li> 
+ * </ul>
+ * @author Devender Gollapally
+ * 
+ */
 public class EulerianPath {
 
 }
