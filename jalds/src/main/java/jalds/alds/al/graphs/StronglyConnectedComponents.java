@@ -27,12 +27,12 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Finds the strongly connected components in a given directed graph
- * 
+ * Finds the strongly connected components in a given directed graph.
+ * <p>
  * A strongly connected component of a directed graph G=(V,E) is a max set of
  * vertices C such that for every pair of vertices u and v in C, u is reachable
  * from v and v is reachable from u.
- * 
+ * <p>
  * To find the strongly connected components in given graph G
  * <ol>
  * <li>Run DFS on the given graph</li>

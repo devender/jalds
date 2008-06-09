@@ -18,7 +18,7 @@
 package jalds.alds.al.graphs;
 
 /**
- * Used in Graphs algorithms such as BFS or DFS
+ * Used in Graphs algorithms such as BFS or DFS, to color a vertex.
  * 
  * @author Devender Gollapally
  * 
