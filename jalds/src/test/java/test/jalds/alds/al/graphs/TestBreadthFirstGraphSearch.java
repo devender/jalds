@@ -35,7 +35,8 @@ public class TestBreadthFirstGraphSearch extends TestCase {
 		graph.addEdge(t, u);
 		graph.addEdge(y, u);
 
-		BreadthFirstGraphSearch breadthFirstGraphSearch = new BreadthFirstGraphSearch(graph, s);
+		BreadthFirstGraphSearch breadthFirstGraphSearch = new BreadthFirstGraphSearch(
+				graph, s);
 		Map<Vertex, Integer> distanceMap = breadthFirstGraphSearch.compute();
 		assertEquals(1, (int) distanceMap.get(r));
 		assertEquals(2, (int) distanceMap.get(v));
@@ -45,8 +46,10 @@ public class TestBreadthFirstGraphSearch extends TestCase {
 		assertEquals(2, (int) distanceMap.get(x));
 		assertEquals(3, (int) distanceMap.get(u));
 		assertEquals(3, (int) distanceMap.get(y));
-		assertEquals("s->w->x->y->", breadthFirstGraphSearch.printShortestPath(s, y));
-		assertEquals("s->w->t->", breadthFirstGraphSearch.printShortestPath(s, t));
+		assertEquals("s->w->x->y->", breadthFirstGraphSearch
+				.printShortestPathTo(y));
+		assertEquals("s->w->t->", breadthFirstGraphSearch
+				.printShortestPathTo(t));
 
 	}
 }
