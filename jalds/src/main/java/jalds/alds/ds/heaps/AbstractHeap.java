@@ -22,6 +22,12 @@ import java.util.List;
 
 import jalds.alds.SortableObject;
 
+/**
+ * Contains common functionality between Max and Min Heaps
+ * 
+ * @author Devender Gollapally
+ * 
+ */
 public abstract class AbstractHeap implements Heap {
 	protected List<SortableObject> list;
 
