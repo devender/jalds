@@ -35,9 +35,9 @@ import java.util.Set;
  * continues till we have discovered all the vertices that are reachable from
  * the original source. If any undiscovered vertices remain then one of them is
  * selected as the new source and the search is repeated.
- * 
- * O(V+E)
- * 
+ * <p>
+ * Runs in O(V+E) time
+ * <p>
  * DFS forms a a depth first forest containing several depth first trees.
  * 
  * @author Devender Gollapally
@@ -56,6 +56,11 @@ public class DepthFirstSearch {
 	private List<FinishedEventObserver> finishedEventObserversList;
 	private Set<Set<Vertex>> depthFirstForest;
 
+	/**
+	 * 
+	 * @param graph
+	 *            The graph on which Depth First Search is to be run.
+	 */
 	public DepthFirstSearch(Graph graph) {
 		this.graph = graph;
 		colorMap = new HashMap<Vertex, Color>();
@@ -68,6 +73,9 @@ public class DepthFirstSearch {
 		depthFirstForest = new HashSet<Set<Vertex>>();
 	}
 
+	/**
+	 * Run the depth first search on the given graph.
+	 */
 	public void compute() {
 		init();
 
@@ -77,7 +85,12 @@ public class DepthFirstSearch {
 		}
 	}
 
-	public Set<Vertex> init() {
+	/**
+	 * Initializes the DFS by coloring all vertices white.
+	 * 
+	 * @return
+	 */
+	protected Set<Vertex> init() {
 		Set<Vertex> set = graph.getVertices();
 		for (Vertex vertex : set) {
 			colorMap.put(vertex, Color.WHITE);
@@ -87,12 +100,11 @@ public class DepthFirstSearch {
 	}
 
 	/**
-	 * This was made public so that we can call process vertex in any order from
-	 * a different object
+	 * Run DFS on the given vertex.
 	 * 
 	 * @param vertex
 	 */
-	public void process(Vertex vertex) {
+	protected void process(Vertex vertex) {
 		if (colorMap.get(vertex).compareTo(Color.WHITE) == 0) {
 			Set<Vertex> depthFirstTree = new HashSet<Vertex>();
 			depthFirstTree.add(vertex);
@@ -141,12 +153,14 @@ public class DepthFirstSearch {
 	}
 
 	/**
+	 * Notifies an registered Finished Event Observers about a finished event.
 	 * 
 	 * @param vertex
 	 */
 	private void notifyFinishedEvent(Vertex vertex) {
 		for (FinishedEventObserver eventObserver : finishedEventObserversList) {
-			eventObserver.update(vertex, discoveredAtMap.get(vertex), finishedAtMap.get(vertex));
+			eventObserver.update(vertex, discoveredAtMap.get(vertex),
+					finishedAtMap.get(vertex));
 		}
 	}
 
@@ -156,23 +170,44 @@ public class DepthFirstSearch {
 	 * 
 	 * @param finishedEventObserver
 	 */
-	public void registerFinishedEventObserver(FinishedEventObserver finishedEventObserver) {
+	public void registerFinishedEventObserver(
+			FinishedEventObserver finishedEventObserver) {
 		finishedEventObserversList.add(finishedEventObserver);
 	}
 
+	/**
+	 * 
+	 * @return Map<Vertex, Vertex> A map of each vertex and its predecessor
+	 */
 	public Map<Vertex, Vertex> getPredecessorMap() {
 		return predecessorMap;
 	}
 
+	/**
+	 * 
+	 * @return Map<Vertex, Integer> a map of vertices and when they were
+	 *         discovered.
+	 */
 	public Map<Vertex, Integer> getDiscoveredAtMap() {
 		return discoveredAtMap;
 	}
 
+	/**
+	 * 
+	 * @return Map<Vertex, Integer> a map of vertices and when they were
+	 *         finished.
+	 */
 	public Map<Vertex, Integer> getFinishedAtMap() {
 		return finishedAtMap;
 	}
 
-	public Map<Vertex, Vertex> getTreeEdge() {
+	/**
+	 * Returns all tree edges, A tree edge or a white edge is an edge that
+	 * represents the edge between the parent and the child.
+	 * 
+	 * @return
+	 */
+	public Map<Vertex, Vertex> getTreeEdges() {
 		return treeEdge;
 	}
 

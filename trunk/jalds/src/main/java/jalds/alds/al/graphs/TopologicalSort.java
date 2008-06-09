@@ -29,10 +29,10 @@ import java.util.List;
  * such that if G contains an edge (u,v) the u will appear before v in the
  * ordering, a topological sort can be viewed as an ordering of its vertices
  * along a horizontal line so that all directed edges go from left to right.
- * 
+ * <p>
  * This produces a linked list of vertices in the given graph that are in
  * topological order.
- * 
+ * <p>
  * In order to compute the topological order, the Graph is first examined using
  * a depth first search and when ever a vertex has been completely explored (i.e
  * finished) we add it to the front of the list.
