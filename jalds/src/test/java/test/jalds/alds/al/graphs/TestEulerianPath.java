@@ -22,6 +22,7 @@ public class TestEulerianPath extends TestCase {
 	}
 
 	public void testEular() {
+		// a simple square
 		Vertex q = new Vertex("q");
 		Vertex r = new Vertex("r");
 		Vertex s = new Vertex("s");
@@ -34,6 +35,24 @@ public class TestEulerianPath extends TestCase {
 		EulerianPath eulerianPath = new EulerianPath(graph);
 		eulerianPath.compute();
 		assertTrue(eulerianPath.hasEulerianCycle());
+		assertTrue(eulerianPath.hasEulerianPath());
+	}
+
+	public void testEularTwo() {
+		// a simple square
+		Vertex q = new Vertex("q");
+		Vertex r = new Vertex("r");
+		Vertex s = new Vertex("s");
+		Vertex t = new Vertex("t");
+		Graph graph = new Graph(Graph.Type.UNDIRECTED);
+		graph.addEdge(q, r);
+		graph.addEdge(r, s);
+		graph.addEdge(s, t);
+		graph.addEdge(t, q);
+		graph.addEdge(r, t);
+		EulerianPath eulerianPath = new EulerianPath(graph);
+		eulerianPath.compute();
+		assertFalse(eulerianPath.hasEulerianCycle());
 		assertTrue(eulerianPath.hasEulerianPath());
 
 	}
