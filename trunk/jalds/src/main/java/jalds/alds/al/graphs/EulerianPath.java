@@ -17,6 +17,7 @@
  */
 package jalds.alds.al.graphs;
 
+import java.util.Map;
 import java.util.Set;
 
 import jalds.alds.ds.graphs.Graph;
@@ -38,9 +39,12 @@ import jalds.alds.ds.graphs.Vertex;
  * <ul>
  * <li> A directed connected graph has a Eulerian cycle if every vertex has
  * equal in and out degrees. </li>
- * <li> A directed graph has Eulerian cycle if it is connected and can be
- * decomposed into edge disjoint directed cycles </li>
+ * <li> A directed graph has an eulerian path if and only if it is connected and
+ * each vertex except 2 have the same in-degree as out-degree, and one of those
+ * 2 vertices has out-degree with one greater than in-degree</li>
  * </ul>
+ * 
+ * Check out http://www.graph-magics.com/articles/euler.php
  * 
  * @author Devender Gollapally
  * 
@@ -81,6 +85,34 @@ public class EulerianPath {
 	}
 
 	private void directed() {
+		int nodeWithOutSameInOutDegree = 0;
+		// the vertices that do not have the same in and out degree, if it is
+		// greater than 2 we dont care
+		Vertex[] vertices = new Vertex[2];
+		int i = 0;
+		Set<Vertex> set = graph.getVertices();
+		for (Vertex vertex : set) {
+			if (graph.getInDegree(vertex) != graph.getOutDegree(vertex)) {
+				nodeWithOutSameInOutDegree += 1;
+				if (i < 2) {
+					vertices[i] = vertex;
+					i += 1;
+				}
+			}
+		}
+		if (nodeWithOutSameInOutDegree == 0) {
+			eulerianCycle = true;
+			eulerianPath = true;
+		} else if (nodeWithOutSameInOutDegree == 2) {
+			int vertexOneIndegree = graph.getInDegree(vertices[0]);
+			int vertexOneOutdegree = graph.getOutDegree(vertices[0]);
+			int vertexTwoIndegree = graph.getInDegree(vertices[1]);
+			int vertexTwoOutdegree = graph.getOutDegree(vertices[1]);
+			if ((vertexOneIndegree - vertexOneOutdegree == 1 || vertexOneOutdegree - vertexOneIndegree == 1)
+					&& (vertexTwoIndegree - vertexTwoOutdegree == 1 || vertexTwoOutdegree - vertexTwoIndegree == 1)) {
+				eulerianPath = true;
+			}
+		}
 
 	}
 

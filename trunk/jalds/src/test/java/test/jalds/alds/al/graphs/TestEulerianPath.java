@@ -54,6 +54,32 @@ public class TestEulerianPath extends TestCase {
 		eulerianPath.compute();
 		assertFalse(eulerianPath.hasEulerianCycle());
 		assertTrue(eulerianPath.hasEulerianPath());
+	}
 
+	public void testEularThree() {
+		Vertex q = new Vertex("q");
+		Vertex r = new Vertex("r");
+		Graph graph = new Graph(Graph.Type.DIRECTED);
+		graph.addEdge(q, r);
+		graph.addEdge(r, q);
+		EulerianPath eulerianPath = new EulerianPath(graph);
+		eulerianPath.compute();
+		assertTrue(eulerianPath.hasEulerianCycle());
+		assertTrue(eulerianPath.hasEulerianPath());
+	}
+	
+	public void testEularFour() {
+		Vertex q = new Vertex("q");
+		Vertex r = new Vertex("r");
+		Vertex s = new Vertex("s");
+		Graph graph = new Graph(Graph.Type.DIRECTED);
+		graph.addEdge(q, r);
+		graph.addEdge(q, s);
+		graph.addEdge(r, s);
+		graph.addEdge(s, q);
+		EulerianPath eulerianPath = new EulerianPath(graph);
+		eulerianPath.compute();
+		assertFalse(eulerianPath.hasEulerianCycle());
+		assertTrue(eulerianPath.hasEulerianPath());
 	}
 }
