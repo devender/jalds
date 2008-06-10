@@ -27,6 +27,12 @@ public class TestGraph extends TestCase {
 		graph.addEdge(a3, a4);
 		graph.addEdge(a5, a4);
 
+		assertEquals(graph.getInDegree(a1), graph.getOutDegree(a1));
+		assertEquals(graph.getInDegree(a2), graph.getOutDegree(a2));
+		assertEquals(graph.getInDegree(a3), graph.getOutDegree(a3));
+		assertEquals(graph.getInDegree(a4), graph.getOutDegree(a4));
+		assertEquals(graph.getInDegree(a5), graph.getOutDegree(a5));
+
 		assertTrue(graph.containsEdge(a1, a2));
 		assertFalse(graph.containsEdge(a1, a3));
 		assertTrue(graph.containsEdge(a1, a5));
@@ -91,6 +97,24 @@ public class TestGraph extends TestCase {
 		assertEquals(8, graph.numberOfEdges());
 		int[][] is = graph.getAdjacencyMatrix();
 
+		assertEquals(2, graph.getOutDegree(a1));
+		assertEquals(0, graph.getInDegree(a1));
+		
+		assertEquals(1, graph.getOutDegree(a2));
+		assertEquals(2, graph.getInDegree(a2));
+		
+		assertEquals(0, graph.getInDegree(a3));
+		assertEquals(2, graph.getOutDegree(a3));
+		
+		assertEquals(2, graph.getInDegree(a4));
+		assertEquals(1, graph.getOutDegree(a4));
+		
+		assertEquals(2, graph.getInDegree(a5));
+		assertEquals(1, graph.getOutDegree(a5));
+		
+		assertEquals(2, graph.getInDegree(a6));
+		assertEquals(1, graph.getOutDegree(a6));
+		
 		assertEquals(0, is[0][0]);
 		assertEquals(1, is[0][1]);
 		assertEquals(0, is[0][2]);

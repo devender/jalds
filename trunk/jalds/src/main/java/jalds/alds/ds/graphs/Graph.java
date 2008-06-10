@@ -269,12 +269,30 @@ public class Graph {
 	 * @param vertex
 	 * @return
 	 */
-	public int getInDegree(Vertex vertex) {
+	public int getOutDegree(Vertex vertex) {
 		int index = getVertexIndex(vertex);
 		if (index != -1) {
 			return adjacencyList[index].length - 1;
 		}
 		return 0;
+	}
+
+	public int getInDegree(Vertex vertex) {
+		// if undirected in==out
+		if (Type.UNDIRECTED == this.type) {
+			return getOutDegree(vertex);
+		} else {
+			// get adjacency matrix and sum the the col which represents the
+			// vertex
+			int indegree = 0;
+			int index = getVertexIndex(vertex);
+			if (index != -1) {
+				for (int[] col : adjacencyMatrix) {
+					indegree = indegree + col[index];
+				}
+			}
+			return indegree;
+		}
 	}
 
 	/**

@@ -44,6 +44,8 @@ import jalds.alds.ds.graphs.Graph;
  */
 public class EulerianPath {
 	private Graph graph;
+	private boolean eulerianPath = false;
+	private boolean eulerianCycle = false;
 
 	/**
 	 * 
@@ -58,10 +60,13 @@ public class EulerianPath {
 		if (!connected()) {
 			return;
 		}
+
 		switch (graph.getType()) {
 		case DIRECTED:
+			directed();
 			break;
 		case UNDIRECTED:
+			undirected();
 			break;
 		}
 	}
@@ -69,8 +74,7 @@ public class EulerianPath {
 	private boolean connected() {
 		BreadthFirstGraphSearch bfs = new BreadthFirstGraphSearch(graph, graph.getAdjacencyList()[0][0]);
 		bfs.compute();
-		
-		return false;
+		return bfs.isConnected();
 	}
 
 	private void directed() {
@@ -80,4 +84,13 @@ public class EulerianPath {
 	private void undirected() {
 
 	}
+
+	public boolean hasEulerianPath() {
+		return eulerianPath;
+	}
+
+	public boolean hasEulerianCycle() {
+		return eulerianCycle;
+	}
+
 }
