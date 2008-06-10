@@ -20,4 +20,20 @@ public class TestEulerianPath extends TestCase {
 		assertFalse(eulerianPath.hasEulerianCycle());
 		assertFalse(eulerianPath.hasEulerianPath());
 	}
+
+	public void testEular() {
+		Vertex q = new Vertex("q");
+		Vertex r = new Vertex("r");
+		Vertex s = new Vertex("s");
+		Vertex t = new Vertex("t");
+		Graph graph = new Graph(Graph.Type.UNDIRECTED);
+		graph.addEdge(q, r);
+		graph.addEdge(r, s);
+		graph.addEdge(s, t);
+		EulerianPath eulerianPath = new EulerianPath(graph);
+		eulerianPath.compute();
+		assertTrue(eulerianPath.hasEulerianCycle());
+		assertTrue(eulerianPath.hasEulerianPath());
+
+	}
 }
