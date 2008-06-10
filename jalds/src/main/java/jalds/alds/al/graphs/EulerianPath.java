@@ -17,7 +17,10 @@
  */
 package jalds.alds.al.graphs;
 
+import java.util.Set;
+
 import jalds.alds.ds.graphs.Graph;
+import jalds.alds.ds.graphs.Vertex;
 
 /**
  * A Eulerian path is a path in a graph which visits each edge exactly once.A
@@ -82,7 +85,17 @@ public class EulerianPath {
 	}
 
 	private void undirected() {
-
+		int numberOfNodesWithOddDegree = 0;
+		Set<Vertex> set = graph.getVertices();
+		for (Vertex vertex : set) {
+			numberOfNodesWithOddDegree += graph.getInDegree(vertex) % 2;
+		}
+		if (numberOfNodesWithOddDegree == 0) {
+			eulerianCycle = true;
+			eulerianPath = true;
+		} else if (numberOfNodesWithOddDegree == 2) {
+			eulerianPath = true;
+		}
 	}
 
 	public boolean hasEulerianPath() {
