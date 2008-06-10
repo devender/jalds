@@ -27,14 +27,13 @@ import java.util.Set;
  * Eulerian circuit is an eulerian path which starts and ends on the same
  * vertex.
  * <ul>
+ * <ul>
+ * Directed
  * <li> A connected un-directed graph has a Eulerian cycle if every graph vertex
  * has an even degree</li>
- * <li> A connected un-directed graph has a Eulerian cycle if it can be
- * decomposed into edge disjoint cycles. </li>
  * <li> A connected un-directed graph has a Eulerian path if at most two
  * vertices in the graph are of odd degree.</li>
  * </ul>
- * 
  * <ul>
  * <li> A directed connected graph has a Eulerian cycle if every vertex has
  * equal in and out degrees. </li>
@@ -42,7 +41,7 @@ import java.util.Set;
  * each vertex except 2 have the same in-degree as out-degree, and one of those
  * 2 vertices has out-degree with one greater than in-degree</li>
  * </ul>
- * 
+ * </ul>
  * Check out http://www.graph-magics.com/articles/euler.php
  * 
  * @author Devender Gollapally
