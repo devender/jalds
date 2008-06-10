@@ -24,9 +24,10 @@ import jalds.alds.al.sorting.Sort;
  * <ul>
  * <li>Find the MaxValue in the given unsorted set.</li>
  * <li>Create a second set with length 0..MaxValue. (lets call this C set) it
- * reperesents the number of times a given value appears in the unsorted set</li>
+ * represents the number of times a given value appears in the unsorted set</li>
  * <li>For each value in the unsorted set increment the corresponding element
  * in the second set</li>
+ * <li>For each element i in set c > 1 increment it c(i) = c(i)+c(i-1)</li>
  * <li>Create a empty set with size same as the unsorted set (lets call this b)</li>
  * <li>For each element (i) in the unsorted set
  * <ul>
