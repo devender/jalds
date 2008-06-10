@@ -17,11 +17,10 @@
  */
 package jalds.alds.al.graphs;
 
-import java.util.Map;
-import java.util.Set;
-
 import jalds.alds.ds.graphs.Graph;
 import jalds.alds.ds.graphs.Vertex;
+
+import java.util.Set;
 
 /**
  * A Eulerian path is a path in a graph which visits each edge exactly once.A
@@ -130,10 +129,18 @@ public class EulerianPath {
 		}
 	}
 
+	/**
+	 * 
+	 * @return boolean returns true if the given graph has an eular path.
+	 */
 	public boolean hasEulerianPath() {
 		return eulerianPath;
 	}
 
+	/**
+	 * 
+	 * @return boolean returns true if the given graph has an eular cycle
+	 */
 	public boolean hasEulerianCycle() {
 		return eulerianCycle;
 	}
