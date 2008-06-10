@@ -30,6 +30,7 @@ public class TestEulerianPath extends TestCase {
 		graph.addEdge(q, r);
 		graph.addEdge(r, s);
 		graph.addEdge(s, t);
+		graph.addEdge(t, q);
 		EulerianPath eulerianPath = new EulerianPath(graph);
 		eulerianPath.compute();
 		assertTrue(eulerianPath.hasEulerianCycle());
