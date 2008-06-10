@@ -55,11 +55,29 @@ public class EulerianPath {
 	}
 
 	public void compute() {
+		if (!connected()) {
+			return;
+		}
 		switch (graph.getType()) {
 		case DIRECTED:
 			break;
 		case UNDIRECTED:
 			break;
 		}
+	}
+
+	private boolean connected() {
+		BreadthFirstGraphSearch bfs = new BreadthFirstGraphSearch(graph, graph.getAdjacencyList()[0][0]);
+		bfs.compute();
+		
+		return false;
+	}
+
+	private void directed() {
+
+	}
+
+	private void undirected() {
+
 	}
 }

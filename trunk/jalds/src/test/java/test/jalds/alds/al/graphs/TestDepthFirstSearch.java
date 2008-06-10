@@ -1,12 +1,12 @@
 package test.jalds.alds.al.graphs;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import jalds.alds.al.graphs.DepthFirstSearch;
 import jalds.alds.ds.graphs.Graph;
 import jalds.alds.ds.graphs.Vertex;
+
+import java.util.Map;
+import java.util.Set;
+
 import junit.framework.TestCase;
 
 public class TestDepthFirstSearch extends TestCase {

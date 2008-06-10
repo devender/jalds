@@ -83,8 +83,9 @@ public class BreadthFirstGraphSearch {
 	 * <p>
 	 * In the while loop, extracts a node from the queue, then get all of it
 	 * adjacent nodes and for each adjacent node runs a for loop
-	 * <p>For loop: if a node is white, then colors the node grey and sets
-	 * the distance from it to the source as the distance from its parent to the
+	 * <p>
+	 * For loop: if a node is white, then colors the node grey and sets the
+	 * distance from it to the source as the distance from its parent to the
 	 * source +1, enter it into the tail of queue. Else color it black.
 	 * <p>
 	 * Runs in O(number of vertices + number of edges)
@@ -96,15 +97,14 @@ public class BreadthFirstGraphSearch {
 		Set<Vertex> set = graph.getVertices();
 		for (Vertex vertex : set) {
 			colorMap.put(vertex, Color.WHITE);
-			distanceMap.put(vertex, 0);
+			distanceMap.put(vertex, -1);
 			predecessorMap.put(vertex, null);
 		}
 
 		colorMap.put(source, Color.GRAY);
 		distanceMap.put(source, 0);
 
-		Queue<Vertex> queue = new ArrayBlockingQueue<Vertex>(graph
-				.numberOfVertices(), true);
+		Queue<Vertex> queue = new ArrayBlockingQueue<Vertex>(graph.numberOfVertices(), true);
 		queue.add(source);
 
 		while (!queue.isEmpty()) {
@@ -114,8 +114,7 @@ public class BreadthFirstGraphSearch {
 				for (Vertex adjacentVertex : adjacentVertices) {
 					if (colorMap.get(adjacentVertex).equals(Color.WHITE)) {
 						colorMap.put(adjacentVertex, Color.GRAY);
-						distanceMap.put(adjacentVertex,
-								distanceMap.get(vertex) + 1);
+						distanceMap.put(adjacentVertex, distanceMap.get(vertex) + 1);
 						predecessorMap.put(adjacentVertex, vertex);
 						queue.add(adjacentVertex);
 					}
@@ -153,5 +152,18 @@ public class BreadthFirstGraphSearch {
 				buffer.append("->");
 			}
 		}
+	}
+
+	/**
+	 * 
+	 * @return boolean true if the graph is connected.
+	 */
+	public boolean isConnected() {
+		for (Vertex vertex : distanceMap.keySet()) {
+			if (distanceMap.get(vertex) == -1) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
