@@ -201,4 +201,71 @@ public class TestGraph extends TestCase {
 
 	}
 
+	public void testCloneGraph() {
+		Graph ograph = new Graph(Graph.Type.UNDIRECTED);
+		ograph.addVertex(a1);
+		ograph.addVertex(a2);
+		ograph.addVertex(a3);
+		ograph.addVertex(a4);
+		ograph.addVertex(a5);
+		ograph.addEdge(a1, a2);
+		ograph.addEdge(a1, a5);
+		ograph.addEdge(a2, a5);
+		ograph.addEdge(a2, a4);
+		ograph.addEdge(a2, a3);
+		ograph.addEdge(a3, a4);
+		ograph.addEdge(a5, a4);
+
+		Graph graph = ograph.cloneGraph();
+		
+		assertEquals(graph.getInDegree(a1), graph.getOutDegree(a1));
+		assertEquals(graph.getInDegree(a2), graph.getOutDegree(a2));
+		assertEquals(graph.getInDegree(a3), graph.getOutDegree(a3));
+		assertEquals(graph.getInDegree(a4), graph.getOutDegree(a4));
+		assertEquals(graph.getInDegree(a5), graph.getOutDegree(a5));
+
+		assertTrue(graph.containsEdge(a1, a2));
+		assertFalse(graph.containsEdge(a1, a3));
+		assertTrue(graph.containsEdge(a1, a5));
+		assertTrue(graph.containsEdge(a2, a5));
+		assertTrue(graph.containsEdge(a2, a4));
+		assertTrue(graph.containsEdge(a2, a3));
+		assertTrue(graph.containsEdge(a3, a4));
+		assertTrue(graph.containsEdge(a5, a4));
+
+		assertEquals(5, graph.numberOfVertices());
+		assertEquals(14, graph.numberOfEdges());
+		int[][] is = graph.getAdjacencyMatrix();
+		assertEquals(0, is[0][0]);
+		assertEquals(1, is[0][1]);
+		assertEquals(0, is[0][2]);
+		assertEquals(0, is[0][3]);
+		assertEquals(1, is[0][4]);
+
+		assertEquals(1, is[1][0]);
+		assertEquals(0, is[1][1]);
+		assertEquals(1, is[1][2]);
+		assertEquals(1, is[1][3]);
+		assertEquals(1, is[1][4]);
+
+		assertEquals(0, is[2][0]);
+		assertEquals(1, is[2][1]);
+		assertEquals(0, is[2][2]);
+		assertEquals(1, is[2][3]);
+		assertEquals(0, is[2][4]);
+
+		assertEquals(0, is[3][0]);
+		assertEquals(1, is[3][1]);
+		assertEquals(1, is[3][2]);
+		assertEquals(0, is[3][3]);
+		assertEquals(1, is[3][4]);
+
+		assertEquals(1, is[4][0]);
+		assertEquals(1, is[4][1]);
+		assertEquals(0, is[4][2]);
+		assertEquals(1, is[4][3]);
+		assertEquals(0, is[4][4]);
+
+	}
+
 }

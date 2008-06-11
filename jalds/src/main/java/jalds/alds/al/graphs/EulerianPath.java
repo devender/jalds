@@ -61,6 +61,9 @@ public class EulerianPath {
 		this.graph = graph;
 	}
 
+	/**
+	 * Checks if the graph has a eulerian path/cycle
+	 */
 	public void compute() {
 		if (!connected()) {
 			return;
@@ -76,8 +79,14 @@ public class EulerianPath {
 		}
 	}
 
+	/**
+	 * Checks if the given graph is connected
+	 * 
+	 * @return
+	 */
 	private boolean connected() {
-		BreadthFirstGraphSearch bfs = new BreadthFirstGraphSearch(graph, graph.getAdjacencyList()[0][0]);
+		BreadthFirstGraphSearch bfs = new BreadthFirstGraphSearch(graph, graph
+				.getAdjacencyList()[0][0]);
 		bfs.compute();
 		return bfs.isConnected();
 	}
@@ -106,8 +115,10 @@ public class EulerianPath {
 			int vertexOneOutdegree = graph.getOutDegree(vertices[0]);
 			int vertexTwoIndegree = graph.getInDegree(vertices[1]);
 			int vertexTwoOutdegree = graph.getOutDegree(vertices[1]);
-			if ((vertexOneIndegree - vertexOneOutdegree == 1 || vertexOneOutdegree - vertexOneIndegree == 1)
-					&& (vertexTwoIndegree - vertexTwoOutdegree == 1 || vertexTwoOutdegree - vertexTwoIndegree == 1)) {
+			if ((vertexOneIndegree - vertexOneOutdegree == 1 || vertexOneOutdegree
+					- vertexOneIndegree == 1)
+					&& (vertexTwoIndegree - vertexTwoOutdegree == 1 || vertexTwoOutdegree
+							- vertexTwoIndegree == 1)) {
 				eulerianPath = true;
 			}
 		}
@@ -126,6 +137,21 @@ public class EulerianPath {
 		} else if (numberOfNodesWithOddDegree == 2) {
 			eulerianPath = true;
 		}
+	}
+
+	public void getEulerianPath() {
+		if (hasEulerianPath()) {
+			Set<Vertex> set = graph.getVertices();
+			for (Vertex vertex : set) {
+				Vertex[] vertexs = graph.getAllAdjacentVertices(vertex);
+				
+			}
+		}
+	}
+	
+	private void constructEulerCircuit()
+	{
+		
 	}
 
 	/**
