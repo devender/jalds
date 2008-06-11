@@ -86,7 +86,8 @@ public class Graph {
 		}
 
 		// (a,b) and (b,a) are considered as same in an undirected graph
-		if ((containsEdge(a, b) || containsEdge(a, b)) && Graph.Type.UNDIRECTED == this.type) {
+		if ((containsEdge(a, b) || containsEdge(a, b))
+				&& Graph.Type.UNDIRECTED == this.type) {
 			return;
 		}
 
@@ -95,20 +96,56 @@ public class Graph {
 
 		for (int i = 0; i < adjacencyList.length; i++) {
 			Vertex[] vertexs = adjacencyList[i];
-			int preLength = vertexs.length;
 
 			if (vertexs[0].equals(a)) {
-				vertexs = increaseSize(vertexs);
-				vertexs[preLength] = b;
+				vertexs = addVertexToAdjacentVerticies(vertexs, b);
 				adjacencyList[i] = vertexs;
 			} else if (type.equals(Type.UNDIRECTED) && vertexs[0].equals(b)) {
-				vertexs = increaseSize(vertexs);
-				vertexs[preLength] = a;
+				vertexs = addVertexToAdjacentVerticies(vertexs, a);
 				adjacencyList[i] = vertexs;
 			}
 		}
 
 		buildAdjacencyMatrix();
+	}
+
+	public void deleteEdge(Vertex a, Vertex b) {
+		if (containsEdge(a, b)) {
+			for (int i = 0; i < adjacencyList.length; i++) {
+				Vertex[] vertexs = adjacencyList[i];
+
+				if (vertexs[0].equals(a)) {
+					vertexs = deleteVertexFromAdjacentVerticies(vertexs, b);
+					adjacencyList[i] = vertexs;
+				} else if (type.equals(Type.UNDIRECTED) && vertexs[0].equals(b)) {
+					vertexs = deleteVertexFromAdjacentVerticies(vertexs, a);
+					adjacencyList[i] = vertexs;
+				}
+			}
+		}
+		buildAdjacencyMatrix();
+	}
+
+	/**
+	 * Deletes a given vertex from an array of vertices and returns back a new
+	 * array.
+	 * 
+	 * @param vertexs
+	 * @param b
+	 * @return
+	 */
+	private Vertex[] deleteVertexFromAdjacentVerticies(Vertex[] vertexs,
+			Vertex b) {
+		Vertex[] vertexs2 = new Vertex[vertexs.length - 1];
+
+		int j = 0;
+		for (int i = 0; i < vertexs.length; i++) {
+			if (!vertexs[i].equals(b)) {
+				vertexs2[j++] = vertexs[i];
+			}
+		}
+
+		return vertexs2;
 	}
 
 	/**
@@ -127,6 +164,21 @@ public class Graph {
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * Adds a Vertex to an array of Vertices
+	 * 
+	 * @param vertexs
+	 * @param vertex
+	 * @return
+	 */
+	private Vertex[] addVertexToAdjacentVerticies(Vertex[] vertexs,
+			Vertex vertex) {
+		int preLength = vertexs.length;
+		vertexs = increaseSize(vertexs);
+		vertexs[preLength] = vertex;
+		return vertexs;
 	}
 
 	/**
