@@ -43,6 +43,30 @@ public class Graph {
 	}
 
 	/**
+	 * Clones this Graph and gives a new Graph
+	 * 
+	 * @return Graph
+	 */
+	public Graph cloneGraph() {
+		Graph graph = new Graph(this.type);
+		graph.adjacencyList = new Vertex[this.adjacencyList.length][];
+		for (int i = 0; i < this.adjacencyList.length; i++) {
+			graph.adjacencyList[i] = cloneVertexList(this.adjacencyList[i]);
+		}
+		graph.buildAdjacencyMatrix();
+		return graph;
+
+	}
+
+	private Vertex[] cloneVertexList(Vertex[] vertices) {
+		Vertex[] newVertices = new Vertex[vertices.length];
+		for (int i = 0; i < vertices.length; i++) {
+			newVertices[i] = vertices[i];
+		}
+		return newVertices;
+	}
+
+	/**
 	 * Adds a new vertex to the graph
 	 * 
 	 * @param vertex
