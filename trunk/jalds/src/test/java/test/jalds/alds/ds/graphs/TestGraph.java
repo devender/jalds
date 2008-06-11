@@ -99,22 +99,22 @@ public class TestGraph extends TestCase {
 
 		assertEquals(2, graph.getOutDegree(a1));
 		assertEquals(0, graph.getInDegree(a1));
-		
+
 		assertEquals(1, graph.getOutDegree(a2));
 		assertEquals(2, graph.getInDegree(a2));
-		
+
 		assertEquals(0, graph.getInDegree(a3));
 		assertEquals(2, graph.getOutDegree(a3));
-		
+
 		assertEquals(2, graph.getInDegree(a4));
 		assertEquals(1, graph.getOutDegree(a4));
-		
+
 		assertEquals(2, graph.getInDegree(a5));
 		assertEquals(1, graph.getOutDegree(a5));
-		
+
 		assertEquals(2, graph.getInDegree(a6));
 		assertEquals(1, graph.getOutDegree(a6));
-		
+
 		assertEquals(0, is[0][0]);
 		assertEquals(1, is[0][1]);
 		assertEquals(0, is[0][2]);
@@ -156,6 +156,48 @@ public class TestGraph extends TestCase {
 		assertEquals(0, is[5][3]);
 		assertEquals(0, is[5][4]);
 		assertEquals(1, is[5][5]);
+
+	}
+
+	public void testDeleteEdge() {
+		Graph graph = new Graph(Graph.Type.DIRECTED);
+		graph.addVertex(a1);
+		graph.addVertex(a2);
+		graph.addVertex(a3);
+		graph.addVertex(a4);
+		graph.addVertex(a5);
+		graph.addVertex(a6);
+		graph.addEdge(a1, a2);
+		graph.addEdge(a1, a4);
+		graph.addEdge(a2, a5);
+		graph.addEdge(a3, a5);
+		graph.addEdge(a3, a6);
+		graph.addEdge(a4, a2);
+		graph.addEdge(a5, a4);
+		graph.addEdge(a6, a6);
+		assertEquals(6, graph.numberOfVertices());
+		assertEquals(8, graph.numberOfEdges());
+		graph.deleteEdge(a1, a2);
+		assertEquals(6, graph.numberOfVertices());
+		assertEquals(7, graph.numberOfEdges());
+
+		assertEquals(1, graph.getOutDegree(a1));
+		assertEquals(0, graph.getInDegree(a1));
+
+		assertEquals(1, graph.getOutDegree(a2));
+		assertEquals(1, graph.getInDegree(a2));
+
+		assertEquals(0, graph.getInDegree(a3));
+		assertEquals(2, graph.getOutDegree(a3));
+
+		assertEquals(2, graph.getInDegree(a4));
+		assertEquals(1, graph.getOutDegree(a4));
+
+		assertEquals(2, graph.getInDegree(a5));
+		assertEquals(1, graph.getOutDegree(a5));
+
+		assertEquals(2, graph.getInDegree(a6));
+		assertEquals(1, graph.getOutDegree(a6));
 
 	}
 
