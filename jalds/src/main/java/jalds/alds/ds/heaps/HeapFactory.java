@@ -15,31 +15,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package jalds.alds.al.sorting.comparisonsort;
+package jalds.alds.ds.heaps;
 
-import jalds.alds.SortableObject;
-import jalds.alds.ds.heaps.Heap;
-import jalds.alds.ds.heaps.HeapFactory;
+public class HeapFactory {
 
-/**
- * Running time is <em>O(n log n)</em>, is In Place
- * 
- * @author Devender Gollapally
- * 
- */
-final class HeapSort extends AbstractComparisonSort {
+	private HeapFactory() {
+		// restricting any instances
+	}
 
-	public SortableObject[] sort(SortableObject[] unSortedList) {
-		Heap heap = HeapFactory.minHeap();
-		for (SortableObject object : unSortedList) {
-			heap.insert(object);
-		}
+	/**
+	 * 
+	 * @return Heap returns a Min Heap
+	 */
+	public static Heap minHeap() {
+		return new MinHeapImpl();
+	}
 
-		for (int i = 0; i < unSortedList.length; i++) {
-			unSortedList[i] = heap.extract();
-		}
-
-		return unSortedList;
-
+	/**
+	 * 
+	 * @return Heap returns a Max Heap
+	 */
+	public static Heap maxHeap() {
+		return new MaxHeapImpl();
 	}
 }

@@ -23,7 +23,7 @@ package jalds.alds.ds.heaps;
  * @author Devender Gollapally
  * 
  */
-public class MaxHeapImpl extends AbstractHeap implements Heap {
+class MaxHeapImpl extends AbstractHeap implements Heap {
 
 	/**
 	 * use the child with the max value
