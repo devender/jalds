@@ -24,7 +24,7 @@ import jalds.alds.SortableObject;
  * @author Devender Gollapally
  * 
  */
-public class PatienceSort extends AbstractComparisonSort {
+class PatienceSort extends AbstractComparisonSort {
 
 	public SortableObject[] sort(SortableObject[] unSortedList) {
 		throw new RuntimeException("Sorry Not Yet Implemented");

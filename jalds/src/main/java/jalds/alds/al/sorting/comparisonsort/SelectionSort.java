@@ -31,7 +31,7 @@ import jalds.alds.SortableObject;
  * @author Devender Gollapally
  * 
  */
-public class SelectionSort extends AbstractComparisonSort {
+class SelectionSort extends AbstractComparisonSort {
 
 	public SortableObject[] sort(SortableObject[] unSortedList) {
 		for (int i = 0; i < unSortedList.length - 1; i++) {

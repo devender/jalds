@@ -19,7 +19,7 @@ package jalds.alds.al.graphs;
 
 import jalds.alds.SortableObject;
 import jalds.alds.al.sorting.Sort;
-import jalds.alds.al.sorting.comparisonsort.QuickSort;
+import jalds.alds.al.sorting.comparisonsort.SortFactory;
 import jalds.alds.ds.graphs.Graph;
 import jalds.alds.ds.graphs.Vertex;
 
@@ -89,7 +89,7 @@ public class StronglyConnectedComponents {
 		for (Vertex vertex : map.keySet()) {
 			sortableObjects[j++] = new SortableObject(vertex, map.get(vertex));
 		}
-		Sort sort = new QuickSort();
+		Sort sort = SortFactory.quickSort();
 		sortableObjects = sort.sort(sortableObjects);
 		Vertex[] vertexs = new Vertex[sortableObjects.length];
 

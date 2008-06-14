@@ -46,7 +46,7 @@ import jalds.alds.SortableObject;
  * @author Devender Gollapally
  * 
  */
-public class ShellSort extends AbstractComparisonSort {
+class ShellSort extends AbstractComparisonSort {
 
 	public SortableObject[] sort(SortableObject[] unSortedList) {
 		int gap = unSortedList.length / 2;

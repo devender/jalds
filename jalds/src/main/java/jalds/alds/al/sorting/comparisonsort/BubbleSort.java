@@ -35,7 +35,7 @@ import jalds.alds.SortableObject;
  * @author Devender Gollapally
  * 
  */
-public class BubbleSort extends AbstractComparisonSort {
+class BubbleSort extends AbstractComparisonSort {
 
 	public SortableObject[] sort(SortableObject[] unSortedList) {
 		boolean swapped = false;
