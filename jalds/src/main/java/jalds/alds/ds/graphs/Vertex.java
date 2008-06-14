@@ -40,7 +40,7 @@ public class Vertex {
 	}
 
 	public boolean equals(Object obj) {
-		if ( !(obj instanceof Vertex)) {
+		if (!(obj instanceof Vertex)) {
 			return false;
 		}
 		Vertex other = (Vertex) obj;
@@ -49,7 +49,11 @@ public class Vertex {
 	}
 
 	public int hashCode() {
-		return 37 * name.hashCode();
+		int result = 19;
+		if (name != null) {
+			result = 31 + name.hashCode();
+		}
+		return result;
 	}
 
 }
