@@ -17,7 +17,7 @@
  */
 package jalds.alds.ds.heaps;
 
-class MinHeapImpl extends AbstractHeap implements Heap {
+final class MinHeapImpl extends AbstractHeap implements Heap {
 
 	/**
 	 * use the child with the
