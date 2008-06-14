@@ -46,7 +46,7 @@ import jalds.alds.SortableObject;
  * @author Devender Gollapally
  *
  */
-class CombSort extends AbstractComparisonSort {
+final class CombSort extends AbstractComparisonSort {
 	private static final float SHRINK_FACTOR = (float) 1.3;
 
 	public SortableObject[] sort(SortableObject[] unSortedList) {

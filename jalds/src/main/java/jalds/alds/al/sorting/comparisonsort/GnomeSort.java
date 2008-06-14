@@ -35,7 +35,7 @@ import jalds.alds.SortableObject;
  * @author Devender Gollapally
  * 
  */
-class GnomeSort extends AbstractComparisonSort {
+final class GnomeSort extends AbstractComparisonSort {
 
 	public SortableObject[] sort(SortableObject[] unSortedList) {
 		int i = 0;
