@@ -2,7 +2,7 @@ package test.jalds.alds.al.sorting.linear;
 
 import jalds.alds.SortableObject;
 import jalds.alds.al.sorting.Sort;
-import jalds.alds.al.sorting.linear.CountingSort;
+import jalds.alds.al.sorting.linear.SortFactory;
 
 import java.util.Calendar;
 
@@ -13,10 +13,10 @@ public class TestCountingSort extends TestSorting {
 	@Override
 	protected SortableObject[] sortEm(SortableObject[] objects) {
 		long t1 = Calendar.getInstance().getTimeInMillis();
-		Sort sort = new CountingSort();
+		Sort sort = SortFactory.countingSort();
 		objects = sort.sort(objects);
-		long t2 = Calendar.getInstance().getTimeInMillis();		
-		System.out.println("Counting    || "  + (t2 - t1));
+		long t2 = Calendar.getInstance().getTimeInMillis();
+		System.out.println("Counting    || " + (t2 - t1));
 		return objects;
 	}
 }
