@@ -40,7 +40,7 @@ public class Vertex {
 	}
 
 	public boolean equals(Object obj) {
-		if (obj == null || obj.getClass() != this.getClass()) {
+		if ( !(obj instanceof Vertex)) {
 			return false;
 		}
 		Vertex other = (Vertex) obj;

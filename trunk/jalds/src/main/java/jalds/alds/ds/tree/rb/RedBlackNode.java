@@ -157,9 +157,10 @@ public class RedBlackNode {
 	 * and same key.
 	 */
 	public boolean equals(Object obj) {
-		if (obj == null || obj.getClass() != this.getClass()) {
+		if ( !(obj instanceof RedBlackNode) ) {
 			return false;
 		}
+		
 		RedBlackNode other = (RedBlackNode) obj;
 		boolean hasSameParent = false;
 
@@ -185,8 +186,12 @@ public class RedBlackNode {
 	@Override
 	public int hashCode() {
 		int result = 17;
-		result = 31 * result + parent.hashCode();
-		result = 31 * result + sortableObject.hashCode();
+		if (parent != null) {
+			result = 31 * result + parent.hashCode();
+		}
+		if (sortableObject != null) {
+			result = 31 * result + sortableObject.hashCode();
+		}
 		return result;
 	}
 }

@@ -82,7 +82,7 @@ public class SortableObject {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null || obj.getClass() != this.getClass()) {
+		if (!(obj instanceof SortableObject)) {
 			return false;
 		} else {
 			SortableObject other = (SortableObject) obj;
