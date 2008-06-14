@@ -27,7 +27,7 @@ import jalds.alds.SortableObject;
  * @author Devender Gollapally
  * 
  */
-public class RedBlackNode {
+class RedBlackNode {
 	private RedBlackNode parent;
 	private RedBlackNode left;
 	private RedBlackNode right;
