@@ -27,7 +27,7 @@ import jalds.alds.ds.heaps.MinHeapImpl;
  * @author Devender Gollapally
  * 
  */
-public class HeapSort extends AbstractComparisonSort {
+class HeapSort extends AbstractComparisonSort {
 
 	public SortableObject[] sort(SortableObject[] unSortedList) {
 		Heap heap = new MinHeapImpl();
