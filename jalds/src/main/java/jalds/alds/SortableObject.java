@@ -95,6 +95,11 @@ public class SortableObject {
 	}
 
 	@Override
+	public int hashCode() {
+		return value * 17;
+	}
+
+	@Override
 	public String toString() {
 		return String.valueOf(value);
 	}

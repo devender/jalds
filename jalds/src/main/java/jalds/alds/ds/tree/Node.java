@@ -153,4 +153,12 @@ public class Node {
 			return false;
 		}
 	}
+
+	@Override
+	public int hashCode() {
+		int result = 17;
+		result = 31 * result + parent.hashCode();
+		result = 31 * result + sortableObject.hashCode();
+		return result;
+	}
 }
