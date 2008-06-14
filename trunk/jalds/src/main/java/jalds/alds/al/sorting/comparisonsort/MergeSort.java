@@ -47,7 +47,7 @@ import jalds.alds.SortableObject;
  * @author Devender Gollapally
  * 
  */
-class MergeSort extends AbstractComparisonSort {
+final class MergeSort extends AbstractComparisonSort {
 
 	public SortableObject[] sort(SortableObject[] unSortedList) {
 		if (unSortedList.length == 1) {

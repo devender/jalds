@@ -30,7 +30,7 @@ import jalds.alds.SortableObject;
  * @author Devender Gollapally
  * 
  */
-class QuickSort extends AbstractComparisonSort {
+final class QuickSort extends AbstractComparisonSort {
 
 	public SortableObject[] sort(SortableObject[] unSortedList) {
 		quickSort(unSortedList, 0, unSortedList.length - 1);

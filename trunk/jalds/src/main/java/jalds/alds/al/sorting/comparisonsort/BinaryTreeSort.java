@@ -33,7 +33,7 @@ import java.util.List;
  * @author Devender Gollapally
  * 
  */
-class BinaryTreeSort extends AbstractComparisonSort {
+final class BinaryTreeSort extends AbstractComparisonSort {
 
 	public SortableObject[] sort(SortableObject[] unSortedList) {
 		BinaryTree binaryTree = new SimpleBinaryTree();

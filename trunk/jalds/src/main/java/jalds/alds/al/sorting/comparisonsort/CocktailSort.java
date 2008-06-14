@@ -27,7 +27,7 @@ import jalds.alds.SortableObject;
  * @author Devender Gollapally
  * 
  */
-class CocktailSort extends AbstractComparisonSort  {
+final class CocktailSort extends AbstractComparisonSort  {
 
 	public SortableObject[] sort(SortableObject[] unSortedList) {
 		boolean swapped = false;
