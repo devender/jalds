@@ -96,7 +96,7 @@ public class SortableObject {
 
 	@Override
 	public int hashCode() {
-		return value * 17;
+		return value + 17;
 	}
 
 	@Override
