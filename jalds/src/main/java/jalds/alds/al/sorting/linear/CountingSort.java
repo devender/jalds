@@ -41,7 +41,7 @@ import jalds.alds.al.sorting.Sort;
  * @author Devender
  * 
  */
-public class CountingSort implements Sort {
+final class CountingSort implements Sort {
 
 	public SortableObject[] sort(SortableObject[] unSortedList) {
 		int maxValue = 0;

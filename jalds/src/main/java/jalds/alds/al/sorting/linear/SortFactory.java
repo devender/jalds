@@ -15,14 +15,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package jalds.alds.al.graphs;
+package jalds.alds.al.sorting.linear;
+
+import jalds.alds.al.sorting.Sort;
 
 /**
- * Used in Graphs algorithms such as BFS or DFS, to color a vertex.
+ * Constructs a Sort of a Type and returns.
  * 
  * @author Devender Gollapally
  * 
  */
-enum Color {
-	WHITE, GRAY, BLACK;
+public class SortFactory {
+
+	private SortFactory() {
+		// restricting any instances
+	}
+
+	/**
+	 * 
+	 * @return Sort returns a CountingSort
+	 */
+	public static Sort countingSort() {
+		return new CountingSort();
+	}
 }
