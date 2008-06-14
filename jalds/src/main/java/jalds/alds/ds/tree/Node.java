@@ -129,7 +129,7 @@ public class Node {
 	 * sortable objects is the same.
 	 */
 	public boolean equals(Object obj) {
-		if (obj == null || obj.getClass() != this.getClass()) {
+		if (!(obj instanceof Node)) {
 			return false;
 		}
 		Node other = (Node) obj;
@@ -157,8 +157,12 @@ public class Node {
 	@Override
 	public int hashCode() {
 		int result = 17;
-		result = 31 * result + parent.hashCode();
-		result = 31 * result + sortableObject.hashCode();
+		if (parent != null) {
+			result = 31 * result + parent.hashCode();
+		}
+		if (sortableObject != null) {
+			result = 31 * result + sortableObject.hashCode();
+		}
 		return result;
 	}
 }
