@@ -43,18 +43,18 @@ import java.util.Set;
  * @author Devender Gollapally
  * 
  */
-public class DepthFirstSearch {
+public final class DepthFirstSearch {
 
-	private Graph graph;
+	private final Graph graph;
 	private int time = 0;
-	private Map<Vertex, Color> colorMap;
-	private Map<Vertex, Vertex> predecessorMap;
-	private Map<Vertex, Integer> discoveredAtMap;
-	private Map<Vertex, Integer> finishedAtMap;
-	private Map<Vertex, Vertex> treeEdge;
-	private Map<Vertex, Vertex> blackEdge;
-	private List<FinishedEventObserver> finishedEventObserversList;
-	private Set<Set<Vertex>> depthFirstForest;
+	private final Map<Vertex, Color> colorMap;
+	private final Map<Vertex, Vertex> predecessorMap;
+	private final Map<Vertex, Integer> discoveredAtMap;
+	private final Map<Vertex, Integer> finishedAtMap;
+	private final Map<Vertex, Vertex> treeEdge;
+	private final Map<Vertex, Vertex> blackEdge;
+	private final List<FinishedEventObserver> finishedEventObserversList;
+	private final Set<Set<Vertex>> depthFirstForest;
 
 	/**
 	 * 
@@ -90,7 +90,7 @@ public class DepthFirstSearch {
 	 * 
 	 * @return
 	 */
-	protected Set<Vertex> init() {
+	Set<Vertex> init() {
 		Set<Vertex> set = graph.getVertices();
 		for (Vertex vertex : set) {
 			colorMap.put(vertex, Color.WHITE);
@@ -104,7 +104,7 @@ public class DepthFirstSearch {
 	 * 
 	 * @param vertex
 	 */
-	protected void process(Vertex vertex) {
+	void process(Vertex vertex) {
 		if (colorMap.get(vertex).compareTo(Color.WHITE) == 0) {
 			Set<Vertex> depthFirstTree = new HashSet<Vertex>();
 			depthFirstTree.add(vertex);

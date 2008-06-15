@@ -43,10 +43,10 @@ import java.util.List;
  * @author Devender Gollapally
  * 
  */
-public class TopologicalSort implements FinishedEventObserver {
+public final class TopologicalSort implements FinishedEventObserver {
 
-	private Graph graph;
-	private List<Vertex> list;
+	private final Graph graph;
+	private final List<Vertex> list;
 
 	/**
 	 * The graph from which a topological order of vertices is needed.

@@ -51,13 +51,13 @@ import java.util.concurrent.ArrayBlockingQueue;
  * @author Devender
  * 
  */
-public class BreadthFirstGraphSearch {
+public final class BreadthFirstGraphSearch {
 
-	private Graph graph;
-	private Vertex source;
-	private Map<Vertex, Integer> distanceMap;
-	private Map<Vertex, Color> colorMap;
-	private Map<Vertex, Vertex> predecessorMap;
+	private final Graph graph;
+	private final Vertex source;
+	private final Map<Vertex, Integer> distanceMap;
+	private final Map<Vertex, Color> colorMap;
+	private final Map<Vertex, Vertex> predecessorMap;
 
 	/**
 	 * 

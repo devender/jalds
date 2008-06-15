@@ -32,8 +32,8 @@ package jalds.alds;
  * 
  */
 public class SortableObject {
-	private Object object;
-	private int value;
+	private final Object object;
+	private final int value;
 
 	/**
 	 * Constructs a Sortable Object whose value is the hash code of the provided

@@ -23,9 +23,9 @@ package jalds.alds.ds.graphs;
  * @author Devender
  * 
  */
-public class Vertex {
+public final class Vertex {
 
-	private String name;
+	private final String name;
 
 	public Vertex(String name) {
 		this.name = name;

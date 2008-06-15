@@ -27,10 +27,10 @@ import java.util.Set;
  * @author Devender Gollapally
  * 
  */
-public class Graph {
-	private Vertex[][] adjacencyList = null;
-	private int[][] adjacencyMatrix = null;
-	private Type type;
+public final class Graph {
+	private Vertex[][] adjacencyList;
+	private int[][] adjacencyMatrix;
+	private final Type type;
 
 	/**
 	 * Creates a new graph which can be either directed or un-directed
