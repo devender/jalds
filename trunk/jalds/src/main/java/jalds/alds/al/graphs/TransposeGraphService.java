@@ -27,7 +27,7 @@ import jalds.alds.ds.graphs.Vertex;
  * @author Devender Gollapally
  * 
  */
-public class TransposeGraphService {
+public final class TransposeGraphService {
 
 	/**
 	 * Returns a new graph which is the transpose of the given one

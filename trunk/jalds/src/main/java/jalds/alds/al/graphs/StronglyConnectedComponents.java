@@ -47,7 +47,7 @@ import java.util.Set;
  * @author Devender Gollapally
  * 
  */
-public class StronglyConnectedComponents {
+public final class StronglyConnectedComponents {
 
 	public Set<Set<Vertex>> compute(Graph graph) {
 		// Compute depth first on the original graph

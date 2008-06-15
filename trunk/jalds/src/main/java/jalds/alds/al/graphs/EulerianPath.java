@@ -47,8 +47,8 @@ import java.util.Set;
  * @author Devender Gollapally
  * 
  */
-public class EulerianPath {
-	private Graph graph;
+public final class EulerianPath {
+	private final Graph graph;
 	private boolean eulerianPath = false;
 	private boolean eulerianCycle = false;
 
