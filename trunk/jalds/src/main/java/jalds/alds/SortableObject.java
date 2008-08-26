@@ -31,8 +31,8 @@ package jalds.alds;
  * @author Devender Gollapally
  * 
  */
-public class SortableObject {
-	private final Object object;
+public class SortableObject<T> {
+	private final T object;
 	private final int value;
 
 	/**
@@ -42,7 +42,7 @@ public class SortableObject {
 	 * 
 	 * @param object
 	 */
-	public SortableObject(Object object) {
+	public SortableObject(T object) {
 		this.object = object;
 		this.value = object.hashCode();
 	}
@@ -53,7 +53,7 @@ public class SortableObject {
 	 * @param object
 	 * @param value
 	 */
-	public SortableObject(Object object, int value) {
+	public SortableObject(T object, int value) {
 		this.object = object;
 		this.value = value;
 	}
@@ -63,7 +63,7 @@ public class SortableObject {
 	 * 
 	 * @return Object
 	 */
-	public Object getObject() {
+	public T getObject() {
 		return object;
 	}
 
@@ -85,6 +85,7 @@ public class SortableObject {
 		if (!(obj instanceof SortableObject)) {
 			return false;
 		} else {
+			@SuppressWarnings("unchecked")
 			SortableObject other = (SortableObject) obj;
 			if (this.getValue() == other.getValue()) {
 				return true;
