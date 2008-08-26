@@ -16,7 +16,6 @@ public class TestGraph extends TestCase {
 		Graph graph = new Graph(Graph.Type.UNDIRECTED);
 		graph.addVertex(a1).addVertex(a2).addVertex(a3).addVertex(a4)
 				.addVertex(a5);
-
 		graph.addEdge(a1, a2).addEdge(a1, a5).addEdge(a2, a5).addEdge(a2, a4)
 				.addEdge(a2, a3).addEdge(a3, a4).addEdge(a5, a4);
 
@@ -72,20 +71,11 @@ public class TestGraph extends TestCase {
 
 	public void testDirectedGraph() {
 		Graph graph = new Graph(Graph.Type.DIRECTED);
-		graph.addVertex(a1);
-		graph.addVertex(a2);
-		graph.addVertex(a3);
-		graph.addVertex(a4);
-		graph.addVertex(a5);
-		graph.addVertex(a6);
-		graph.addEdge(a1, a2);
-		graph.addEdge(a1, a4);
-		graph.addEdge(a2, a5);
-		graph.addEdge(a3, a5);
-		graph.addEdge(a3, a6);
-		graph.addEdge(a4, a2);
-		graph.addEdge(a5, a4);
-		graph.addEdge(a6, a6);
+		graph.addVertex(a1).addVertex(a2).addVertex(a3).addVertex(a4)
+				.addVertex(a5).addVertex(a6).addEdge(a1, a2).addEdge(a1, a4)
+				.addEdge(a2, a5).addEdge(a3, a5).addEdge(a3, a6)
+				.addEdge(a4, a2).addEdge(a5, a4).addEdge(a6, a6);
+
 		assertEquals(6, graph.numberOfVertices());
 		assertEquals(8, graph.numberOfEdges());
 		int[][] is = graph.getAdjacencyMatrix();
@@ -154,20 +144,13 @@ public class TestGraph extends TestCase {
 
 	public void testDeleteEdge() {
 		Graph graph = new Graph(Graph.Type.DIRECTED);
-		graph.addVertex(a1);
-		graph.addVertex(a2);
-		graph.addVertex(a3);
-		graph.addVertex(a4);
-		graph.addVertex(a5);
-		graph.addVertex(a6);
-		graph.addEdge(a1, a2);
-		graph.addEdge(a1, a4);
-		graph.addEdge(a2, a5);
-		graph.addEdge(a3, a5);
-		graph.addEdge(a3, a6);
-		graph.addEdge(a4, a2);
-		graph.addEdge(a5, a4);
-		graph.addEdge(a6, a6);
+		graph.addVertex(a1).addVertex(a2).addVertex(a3).addVertex(a4)
+				.addVertex(a5).addVertex(a6);
+
+		graph.addEdge(a1, a2).addEdge(a1, a4).addEdge(a2, a5).addEdge(a3, a5)
+				.addEdge(a3, a6).addEdge(a4, a2).addEdge(a5, a4)
+				.addEdge(a6, a6);
+
 		assertEquals(6, graph.numberOfVertices());
 		assertEquals(8, graph.numberOfEdges());
 		graph.deleteEdge(a1, a2);
@@ -196,19 +179,10 @@ public class TestGraph extends TestCase {
 
 	public void testCloneGraph() {
 		Graph ograph = new Graph(Graph.Type.UNDIRECTED);
-		ograph.addVertex(a1);
-		ograph.addVertex(a2);
-		ograph.addVertex(a3);
-		ograph.addVertex(a4);
-		ograph.addVertex(a5);
-		ograph.addEdge(a1, a2);
-		ograph.addEdge(a1, a5);
-		ograph.addEdge(a2, a5);
-		ograph.addEdge(a2, a4);
-		ograph.addEdge(a2, a3);
-		ograph.addEdge(a3, a4);
-		ograph.addEdge(a5, a4);
-
+		ograph.addVertex(a1).addVertex(a2).addVertex(a3).addVertex(a4)
+				.addVertex(a5);
+		ograph.addEdge(a1, a2).addEdge(a1, a5).addEdge(a2, a5).addEdge(a2, a4)
+				.addEdge(a2, a3).addEdge(a3, a4).addEdge(a5, a4);
 		Graph graph = ograph.cloneGraph();
 
 		assertEquals(graph.getInDegree(a1), graph.getOutDegree(a1));
