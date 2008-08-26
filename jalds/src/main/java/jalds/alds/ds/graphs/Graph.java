@@ -71,16 +71,17 @@ public final class Graph {
 	 * 
 	 * @param vertex
 	 */
-	public void addVertex(Vertex vertex) {
+	public Graph addVertex(Vertex vertex) {
 		// check for duplicates
 		if (containsVertex(vertex)) {
-			return;
+			return this;
 		}
 
 		int preLength = adjacencyList.length;
 		increaseVertices();
 		adjacencyList[preLength] = new Vertex[1];
 		adjacencyList[preLength][0] = vertex;
+		return this;
 	}
 
 	private boolean containsVertex(Vertex vertex) {
@@ -103,16 +104,16 @@ public final class Graph {
 	 * @param a
 	 * @param b
 	 */
-	public void addEdge(Vertex a, Vertex b) {
+	public Graph addEdge(Vertex a, Vertex b) {
 		// cycles are not allowed in undirected graphs
 		if (a.equals(b) && Graph.Type.UNDIRECTED == this.type) {
-			return;
+			return this;
 		}
 
 		// (a,b) and (b,a) are considered as same in an undirected graph
 		if ((containsEdge(a, b) || containsEdge(a, b))
 				&& Graph.Type.UNDIRECTED == this.type) {
-			return;
+			return this;
 		}
 
 		addVertex(a);
@@ -131,6 +132,7 @@ public final class Graph {
 		}
 
 		buildAdjacencyMatrix();
+		return this;
 	}
 
 	public void deleteEdge(Vertex a, Vertex b) {

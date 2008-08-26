@@ -14,18 +14,11 @@ public class TestGraph extends TestCase {
 
 	public void testUnDirectedGraph() {
 		Graph graph = new Graph(Graph.Type.UNDIRECTED);
-		graph.addVertex(a1);
-		graph.addVertex(a2);
-		graph.addVertex(a3);
-		graph.addVertex(a4);
-		graph.addVertex(a5);
-		graph.addEdge(a1, a2);
-		graph.addEdge(a1, a5);
-		graph.addEdge(a2, a5);
-		graph.addEdge(a2, a4);
-		graph.addEdge(a2, a3);
-		graph.addEdge(a3, a4);
-		graph.addEdge(a5, a4);
+		graph.addVertex(a1).addVertex(a2).addVertex(a3).addVertex(a4)
+				.addVertex(a5);
+
+		graph.addEdge(a1, a2).addEdge(a1, a5).addEdge(a2, a5).addEdge(a2, a4)
+				.addEdge(a2, a3).addEdge(a3, a4).addEdge(a5, a4);
 
 		assertEquals(graph.getInDegree(a1), graph.getOutDegree(a1));
 		assertEquals(graph.getInDegree(a2), graph.getOutDegree(a2));
@@ -217,7 +210,7 @@ public class TestGraph extends TestCase {
 		ograph.addEdge(a5, a4);
 
 		Graph graph = ograph.cloneGraph();
-		
+
 		assertEquals(graph.getInDegree(a1), graph.getOutDegree(a1));
 		assertEquals(graph.getInDegree(a2), graph.getOutDegree(a2));
 		assertEquals(graph.getInDegree(a3), graph.getOutDegree(a3));
