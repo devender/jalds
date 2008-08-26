@@ -62,6 +62,14 @@ public class DijkstraSingleSourceShortestPath {
 
 	}
 
+	/**
+	 * Sets the distance of all vertices to the source to Integer.MAX_VALUE and
+	 * all the predecessors to null, initializes the distance of source to
+	 * itself to 0
+	 * 
+	 * @param graph
+	 * @param source
+	 */
 	private void initializeSingleSource(WeightedGraph graph, Vertex source) {
 		distanceMap = new HashMap<Vertex, Integer>(graph.numberOfVertices());
 		predecessorMap = new HashMap<Vertex, Vertex>(graph.numberOfVertices());
@@ -93,6 +101,13 @@ public class DijkstraSingleSourceShortestPath {
 		}
 	}
 
+	/**
+	 * Create a Min Priority Queue keyed on the distance map
+	 * 
+	 * @param graph
+	 * @param set
+	 * @return
+	 */
 	private Heap createMinQueue(WeightedGraph graph, Set<Vertex> set) {
 		Heap minQueue = HeapFactory.minHeap();
 		for (Vertex vertex : graph.getVertices()) {
