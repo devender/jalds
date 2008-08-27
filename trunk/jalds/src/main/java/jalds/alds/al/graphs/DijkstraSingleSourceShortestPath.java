@@ -29,6 +29,12 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * For a given source vertex (node) in the graph, the algorithm finds the path
+ * with lowest cost (i.e. the shortest path) between that vertex and every other
+ * vertex. It can also be used for finding costs of shortest paths from a single
+ * vertex to a single destination vertex by stopping the algorithm once the
+ * shortest path to the destination vertex has been determined.
+ * 
  * Dijkstra's algorithm solves the single source shortest paths problem on a
  * weighted directed graph G for the case in which all edge weights are non
  * negative. This algorithm will therefor assume that w(u,v) >=0 for each edge.
