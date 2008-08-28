@@ -4,7 +4,7 @@ import jalds.alds.SortableObject;
 import jalds.alds.ds.tree.BinaryNode;
 import junit.framework.TestCase;
 
-public class TestNode extends TestCase {
+public class TestBinaryNode extends TestCase {
 
 	public void testNode() {
 		BinaryNode parentNode = new BinaryNode();
