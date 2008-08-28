@@ -24,16 +24,7 @@ public class TestBreadthFirstGraphSearch extends TestCase {
 		Vertex y = new Vertex("y");
 
 		Graph graph = new Graph(Graph.Type.UNDIRECTED);
-		graph.addEdge(v, r);
-		graph.addEdge(r, s);
-		graph.addEdge(s, w);
-		graph.addEdge(w, t);
-		graph.addEdge(w, x);
-		graph.addEdge(x, t);
-		graph.addEdge(x, u);
-		graph.addEdge(x, y);
-		graph.addEdge(t, u);
-		graph.addEdge(y, u);
+		graph.addEdge(v, r).addEdge(r, s).addEdge(s, w).addEdge(w, t).addEdge(w, x).addEdge(x, t).addEdge(x, u).addEdge(x, y).addEdge(t, u).addEdge(y, u);
 
 		BreadthFirstGraphSearch breadthFirstGraphSearch = new BreadthFirstGraphSearch(graph, s);
 		Map<Vertex, Integer> distanceMap = breadthFirstGraphSearch.compute();

@@ -26,9 +26,8 @@ public class TestDijkstraSingleSourceShortestPath extends TestCase {
 		weightedGraph.addEdge(z, x, 6).addEdge(z, s, 7);
 		weightedGraph.addEdge(y, z, 2).addEdge(y, t, 3).addEdge(y, x, 9);
 
-		DijkstraSingleSourceShortestPath dijkstraSingleSourceShortestPath = new DijkstraSingleSourceShortestPath();
-		dijkstraSingleSourceShortestPath.compute(weightedGraph, s);
-		Map<Vertex, Integer> distanceMap = dijkstraSingleSourceShortestPath.getDistanceMap();
+		DijkstraSingleSourceShortestPath dijkstraSingleSourceShortestPath = new DijkstraSingleSourceShortestPath(weightedGraph, s);
+		Map<Vertex, Integer> distanceMap = dijkstraSingleSourceShortestPath.compute().getDistanceMap();
 		
 		assertEquals(8,distanceMap.get(t).intValue());
 		assertEquals(9,distanceMap.get(x).intValue());

@@ -32,9 +32,8 @@ public class TestPrimMinimumSpanningTree extends TestCase {
 		weightedGraph.addEdge(g, i, 6).addEdge(g, h, 1);
 		weightedGraph.addEdge(h, i, 7);
 
-		PrimMinimumSpanningTree minimumSpanningTree = new PrimMinimumSpanningTree();
-		minimumSpanningTree.compute(weightedGraph, a);
-		Map<Vertex, Vertex> predecessor = minimumSpanningTree.getPredecessorMap();
+		PrimMinimumSpanningTree minimumSpanningTree = new PrimMinimumSpanningTree(weightedGraph, a);
+		Map<Vertex, Vertex> predecessor = minimumSpanningTree.compute().getPredecessorMap();
 		assertEquals(a, predecessor.get(b));
 		assertEquals(b, predecessor.get(c));
 		assertEquals(c, predecessor.get(i));
