@@ -116,4 +116,5 @@ public final class PrimMinimumSpanningTree {
 	public Map<Vertex, Vertex> getPredecessorMap() {
 		return predecessorMap;
 	}
+	
 }
