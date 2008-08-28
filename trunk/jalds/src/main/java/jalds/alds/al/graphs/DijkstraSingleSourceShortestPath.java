@@ -76,6 +76,7 @@ public final class DijkstraSingleSourceShortestPath {
 		Heap minQueue = createMinQueue(graph, set);
 
 		while (minQueue.size() > 0) {
+			@SuppressWarnings("unchecked")
 			SortableObject<Vertex> sortableObject = minQueue.extract();
 			Vertex u = sortableObject.getObject();
 			set.add(u);

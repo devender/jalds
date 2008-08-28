@@ -64,6 +64,7 @@ public final class PrimMinimumSpanningTree {
 		Heap queue = createMinPriorityQueue(graph, removed);
 
 		while (queue.size() > 0) {
+			@SuppressWarnings("unchecked")
 			SortableObject<Vertex> sortableObject = queue.extract();
 			Vertex u = sortableObject.getObject();
 			removed.add(u);
