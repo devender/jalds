@@ -52,7 +52,6 @@ import java.util.concurrent.ArrayBlockingQueue;
  * 
  */
 public final class BreadthFirstGraphSearch {
-
 	private final Graph graph;
 	private final Vertex source;
 	private final Map<Vertex, Integer> distanceMap;

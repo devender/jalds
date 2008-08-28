@@ -17,16 +17,16 @@
  */
 package jalds.alds.al.graphs;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 import jalds.alds.SortableObject;
 import jalds.alds.ds.graphs.Vertex;
 import jalds.alds.ds.graphs.WeightedGraph;
 import jalds.alds.ds.heaps.Heap;
 import jalds.alds.ds.heaps.HeapFactory;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * A spanning tree (T) is a graph that connects all the vertices of a graph. A
@@ -35,11 +35,30 @@ import jalds.alds.ds.heaps.HeapFactory;
  * @author Devender Gollapally
  * 
  */
-public class PrimMinimumSpanningTree {
-	private Map<Vertex, Integer> keyMap;
-	private Map<Vertex, Vertex> predecessorMap;
+public final class PrimMinimumSpanningTree {
+	private final Map<Vertex, Integer> keyMap;
+	private final Map<Vertex, Vertex> predecessorMap;
+	private final WeightedGraph graph;
+	private final Vertex root;
 
-	public void compute(WeightedGraph graph, Vertex root) {
+	/**
+	 * Requires a {@link WeightedGraph} and a Source
+	 * 
+	 * @param graph
+	 * @param root
+	 */
+	public PrimMinimumSpanningTree(WeightedGraph graph, Vertex root) {
+		this.graph = graph;
+		this.root = root;
+		keyMap = new HashMap<Vertex, Integer>(graph.numberOfVertices());
+		predecessorMap = new HashMap<Vertex, Vertex>(graph.numberOfVertices());
+	}
+
+	/**
+	 * After this method is called the keyMap and the predecessorMap are
+	 * populated
+	 */
+	public PrimMinimumSpanningTree compute() {
 		initialize(graph, root);
 		Set<Vertex> removed = new HashSet<Vertex>();
 		Heap queue = createMinPriorityQueue(graph, removed);
@@ -56,7 +75,7 @@ public class PrimMinimumSpanningTree {
 			}
 			queue = createMinPriorityQueue(graph, removed);
 		}
-
+		return this;
 	}
 
 	private Heap createMinPriorityQueue(WeightedGraph graph, Set<Vertex> removed) {
@@ -70,9 +89,6 @@ public class PrimMinimumSpanningTree {
 	}
 
 	private void initialize(WeightedGraph graph, Vertex root) {
-		keyMap = new HashMap<Vertex, Integer>(graph.numberOfVertices());
-		predecessorMap = new HashMap<Vertex, Vertex>(graph.numberOfVertices());
-
 		for (Vertex vertex : graph.getVertices()) {
 			keyMap.put(vertex, Integer.MAX_VALUE);
 			predecessorMap.put(vertex, null);
@@ -81,10 +97,21 @@ public class PrimMinimumSpanningTree {
 		keyMap.put(root, 0);
 	}
 
+	/**
+	 * returns a map which contains the distance of each node to the source.
+	 * 
+	 * @return
+	 */
 	public Map<Vertex, Integer> getKeyMap() {
 		return keyMap;
 	}
 
+	/**
+	 * returns a map that contains the predecessor of each node, using this map
+	 * a min span tree can be constructed.
+	 * 
+	 * @return
+	 */
 	public Map<Vertex, Vertex> getPredecessorMap() {
 		return predecessorMap;
 	}

@@ -47,11 +47,30 @@ import java.util.Set;
  * @author Devender R. Gollapally
  * 
  */
-public class DijkstraSingleSourceShortestPath {
-	Map<Vertex, Integer> distanceMap = null;
-	Map<Vertex, Vertex> predecessorMap = null;
+public final class DijkstraSingleSourceShortestPath {
+	private final Map<Vertex, Integer> distanceMap;
+	private final Map<Vertex, Vertex> predecessorMap;
+	private final WeightedGraph graph;
+	private final Vertex source;
 
-	public void compute(WeightedGraph graph, Vertex source) {
+	/**
+	 * Requires a {@link WeightedGraph} and a Source
+	 * 
+	 * @param graph
+	 * @param source
+	 */
+	public DijkstraSingleSourceShortestPath(WeightedGraph graph, Vertex source) {
+		this.graph = graph;
+		this.source = source;
+		distanceMap = new HashMap<Vertex, Integer>(graph.numberOfVertices());
+		predecessorMap = new HashMap<Vertex, Vertex>(graph.numberOfVertices());
+	}
+
+	/**
+	 * Will compute the shortest path, after this method is called the
+	 * distanceMap and the predecessorMap are populated.
+	 */
+	public DijkstraSingleSourceShortestPath compute() {
 		initializeSingleSource(graph, source);
 		Set<Vertex> set = new HashSet<Vertex>(graph.numberOfVertices());
 		Heap minQueue = createMinQueue(graph, set);
@@ -65,7 +84,7 @@ public class DijkstraSingleSourceShortestPath {
 			}
 			minQueue = createMinQueue(graph, set);
 		}
-
+		return this;
 	}
 
 	/**
@@ -77,9 +96,6 @@ public class DijkstraSingleSourceShortestPath {
 	 * @param source
 	 */
 	private void initializeSingleSource(WeightedGraph graph, Vertex source) {
-		distanceMap = new HashMap<Vertex, Integer>(graph.numberOfVertices());
-		predecessorMap = new HashMap<Vertex, Vertex>(graph.numberOfVertices());
-
 		for (Vertex vertex : graph.getVertices()) {
 			distanceMap.put(vertex, Integer.MAX_VALUE);
 			predecessorMap.put(vertex, null);
@@ -123,10 +139,22 @@ public class DijkstraSingleSourceShortestPath {
 		return minQueue;
 	}
 
+	/**
+	 * Returns the Distance Map that contains the distance of each node from the
+	 * source
+	 * 
+	 * @return Map<Vertex, Integer>
+	 */
 	public Map<Vertex, Integer> getDistanceMap() {
 		return distanceMap;
 	}
 
+	/**
+	 * Returns the Predecessor Map that contains the predecessor of each node.
+	 * Can use this to build a path from the source to the node.
+	 * 
+	 * @return Map<Vertex, Integer>
+	 */
 	public Map<Vertex, Vertex> getPredecessorMap() {
 		return predecessorMap;
 	}
