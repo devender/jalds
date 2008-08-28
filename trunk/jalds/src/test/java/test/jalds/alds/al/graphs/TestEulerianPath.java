@@ -28,10 +28,7 @@ public class TestEulerianPath extends TestCase {
 		Vertex s = new Vertex("s");
 		Vertex t = new Vertex("t");
 		Graph graph = new Graph(Graph.Type.UNDIRECTED);
-		graph.addEdge(q, r);
-		graph.addEdge(r, s);
-		graph.addEdge(s, t);
-		graph.addEdge(t, q);
+		graph.addEdge(q, r).addEdge(r, s).addEdge(s, t).addEdge(t, q);
 		EulerianPath eulerianPath = new EulerianPath(graph);
 		eulerianPath.compute();
 		assertTrue(eulerianPath.hasEulerianCycle());
@@ -45,11 +42,7 @@ public class TestEulerianPath extends TestCase {
 		Vertex s = new Vertex("s");
 		Vertex t = new Vertex("t");
 		Graph graph = new Graph(Graph.Type.UNDIRECTED);
-		graph.addEdge(q, r);
-		graph.addEdge(r, s);
-		graph.addEdge(s, t);
-		graph.addEdge(t, q);
-		graph.addEdge(r, t);
+		graph.addEdge(q, r).addEdge(r, s).addEdge(s, t).addEdge(t, q).addEdge(r, t);
 		EulerianPath eulerianPath = new EulerianPath(graph);
 		eulerianPath.compute();
 		assertFalse(eulerianPath.hasEulerianCycle());
@@ -60,23 +53,19 @@ public class TestEulerianPath extends TestCase {
 		Vertex q = new Vertex("q");
 		Vertex r = new Vertex("r");
 		Graph graph = new Graph(Graph.Type.DIRECTED);
-		graph.addEdge(q, r);
-		graph.addEdge(r, q);
+		graph.addEdge(q, r).addEdge(r, q);
 		EulerianPath eulerianPath = new EulerianPath(graph);
 		eulerianPath.compute();
 		assertTrue(eulerianPath.hasEulerianCycle());
 		assertTrue(eulerianPath.hasEulerianPath());
 	}
-	
+
 	public void testEularFour() {
 		Vertex q = new Vertex("q");
 		Vertex r = new Vertex("r");
 		Vertex s = new Vertex("s");
 		Graph graph = new Graph(Graph.Type.DIRECTED);
-		graph.addEdge(q, r);
-		graph.addEdge(q, s);
-		graph.addEdge(r, s);
-		graph.addEdge(s, q);
+		graph.addEdge(q, r).addEdge(q, s).addEdge(r, s).addEdge(s, q);
 		EulerianPath eulerianPath = new EulerianPath(graph);
 		eulerianPath.compute();
 		assertFalse(eulerianPath.hasEulerianCycle());
