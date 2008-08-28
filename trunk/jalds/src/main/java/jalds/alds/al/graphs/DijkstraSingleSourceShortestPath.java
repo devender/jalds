@@ -81,7 +81,7 @@ public final class DijkstraSingleSourceShortestPath {
 			Vertex u = sortableObject.getObject();
 			set.add(u);
 			for (Vertex v : graph.getAllAdjacentVertices(u)) {
-				relax(u, v, graph);
+				relax(u, v, graph.getEdgeWeight(u, v));
 			}
 			minQueue = createMinQueue(graph, set);
 		}
@@ -114,10 +114,9 @@ public final class DijkstraSingleSourceShortestPath {
 	 * @param v
 	 * @param weight
 	 */
-	private void relax(Vertex u, Vertex v, WeightedGraph graph) {
+	private void relax(Vertex u, Vertex v, int edgeWeightOfuTov) {
 		int vDistanceFromSource = distanceMap.get(v).intValue();
 		int uDistanceFromSource = distanceMap.get(u).intValue();
-		int edgeWeightOfuTov = graph.getEdgeWeight(u, v);
 		if (vDistanceFromSource > uDistanceFromSource + edgeWeightOfuTov) {
 			distanceMap.put(v, uDistanceFromSource + edgeWeightOfuTov);
 			predecessorMap.put(v, u);
