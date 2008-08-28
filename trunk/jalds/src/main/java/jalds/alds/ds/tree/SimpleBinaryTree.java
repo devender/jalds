@@ -50,9 +50,9 @@ import jalds.alds.ds.tree.rb.RedBlackTree;
  */
 public class SimpleBinaryTree implements BinaryTree {
 
-	private Node root;
+	private BinaryNode root;
 
-	public Node getRoot() {
+	public BinaryNode getRoot() {
 		return root;
 	}
 
@@ -64,9 +64,9 @@ public class SimpleBinaryTree implements BinaryTree {
 			return;
 		}
 
-		Node z = new Node(sortableObject);
-		Node y = null;
-		Node x = root;
+		BinaryNode z = new BinaryNode(sortableObject);
+		BinaryNode y = null;
+		BinaryNode x = root;
 		while (x != null) {
 			y = x;
 			if (z.getSortableObject().getValue() < x.getSortableObject().getValue()) {
@@ -91,7 +91,7 @@ public class SimpleBinaryTree implements BinaryTree {
 	 * {@inheritDoc}
 	 */
 	public void deleteNodeWithValue(int value) {
-		Node nodeToDelete = find(root, value);
+		BinaryNode nodeToDelete = find(root, value);
 		deleteNode(nodeToDelete);
 	}
 
@@ -120,9 +120,9 @@ public class SimpleBinaryTree implements BinaryTree {
 	 * 
 	 * @param nodeToDelete
 	 */
-	private void deleteNode(Node nodeToDelete) {
+	private void deleteNode(BinaryNode nodeToDelete) {
 		// first let us determine what node to splice/move out
-		Node y = null;
+		BinaryNode y = null;
 		if (nodeToDelete.getLeft() == null || nodeToDelete.getRight() == null) {
 			y = nodeToDelete;
 		} else {
@@ -131,7 +131,7 @@ public class SimpleBinaryTree implements BinaryTree {
 		}
 
 		// Now let us splice/move out y
-		Node x = null;
+		BinaryNode x = null;
 		// first find the not null child of y
 		if (y.getLeft() != null) {
 			x = y.getLeft();
@@ -147,7 +147,7 @@ public class SimpleBinaryTree implements BinaryTree {
 			root = x;
 		} else {
 			// if y was right set x as right or if y was left set x as the left
-			Node parent = y.getParent();
+			BinaryNode parent = y.getParent();
 			if (y.equals(parent.getLeft())) {
 				parent.setLeft(x);
 			} else {
@@ -166,7 +166,7 @@ public class SimpleBinaryTree implements BinaryTree {
 	 * {@inheritDoc}
 	 */
 	public SortableObject findSuccessor(int key) {
-		Node nodeForKey = find(root, key);
+		BinaryNode nodeForKey = find(root, key);
 		SortableObject successor = findSuccessor(nodeForKey).getSortableObject();
 		return successor;
 	}
@@ -177,14 +177,14 @@ public class SimpleBinaryTree implements BinaryTree {
 	 * @param node
 	 * @return Node
 	 */
-	private Node findSuccessor(Node node) {
-		Node successor = null;
+	private BinaryNode findSuccessor(BinaryNode node) {
+		BinaryNode successor = null;
 		if (node != null) {
 			if (node.getRight() != null) {
 				successor = findMin(node.getRight());
 			} else {
 				// go find the closest ancestor where which is on the left
-				Node parentNode = node.getParent();
+				BinaryNode parentNode = node.getParent();
 				while (parentNode != null && node.equals(parentNode.getRight())) {
 					node = parentNode;
 					parentNode = parentNode.getParent();
@@ -202,13 +202,13 @@ public class SimpleBinaryTree implements BinaryTree {
 	 */
 	public SortableObject findPredecessor(int key) {
 		SortableObject predecessor = null;
-		Node nodeForKey = find(root, key);
+		BinaryNode nodeForKey = find(root, key);
 		if (nodeForKey != null) {
 			if (nodeForKey.getLeft() != null) {
 				predecessor = findMax(nodeForKey.getLeft()).getSortableObject();
 			} else {
 				// go find the closest ancestor where which is on the right
-				Node parentNode = nodeForKey.getParent();
+				BinaryNode parentNode = nodeForKey.getParent();
 				while (parentNode != null && nodeForKey.equals(parentNode.getLeft())) {
 					nodeForKey = parentNode;
 					parentNode = parentNode.getParent();
@@ -237,7 +237,7 @@ public class SimpleBinaryTree implements BinaryTree {
 	 * @param key
 	 * @return Node
 	 */
-	private Node find(Node node, int key) {
+	private BinaryNode find(BinaryNode node, int key) {
 		while (node != null && node.getSortableObject().getValue() != key) {
 			if (key < node.getSortableObject().getValue()) {
 				node = node.getLeft();
@@ -265,7 +265,7 @@ public class SimpleBinaryTree implements BinaryTree {
 	 * @param node
 	 * @param list
 	 */
-	private void inOrder(Node node, List<SortableObject> list) {
+	private void inOrder(BinaryNode node, List<SortableObject> list) {
 		if (node != null) {
 			inOrder(node.getLeft(), list);
 			list.add(node.getSortableObject());
@@ -282,7 +282,7 @@ public class SimpleBinaryTree implements BinaryTree {
 		return list;
 	}
 
-	private void preOrder(Node node, List<SortableObject> list) {
+	private void preOrder(BinaryNode node, List<SortableObject> list) {
 		if (node != null) {
 			list.add(node.getSortableObject());
 			preOrder(node.getLeft(), list);
@@ -299,7 +299,7 @@ public class SimpleBinaryTree implements BinaryTree {
 		return list;
 	}
 
-	private void postOrder(Node node, List<SortableObject> list) {
+	private void postOrder(BinaryNode node, List<SortableObject> list) {
 		if (node != null) {
 			postOrder(node.getLeft(), list);
 			postOrder(node.getRight(), list);
@@ -320,8 +320,8 @@ public class SimpleBinaryTree implements BinaryTree {
 	 * @param node
 	 * @return Node
 	 */
-	private Node findMax(Node node) {
-		Node max = null;
+	private BinaryNode findMax(BinaryNode node) {
+		BinaryNode max = null;
 		for (; node != null; node = node.getRight()) {
 			max = node;
 		}
@@ -341,8 +341,8 @@ public class SimpleBinaryTree implements BinaryTree {
 	 * @param node
 	 * @return node
 	 */
-	private Node findMin(Node node) {
-		Node min = null;
+	private BinaryNode findMin(BinaryNode node) {
+		BinaryNode min = null;
 		for (; node != null; node = node.getLeft()) {
 			min = node;
 		}

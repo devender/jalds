@@ -26,17 +26,17 @@ import jalds.alds.SortableObject;
  * @author Devender Gollapally
  * 
  */
-public class Node {
+public class BinaryNode {
 
-	private Node parent;
-	private Node left;
-	private Node right;
+	private BinaryNode parent;
+	private BinaryNode left;
+	private BinaryNode right;
 	private SortableObject sortableObject;
 
 	/**
 	 * Create an empty node.
 	 */
-	public Node() {
+	public BinaryNode() {
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class Node {
 	 * 
 	 * @param sortableObject
 	 */
-	public Node(SortableObject sortableObject) {
+	public BinaryNode(SortableObject sortableObject) {
 		this.sortableObject = sortableObject;
 	}
 
@@ -53,7 +53,7 @@ public class Node {
 	 * 
 	 * @return Node
 	 */
-	public Node getParent() {
+	public BinaryNode getParent() {
 		return parent;
 	}
 
@@ -62,7 +62,7 @@ public class Node {
 	 * 
 	 * @param parent
 	 */
-	public void setParent(Node parent) {
+	public void setParent(BinaryNode parent) {
 		this.parent = parent;
 	}
 
@@ -71,7 +71,7 @@ public class Node {
 	 * 
 	 * @return Node
 	 */
-	public Node getLeft() {
+	public BinaryNode getLeft() {
 		return left;
 	}
 
@@ -80,7 +80,7 @@ public class Node {
 	 * 
 	 * @param left
 	 */
-	public void setLeft(Node left) {
+	public void setLeft(BinaryNode left) {
 		this.left = left;
 		if (left != null)
 			left.setParent(this);
@@ -91,7 +91,7 @@ public class Node {
 	 * 
 	 * @return Node
 	 */
-	public Node getRight() {
+	public BinaryNode getRight() {
 		return right;
 	}
 
@@ -100,7 +100,7 @@ public class Node {
 	 * 
 	 * @param right
 	 */
-	public void setRight(Node right) {
+	public void setRight(BinaryNode right) {
 		this.right = right;
 		if (right != null)
 			right.setParent(this);
@@ -129,10 +129,10 @@ public class Node {
 	 * sortable objects is the same.
 	 */
 	public boolean equals(Object obj) {
-		if (!(obj instanceof Node)) {
+		if (!(obj instanceof BinaryNode)) {
 			return false;
 		}
-		Node other = (Node) obj;
+		BinaryNode other = (BinaryNode) obj;
 		boolean hasSameParent = false;
 
 		if (this.getParent() == null && other.getParent() == null) {
