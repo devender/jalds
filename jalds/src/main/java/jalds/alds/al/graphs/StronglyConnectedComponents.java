@@ -83,6 +83,7 @@ public final class StronglyConnectedComponents {
 		System.out.println();
 	}
 
+	@SuppressWarnings("unchecked")
 	private Vertex[] getDescendingFinishedTime(Map<Vertex, Integer> map) {
 		SortableObject[] sortableObjects = new SortableObject[map.size()];
 		int j = 0;
