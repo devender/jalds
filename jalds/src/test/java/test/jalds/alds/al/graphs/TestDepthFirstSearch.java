@@ -20,20 +20,9 @@ public class TestDepthFirstSearch extends TestCase {
 		Vertex z = new Vertex("z");
 
 		Graph graph = new Graph(Graph.Type.DIRECTED);
-
-		graph.addEdge(u, v);
-		graph.addEdge(u, x);
-
-		graph.addEdge(x, v);
-
-		graph.addEdge(v, y);
-
-		graph.addEdge(y, x);
-
-		graph.addEdge(w, y);
-		graph.addEdge(w, z);
-
-		graph.addEdge(z, z);
+		graph.addEdge(u, v).addEdge(u, x);
+		graph.addEdge(x, v).addEdge(v, y).addEdge(y, x).addEdge(z, z);
+		graph.addEdge(w, y).addEdge(w, z);
 
 		assertEquals(8, graph.numberOfEdges());
 

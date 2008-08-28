@@ -21,20 +21,10 @@ public class TestStronglyConnectedComponents extends TestCase {
 		Vertex g = new Vertex("g");
 		Vertex h = new Vertex("h");
 		Graph graph = new Graph(Graph.Type.DIRECTED);
-		graph.addEdge(a, b);
-		graph.addEdge(b, c);
-		graph.addEdge(b, e);
-		graph.addEdge(b, f);
-		graph.addEdge(c, d);
-		graph.addEdge(c, g);
-		graph.addEdge(d, c);
-		graph.addEdge(d, h);
-		graph.addEdge(e, a);
-		graph.addEdge(e, f);
-		graph.addEdge(f, g);
-		graph.addEdge(g, f);
-		graph.addEdge(g, h);
-		graph.addEdge(h, h);
+		graph.addEdge(a, b).addEdge(b, c).addEdge(b, e).addEdge(b, f);
+		graph.addEdge(c, d).addEdge(c, g).addEdge(d, c).addEdge(d, h);
+		graph.addEdge(e, a).addEdge(e, f).addEdge(f, g).addEdge(g, f);
+		graph.addEdge(g, h).addEdge(h, h);
 		Set<Set<Vertex>> set = scc.compute(graph);
 		assertEquals(4, set.size());
 
