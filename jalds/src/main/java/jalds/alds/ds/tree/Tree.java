@@ -17,11 +17,65 @@
  */
 package jalds.alds.ds.tree;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+
+import jalds.alds.SortableObject;
+
 /**
+ * A very generic tree
  * 
- * @author dgollapally
+ * @author Devender Gollapally
  * 
  */
-public class Tree {
+public class Tree<T> {
+	private final Node<T> root;
 
+	/**
+	 * Needs a sortable object that will be used as the root node
+	 * 
+	 * @param sortableObject
+	 */
+	public Tree(SortableObject<T> sortableObject) {
+		root = new Node<T>(sortableObject);
+	}
+
+	/**
+	 * returns the root of the tree
+	 * 
+	 * @return
+	 */
+	public Node<T> getRoot() {
+		return root;
+	}
+
+	/**
+	 * Finds the node which has the given sortable object
+	 * 
+	 * @param sortableObject
+	 * @return
+	 */
+	public Node<T> findNode(SortableObject<T> sortableObject) {
+		if (root.getSortableObject().equals(sortableObject)) {
+			return root;
+		} else {
+			List<Node<T>> list = new LinkedList<Node<T>>();
+			list.addAll(root.getChildren());
+			ListIterator<Node<T>> listIterator = list.listIterator();
+			Node<T> node = null;
+			while (listIterator.hasNext()) {
+				node = listIterator.next();
+				if (node.getSortableObject().equals(sortableObject)) {
+					return node;
+				} else {
+					listIterator.remove();
+					for (Node<T> a : node.getChildren()) {
+						listIterator.add(a);
+					}
+				}
+			}
+			return node;
+		}
+	}
 }
