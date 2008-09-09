@@ -20,14 +20,19 @@ package jalds.alds.al.sorting.comparisonsort;
 import jalds.alds.SortableObject;
 
 /**
- * The algorithm differs from bubble sort in that sorts in both directions each pass through the
- * list. Still results in <em> O(n^2) </em>
+ * The algorithm differs from bubble sort in that sorts in both directions each
+ * pass through the list. Still results in <em> O(n^2) </em>
+ * 
+ * This modification to bubble sort tries to solve the problem of turtles, at
+ * the end of each pass the largest element will move to its right spot but
+ * smaller elements take time to move to the front of the sorted list. By
+ * running the sort on both directions smaller elements will move up faster.
  * 
  * @see BubbleSort
  * @author Devender Gollapally
  * 
  */
-final class CocktailSort extends AbstractComparisonSort  {
+final class CocktailSort extends AbstractComparisonSort {
 
 	public SortableObject[] sort(SortableObject[] unSortedList) {
 		boolean swapped = false;
