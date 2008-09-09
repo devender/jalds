@@ -21,7 +21,7 @@ import jalds.alds.SortableObject;
 
 /**
  * QuickSort is an algorithm whose worst case running time is Q(n^2), but is
- * remarkably efficient on the average and expected run time is )(n log n)
+ * remarkably efficient on the average and expected run time is O(n log n)
  * 
  * This is a divide and conqure algorithm, on each run divides the given
  * partation into elements less than and elements greater than a given piviot
@@ -43,7 +43,6 @@ final class QuickSort extends AbstractComparisonSort {
 			quickSort(unSortedList, startIndex, k - 1);
 			quickSort(unSortedList, k + 1, indexOfElementToUseForPartition);
 		}
-
 	}
 
 	/**

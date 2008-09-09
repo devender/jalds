@@ -20,27 +20,36 @@ package jalds.alds.al.sorting.comparisonsort;
 import jalds.alds.SortableObject;
 
 /**
- * Merge sort or mergesort is an <em>O(n log n)</em> comparison-based sorting algorithm. In most
- * implementations it is stable, meaning that it preserves the input order of equal elements in the
- * sorted output. It is an example of the divide and conquer algorithmic paradigm. It was invented
- * by John von Neumann in 1945.
+ * Merge sort or mergesort is an <em>O(n log n)</em> comparison-based sorting
+ * algorithm. In most implementations it is stable, meaning that it preserves
+ * the input order of equal elements in the sorted output. It is an example of
+ * the divide and conquer algorithmic paradigm. It was invented by John von
+ * Neumann in 1945.
  * <p>
  * Conceptually, merge sort works as follows:
  * <p>
  * <ul>
- * <li> Divide the unsorted list into two sublists of about half the size</li>
- * <li> Divide each of the two </li>
- * sublists recursively until we have list sizes of length 1, in which case the list itself is
- * returned </li>
+ * <li>Divide the unsorted list into two sublists of about half the size</li>
+ * <li>Divide each of the two</li>
+ * sublists recursively until we have list sizes of length 1, in which case the
+ * list itself is returned </li>
  * <li>Merge the two sublists back into one sorted list.</li>
  * </ul>
  * <p>
- * In the worst case, merge sort does approximately[1] (n lg n - 2^lg n + 1) comparisons, which is
- * between (n lg n - n + 1) and (n lg n + n + O(lg n)). In the worst case, merge sort does about 39%
- * fewer comparisons than quicksort does in the average case; merge sort always makes fewer
- * comparisons than quicksort, except in extremely rare cases. Recursive implementations of merge
- * sort make 2n - 1 method calls in the worst case, compared to quicksort's n, thus has roughly
- * twice as much recursive overhead as quicksort.
+ * In the worst case, merge sort does approximately[1] (n lg n - 2^lg n + 1)
+ * comparisons, which is between (n lg n - n + 1) and (n lg n + n + O(lg n)). In
+ * the worst case, merge sort does about 39% fewer comparisons than quicksort
+ * does in the average case; merge sort always makes fewer comparisons than
+ * quicksort, except in extremely rare cases. Recursive implementations of merge
+ * sort make 2n - 1 method calls in the worst case, compared to quicksort's n,
+ * thus has roughly twice as much recursive overhead as quicksort.
+ * <p>
+ * Mergesort incorporates two main ideas to improve its runtime:
+ *<P>
+ * A small list will take fewer steps to sort than a large list.
+ * <p>
+ * Fewer steps are required to construct a sorted list from two sorted lists
+ * than two unsorted lists.
  * <p>
  * source http://en.wikipedia.org/wiki/Merge_sort
  * 
@@ -62,6 +71,7 @@ final class MergeSort extends AbstractComparisonSort {
 
 	/**
 	 * Merges two arrays of Sortable objects and returns the merged array
+	 * 
 	 * @param left
 	 * @param right
 	 * @return SortableObject[]
